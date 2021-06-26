@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -70,6 +71,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.TreeSet;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
@@ -99,6 +101,7 @@ public class EditEntryActivity extends AegisActivity {
     private TextInputEditText _textDigits;
     private TextInputLayout _textDigitsLayout;
     private TextInputEditText _textSecret;
+    private TextInputEditText _textUsageCount;
 
     private AutoCompleteTextView _dropdownType;
     private AutoCompleteTextView _dropdownAlgo;
@@ -149,6 +152,7 @@ public class EditEntryActivity extends AegisActivity {
         _textDigits = findViewById(R.id.text_digits);
         _textDigitsLayout = findViewById(R.id.text_digits_layout);
         _textSecret = findViewById(R.id.text_secret);
+        _textUsageCount = findViewById(R.id.text_usage_count);
         _dropdownType = findViewById(R.id.dropdown_type);
         DropdownHelper.fillDropdown(this, _dropdownType, R.array.otp_types_array);
         _dropdownAlgoLayout = findViewById(R.id.dropdown_algo_layout);
@@ -229,7 +233,7 @@ public class EditEntryActivity extends AegisActivity {
 
         // show/hide period and counter fields on type change
         _dropdownType.setOnItemClickListener((parent, view, position, id) -> {
-            String type = _dropdownType.getText().toString().toLowerCase();
+            String type = _dropdownType.getText().toString().toLowerCase(Locale.ROOT);
             switch (type) {
                 case SteamInfo.ID:
                     _dropdownAlgo.setText(OtpInfo.DEFAULT_ALGORITHM, false);
@@ -278,6 +282,8 @@ public class EditEntryActivity extends AegisActivity {
                 }
             }
         });
+
+        _textUsageCount.setText(getPreferences().getUsageCount(entryUUID).toString());
     }
 
     private void updateAdvancedFieldStatus(String otpType) {
@@ -397,12 +403,20 @@ public class EditEntryActivity extends AegisActivity {
                 onSave();
                 break;
             case R.id.action_delete:
-                Dialogs.showDeleteEntriesDialog(this, Collections.singletonList(_origEntry.getIssuer()), (dialog, which) -> {
+                Dialogs.showDeleteEntriesDialog(this, Collections.singletonList(_origEntry), (dialog, which) -> {
                     deleteAndFinish(_origEntry);
                 });
                 break;
             case R.id.action_edit_icon:
                 startIconSelection();
+                break;
+            case R.id.action_reset_usage_count:
+                Dialogs.showSecureDialog(new AlertDialog.Builder(this)
+                        .setTitle(R.string.action_reset_usage_count)
+                        .setMessage(R.string.action_reset_usage_count_dialog)
+                        .setPositiveButton(android.R.string.yes, (dialog, which) -> resetUsageCount())
+                        .setNegativeButton(android.R.string.no, null)
+                        .create());
                 break;
             case R.id.action_default_icon:
                 TextDrawable drawable = TextDrawableHelper.generate(_origEntry.getIssuer(), _origEntry.getName(), _iconView);
@@ -427,7 +441,12 @@ public class EditEntryActivity extends AegisActivity {
 
         Intent chooserIntent = Intent.createChooser(galleryIntent, getString(R.string.select_icon));
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] { fileIntent });
-        startActivityForResult(chooserIntent, PICK_IMAGE_REQUEST);
+        AegisActivity.Helper.startExtActivityForResult(this, chooserIntent, PICK_IMAGE_REQUEST);
+    }
+
+    private void resetUsageCount() {
+        getPreferences().resetUsageCount(_origEntry.getUUID());
+        _textUsageCount.setText("0");
     }
 
     private void startIconSelection() {
@@ -553,8 +572,8 @@ public class EditEntryActivity extends AegisActivity {
     @Override
     protected void onActivityResult(int requestCode, final int resultCode, Intent data) {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            DocumentFile file = DocumentFile.fromSingleUri(this, data.getData());
-            if (file.getType().equals(IconType.SVG.toMimeType())) {
+            String fileType = getMimeType(data.getData());
+            if (fileType != null && fileType.equals(IconType.SVG.toMimeType())) {
                 ImportFileTask.Params params = new ImportFileTask.Params(data.getData(), "icon", null);
                 ImportFileTask task = new ImportFileTask(this, result -> {
                     if (result.getException() == null) {
@@ -571,6 +590,23 @@ public class EditEntryActivity extends AegisActivity {
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private String getMimeType(Uri uri) {
+        DocumentFile file = DocumentFile.fromSingleUri(this, uri);
+        if (file != null) {
+            String fileType = file.getType();
+            if (fileType != null) {
+                return fileType;
+            }
+
+            String ext = MimeTypeMap.getFileExtensionFromUrl(uri.toString());
+            if (ext != null) {
+                return MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext);
+            }
+        }
+
+        return null;
     }
 
     private int parsePeriod() throws ParseException {
@@ -609,7 +645,7 @@ public class EditEntryActivity extends AegisActivity {
 
         OtpInfo info;
         try {
-            switch (type.toLowerCase()) {
+            switch (type.toLowerCase(Locale.ROOT)) {
                 case TotpInfo.ID:
                     info = new TotpInfo(secret, algo, digits, parsePeriod());
                     break;

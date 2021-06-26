@@ -57,8 +57,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class MainActivity extends AegisActivity implements EntryListView.Listener {
     // activity request codes
@@ -77,7 +77,6 @@ public class MainActivity extends AegisActivity implements EntryListView.Listene
     private AegisApplication _app;
     private VaultManager _vault;
     private boolean _loaded;
-    private List<String> _selectedGroups;
     private boolean _searchSubmitted;
 
     private boolean _isAuthenticating;
@@ -120,6 +119,7 @@ public class MainActivity extends AegisActivity implements EntryListView.Listene
         _entryListView.setSortCategory(getPreferences().getCurrentSortCategory(), false);
         _entryListView.setViewMode(getPreferences().getCurrentViewMode());
         _entryListView.setIsCopyOnTapEnabled(getPreferences().isCopyOnTapEnabled());
+        _entryListView.setPrefGroupFilter(getPreferences().getGroupFilter());
 
          FloatingActionButton fab = findViewById(R.id.fab);
          fab.setOnClickListener(v -> {
@@ -164,6 +164,17 @@ public class MainActivity extends AegisActivity implements EntryListView.Listene
         _entryListView.setListener(null);
         super.onDestroy();
     }
+
+    @Override
+    protected void onPause() {
+        Map<UUID, Integer> usageMap = _entryListView.getUsageCounts();
+        if (usageMap != null) {
+            getPreferences().setUsageCount(usageMap);
+        }
+
+        super.onPause();
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -378,7 +389,7 @@ public class MainActivity extends AegisActivity implements EntryListView.Listene
 
         Intent chooserIntent = Intent.createChooser(galleryIntent, getString(R.string.select_picture));
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] { fileIntent });
-        startActivityForResult(chooserIntent, CODE_SCAN_IMAGE);
+        AegisActivity.Helper.startExtActivityForResult(this, chooserIntent, CODE_SCAN_IMAGE);
     }
 
     private void startPreferencesActivity() {
@@ -486,6 +497,9 @@ public class MainActivity extends AegisActivity implements EntryListView.Listene
         } else if (_loaded) {
             // update the list of groups in the entry list view so that the chip gets updated
             _entryListView.setGroups(_vault.getGroups());
+
+            // update the usage counts in case they are edited outside of the entrylistview
+            _entryListView.setUsageCounts(getPreferences().getUsageCounts());
 
             // refresh all codes to prevent showing old ones
             _entryListView.refresh(false);
@@ -605,6 +619,9 @@ public class MainActivity extends AegisActivity implements EntryListView.Listene
                         case R.id.menu_sort_alphabetically_name_reverse:
                             sortCategory = SortCategory.ACCOUNT_REVERSED;
                             break;
+                        case R.id.menu_sort_usage_count:
+                            sortCategory = SortCategory.USAGE_COUNT;
+                            break;
                         case R.id.menu_sort_custom:
                         default:
                             sortCategory = SortCategory.CUSTOM;
@@ -625,6 +642,7 @@ public class MainActivity extends AegisActivity implements EntryListView.Listene
 
     private void loadEntries() {
         if (!_loaded) {
+            _entryListView.setUsageCounts(getPreferences().getUsageCounts());
             _entryListView.addEntries(_vault.getEntries());
             _entryListView.runEntriesAnimation();
             _loaded = true;
@@ -725,13 +743,22 @@ public class MainActivity extends AegisActivity implements EntryListView.Listene
     public void onListChange() { _fabScrollHelper.setVisible(true); }
 
     @Override
+    public void onSaveGroupFilter(List<String> groupFilter) {
+        getPreferences().setGroupFilter(groupFilter);
+    }
+
+    @Override
     public void onLocked(boolean userInitiated) {
         if (_actionMode != null) {
             _actionMode.finish();
         }
+        if (_searchView != null && !_searchView.isIconified()) {
+            collapseSearchView();
+        }
 
         _entryListView.clearEntries();
         _loaded = false;
+
 
         if (userInitiated) {
             startAuthActivity(true);
@@ -787,13 +814,14 @@ public class MainActivity extends AegisActivity implements EntryListView.Listene
                         return true;
 
                     case R.id.action_delete:
-                        Dialogs.showDeleteEntriesDialog(MainActivity.this, _selectedEntries.stream().map(VaultEntry::getIssuer).collect(Collectors.toList()), (d, which) -> {
+                        Dialogs.showDeleteEntriesDialog(MainActivity.this, _selectedEntries, (d, which) -> {
                             deleteEntries(_selectedEntries);
 
                             for (VaultEntry entry : _selectedEntries) {
                                 if (entry.getGroup() != null) {
                                     if (!_vault.getGroups().contains(entry.getGroup())) {
                                         _entryListView.setGroups(_vault.getGroups());
+                                        break;
                                     }
                                 }
                             }

@@ -6,9 +6,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.beemdevelopment.aegis.R;
 import com.beemdevelopment.aegis.SortCategory;
 import com.beemdevelopment.aegis.ViewMode;
 import com.beemdevelopment.aegis.helpers.ItemTouchHelperAdapter;
@@ -33,6 +33,7 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryHolder> implements I
     private List<VaultEntry> _entries;
     private List<VaultEntry> _shownEntries;
     private List<VaultEntry> _selectedEntries;
+    private Map<UUID, Integer> _usageCounts;
     private VaultEntry _focusedEntry;
     private int _codeGroupSize;
     private boolean _showAccountName;
@@ -140,6 +141,10 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryHolder> implements I
     }
 
     public void addEntries(Collection<VaultEntry> entries) {
+        for (VaultEntry entry: entries) {
+            entry.setUsageCount(_usageCounts.containsKey(entry.getUUID()) ? _usageCounts.get(entry.getUUID()) : 0);
+        }
+
         _entries.addAll(entries);
         updateShownEntries();
         checkPeriodUniformity(true);
@@ -232,20 +237,14 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryHolder> implements I
         }
     }
 
-    public void setGroupFilter(List<String> groups, boolean apply) {
-        if (groups == null) {
-            groups = new ArrayList<>();
-        }
-
+    public void setGroupFilter(@NonNull List<String> groups) {
         if (_groupFilter.equals(groups)) {
             return;
         }
 
         _groupFilter = groups;
-        if (apply) {
-            updateShownEntries();
-            checkPeriodUniformity();
-        }
+        updateShownEntries();
+        checkPeriodUniformity();
     }
 
     public void setSortCategory(SortCategory category, boolean apply) {
@@ -260,7 +259,7 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryHolder> implements I
     }
 
     public void setSearchFilter(String search) {
-        _searchFilter = search != null ? search.toLowerCase() : null;
+        _searchFilter = (search != null && !search.isEmpty()) ? search.toLowerCase() : null;
         updateShownEntries();
     }
 
@@ -288,6 +287,10 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryHolder> implements I
     public void setViewMode(ViewMode viewMode) {
         _viewMode = viewMode;
     }
+
+    public void setUsageCounts(Map<UUID, Integer> usageCounts) { _usageCounts = usageCounts; }
+
+    public Map<UUID, Integer> getUsageCounts() { return _usageCounts; }
 
     public void setGroups(TreeSet<String> groups) {
         _view.setGroups(groups);
@@ -374,6 +377,8 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryHolder> implements I
                             focusEntry(entry, _tapToRevealTime);
                         }
                     }
+
+                    incrementUsageCount(entry);
                 } else {
                     if (_selectedEntries.contains(entry)) {
                         _view.onDeselect(entry);
@@ -595,6 +600,15 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryHolder> implements I
         _selectedEntries.clear();
 
         updateDraggableStatus();
+    }
+
+    private void incrementUsageCount(VaultEntry entry) {
+        if (!_usageCounts.containsKey(entry.getUUID())) {
+            _usageCounts.put(entry.getUUID(), 1);
+        } else {
+            int usageCount = _usageCounts.get(entry.getUUID());
+            _usageCounts.put(entry.getUUID(), ++usageCount);
+        }
     }
 
     public boolean isDragAndDropAllowed() {

@@ -10,7 +10,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.InputType;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
@@ -36,6 +35,7 @@ import com.beemdevelopment.aegis.helpers.EditTextHelper;
 import com.beemdevelopment.aegis.helpers.PasswordStrengthHelper;
 import com.beemdevelopment.aegis.importers.DatabaseImporter;
 import com.beemdevelopment.aegis.ui.tasks.KeyDerivationTask;
+import com.beemdevelopment.aegis.vault.VaultEntry;
 import com.beemdevelopment.aegis.vault.slots.PasswordSlot;
 import com.beemdevelopment.aegis.vault.slots.Slot;
 import com.beemdevelopment.aegis.vault.slots.SlotException;
@@ -46,6 +46,7 @@ import com.nulabinc.zxcvbn.Zxcvbn;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 import javax.crypto.Cipher;
 
@@ -65,11 +66,17 @@ public class Dialogs {
         dialog.show();
     }
 
-    public static void showDeleteEntriesDialog(Activity activity, List<String> services, DialogInterface.OnClickListener onDelete) {
+    public static void showDeleteEntriesDialog(Activity activity, List<VaultEntry> services, DialogInterface.OnClickListener onDelete) {
         View view = activity.getLayoutInflater().inflate(R.layout.dialog_delete_entry, null);
         TextView textMessage = view.findViewById(R.id.text_message);
         TextView textExplanation = view.findViewById(R.id.text_explanation);
-        textExplanation.setText(activity.getString(R.string.delete_entry_explanation, TextUtils.join(", ", services)));
+        String entries = services.stream()
+                .map(entry -> !entry.getIssuer().isEmpty() ? entry.getIssuer()
+                        : !entry.getName().isEmpty() ? entry.getName()
+                        : activity.getString(R.string.unknown_issuer)
+                )
+                .collect(Collectors.joining(", "));
+        textExplanation.setText(activity.getString(R.string.delete_entry_explanation, entries));
 
         String title, message;
         if (services.size() > 1) {
@@ -399,14 +406,18 @@ public class Dialogs {
 
     public static void showImportersDialog(Context context, boolean isDirect, ImporterListener listener) {
         List<DatabaseImporter.Definition> importers = DatabaseImporter.getImporters(isDirect);
-        String[] names = importers.stream().map(DatabaseImporter.Definition::getName).toArray(String[]::new);
+        List<String> names = importers.stream().map(DatabaseImporter.Definition::getName).collect(Collectors.toList());
 
+        int i = 0;
+        if (!isDirect) {
+            i = names.indexOf(context.getString(R.string.app_name));
+        }
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_importers, null);
         TextView helpText = view.findViewById(R.id.text_importer_help);
-        setImporterHelpText(helpText, importers.get(0), isDirect);
+        setImporterHelpText(helpText, importers.get(i), isDirect);
         ListView listView = view.findViewById(R.id.list_importers);
         listView.setAdapter(new ArrayAdapter<>(context, R.layout.card_importer, names));
-        listView.setItemChecked(0, true);
+        listView.setItemChecked(i, true);
         listView.setOnItemClickListener((parent, view1, position, id) -> {
             setImporterHelpText(helpText, importers.get(position), isDirect);
         });

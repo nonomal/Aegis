@@ -7,8 +7,20 @@ import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+import org.json.JSONObject;
+
 import java.util.Date;
+import java.util.List;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class Preferences {
@@ -141,6 +153,56 @@ public class Preferences {
         _prefs.edit().putInt("pref_current_view_mode", viewMode.ordinal()).apply();
     }
 
+    public Integer getUsageCount(UUID uuid) {
+        Integer usageCount = getUsageCounts().get(uuid);
+
+        return usageCount != null ? usageCount : 0;
+    }
+
+    public void resetUsageCount(UUID uuid) {
+        Map<UUID, Integer> usageCounts = getUsageCounts();
+        usageCounts.put(uuid, 0);
+
+        setUsageCount(usageCounts);
+    }
+
+    public void clearUsageCount() {
+        _prefs.edit().remove("pref_usage_count").apply();
+    }
+
+    public Map<UUID, Integer> getUsageCounts() {
+        Map<UUID, Integer> usageCounts = new HashMap<>();
+        String usageCount = _prefs.getString("pref_usage_count", "");
+        try {
+            JSONArray arr = new JSONArray(usageCount);
+            for(int i = 0; i < arr.length(); i++) {
+                JSONObject json = arr.getJSONObject(i);
+                usageCounts.put(UUID.fromString(json.getString("uuid")), json.getInt("count"));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return usageCounts;
+    }
+
+    public void setUsageCount(Map<UUID, Integer> usageCounts) {
+        JSONArray usageCountJson = new JSONArray();
+        for (Map.Entry<UUID, Integer> entry : usageCounts.entrySet()) {
+            JSONObject entryJson = new JSONObject();
+            try {
+                entryJson.put("uuid", entry.getKey());
+                entryJson.put("count", entry.getValue());
+                usageCountJson.put(entryJson);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        _prefs.edit().putString("pref_usage_count", usageCountJson.toString()).apply();
+    }
+
     public int getTimeout() {
         return _prefs.getInt("pref_timeout", -1);
     }
@@ -223,5 +285,28 @@ public class Preferences {
 
     public boolean isCopyOnTapEnabled() {
         return _prefs.getBoolean("pref_copy_on_tap", false);
+    }
+
+    public void setGroupFilter(List<String> groupFilter) {
+        JSONArray json = new JSONArray(groupFilter);
+        _prefs.edit().putString("pref_group_filter", json.toString()).apply();
+    }
+
+    public List<String> getGroupFilter() {
+        String raw = _prefs.getString("pref_group_filter", null);
+        if (raw == null || raw.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        try {
+            JSONArray json = new JSONArray(raw);
+            List<String> filter = new ArrayList<>();
+            for (int i = 0; i < json.length(); i++) {
+                filter.add(json.getString(i));
+            }
+            return filter;
+        } catch (JSONException e) {
+            return Collections.emptyList();
+        }
     }
 }
