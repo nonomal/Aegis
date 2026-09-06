@@ -2,15 +2,12 @@ package com.beemdevelopment.aegis.ui.views;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.os.Build;
 import android.os.Handler;
-import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.animation.LinearInterpolator;
 import android.widget.ProgressBar;
 
-import androidx.annotation.RequiresApi;
-
+import com.beemdevelopment.aegis.helpers.AnimationsHelper;
 import com.beemdevelopment.aegis.otp.TotpInfo;
 
 public class TotpProgressBar extends ProgressBar {
@@ -30,7 +27,6 @@ public class TotpProgressBar extends ProgressBar {
         super(context, attrs, defStyleAttr);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public TotpProgressBar(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
@@ -42,7 +38,7 @@ public class TotpProgressBar extends ProgressBar {
     public void start() {
         stop();
         _handler = new Handler();
-        _animDurationScale = Settings.Global.getFloat(getContext().getContentResolver(), Settings.Global.ANIMATOR_DURATION_SCALE, 1.0f);
+        _animDurationScale = AnimationsHelper.Scale.ANIMATOR.getValue(getContext());
         refresh();
     }
 

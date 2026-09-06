@@ -1,8 +1,5 @@
 package com.beemdevelopment.aegis.vault;
 
-import com.beemdevelopment.aegis.encoding.Base64;
-import com.beemdevelopment.aegis.encoding.EncodingException;
-import com.beemdevelopment.aegis.icons.IconType;
 import com.beemdevelopment.aegis.otp.GoogleAuthInfo;
 import com.beemdevelopment.aegis.otp.OtpInfo;
 import com.beemdevelopment.aegis.otp.OtpInfoException;
@@ -10,24 +7,26 @@ import com.beemdevelopment.aegis.otp.TotpInfo;
 import com.beemdevelopment.aegis.util.JsonUtils;
 import com.beemdevelopment.aegis.util.UUIDMap;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Arrays;
 import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.UUID;
-
-import javax.annotation.Nonnull;
 
 public class VaultEntry extends UUIDMap.Value {
     private String _name = "";
     private String _issuer = "";
-    private String _group;
     private OtpInfo _info;
-    private byte[] _icon;
-    private IconType _iconType = IconType.INVALID;
+    private VaultEntryIcon _icon;
+    private boolean _isFavorite;
     private int _usageCount;
+    private long _lastUsedTimestamp;
     private String _note = "";
+    private String _oldGroup;
+    private Set<UUID> _groups = new TreeSet<>();
 
     private VaultEntry(UUID uuid, OtpInfo info) {
         super(uuid);
@@ -45,13 +44,6 @@ public class VaultEntry extends UUIDMap.Value {
         setIssuer(issuer);
     }
 
-    public VaultEntry(OtpInfo info, String name, String issuer, String group) {
-        this(info);
-        setName(name);
-        setIssuer(issuer);
-        setGroup(group);
-    }
-
     public VaultEntry(GoogleAuthInfo info) {
         this(info.getOtpInfo(), info.getAccountName(), info.getIssuer());
     }
@@ -64,11 +56,17 @@ public class VaultEntry extends UUIDMap.Value {
             obj.put("uuid", getUUID().toString());
             obj.put("name", _name);
             obj.put("issuer", _issuer);
-            obj.put("group", _group);
             obj.put("note", _note);
-            obj.put("icon", _icon == null ? JSONObject.NULL : Base64.encode(_icon));
-            obj.put("icon_mime", _icon == null ? null : _iconType.toMimeType());
+            obj.put("favorite", _isFavorite);
+            VaultEntryIcon.toJson(_icon, obj);
             obj.put("info", _info.toJson());
+
+            JSONArray groupUuids = new JSONArray();
+            for (UUID uuid : _groups) {
+                groupUuids.put(uuid.toString());
+            }
+            obj.put("groups", groupUuids);
+
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -90,24 +88,32 @@ public class VaultEntry extends UUIDMap.Value {
             VaultEntry entry = new VaultEntry(uuid, info);
             entry.setName(obj.getString("name"));
             entry.setIssuer(obj.getString("issuer"));
-            entry.setGroup(obj.optString("group", null));
             entry.setNote(obj.optString("note", ""));
+            entry.setIsFavorite(obj.optBoolean("favorite", false));
 
-            Object icon = obj.get("icon");
-            if (icon != JSONObject.NULL) {
-                String mime = JsonUtils.optString(obj, "icon_mime");
-
-                IconType iconType = mime == null ? IconType.JPEG : IconType.fromMimeType(mime);
-                if (iconType == IconType.INVALID) {
-                    throw new VaultEntryException(String.format("Bad icon MIME type: %s", mime));
+            // If the entry contains a list of group UUID's, assume conversion from the
+            // old group system has already taken place and ignore the old group field.
+            if (obj.has("groups")) {
+                JSONArray groups = obj.getJSONArray("groups");
+                for (int i = 0; i < groups.length(); i++) {
+                    String groupUuid = groups.getString(i);
+                    entry.addGroup(UUID.fromString(groupUuid));
                 }
+            } else if (obj.has("group")) {
+                entry.setOldGroup(JsonUtils.optString(obj, "group"));
+            }
 
-                byte[] iconBytes = Base64.decode((String) icon);
-                entry.setIcon(iconBytes, iconType);
+            // Silently ignore any errors that occur when trying to parse the icon of an
+            // entry. This allows us to introduce new icon types in the future (e.g. WebP)
+            // without breaking compatibility with older versions of Aegis.
+            try {
+                VaultEntryIcon icon = VaultEntryIcon.fromJson(obj);
+                entry.setIcon(icon);
+            } catch (VaultEntryIconException ignored) {
             }
 
             return entry;
-        } catch (OtpInfoException | JSONException | EncodingException e) {
+        } catch (OtpInfoException | JSONException e) {
             throw new VaultEntryException(e);
         }
     }
@@ -120,16 +126,12 @@ public class VaultEntry extends UUIDMap.Value {
         return _issuer;
     }
 
-    public String getGroup() {
-        return _group;
+    public Set<UUID> getGroups() {
+        return _groups;
     }
 
-    public byte[] getIcon() {
+    public VaultEntryIcon getIcon() {
         return _icon;
-    }
-
-    public IconType getIconType() {
-        return _iconType;
     }
 
     public OtpInfo getInfo() {
@@ -140,7 +142,17 @@ public class VaultEntry extends UUIDMap.Value {
         return _usageCount;
     }
 
-    public String getNote() { return _note; }
+    public long getLastUsedTimestamp() {
+        return _lastUsedTimestamp;
+    }
+
+    public String getNote() {
+        return _note;
+    }
+
+    public boolean isFavorite() {
+        return _isFavorite;
+    }
 
     public void setName(String name) {
         _name = name;
@@ -150,26 +162,57 @@ public class VaultEntry extends UUIDMap.Value {
         _issuer = issuer;
     }
 
-    public void setGroup(String group) {
-        _group = group;
+    public void addGroup(UUID group) {
+        if (group == null) {
+            throw new AssertionError("Attempt to add null group to entry's group list");
+        }
+        _groups.add(group);
+    }
+
+    public void removeGroup(UUID group) {
+        _groups.remove(group);
+    }
+
+    public void setGroups(Set<UUID> groups) {
+        if (groups.contains(null)) {
+            throw new AssertionError("Attempt to add null group to entry's group list");
+        }
+        _groups = groups;
     }
 
     public void setInfo(OtpInfo info) {
         _info = info;
     }
 
-    public void setIcon(byte[] icon, IconType iconType) {
+    public void setIcon(VaultEntryIcon icon) {
         _icon = icon;
-        _iconType = iconType;
     }
 
     public boolean hasIcon() {
         return _icon != null;
     }
 
-    public void setUsageCount(int usageCount) { _usageCount = usageCount; }
+    public void setUsageCount(int usageCount) {
+        _usageCount = usageCount;
+    }
 
-    public void setNote(String note) { _note = note; }
+    public void setLastUsedTimestamp(long lastUsedTimestamp) { _lastUsedTimestamp = lastUsedTimestamp; }
+
+    public void setNote(String note) {
+        _note = note;
+    }
+
+    public void setIsFavorite(boolean isFavorite) {
+        _isFavorite = isFavorite;
+    }
+
+    void setOldGroup(String oldGroup) {
+        _oldGroup = oldGroup;
+    }
+
+    String getOldGroup() {
+        return _oldGroup;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -189,11 +232,15 @@ public class VaultEntry extends UUIDMap.Value {
     public boolean equivalates(VaultEntry entry) {
         return getName().equals(entry.getName())
                 && getIssuer().equals(entry.getIssuer())
-                && Objects.equals(getGroup(), entry.getGroup())
                 && getInfo().equals(entry.getInfo())
-                && Arrays.equals(getIcon(), entry.getIcon())
-                && getIconType().equals(entry.getIconType())
-                && getNote().equals(entry.getNote());
+                && Objects.equals(getIcon(), entry.getIcon())
+                && getNote().equals(entry.getNote())
+                && isFavorite() == entry.isFavorite()
+                && getGroups().equals(entry.getGroups());
+    }
+
+    public boolean hasSameNameAndIssuer(VaultEntry entry) {
+        return getName().equals(entry.getName()) && getIssuer().equals(entry.getIssuer());
     }
 
     /**

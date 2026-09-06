@@ -16,6 +16,7 @@ import com.beemdevelopment.aegis.ui.dialogs.Dialogs;
 import com.beemdevelopment.aegis.util.JsonUtils;
 import com.beemdevelopment.aegis.util.PreferenceParser;
 import com.beemdevelopment.aegis.vault.VaultEntry;
+import com.topjohnwu.superuser.Shell;
 import com.topjohnwu.superuser.io.SuFile;
 import com.topjohnwu.superuser.io.SuFileInputStream;
 
@@ -67,14 +68,20 @@ public class AuthyImporter extends DatabaseImporter {
     }
 
     @Override
-    public State readFromApp() throws PackageManager.NameNotFoundException, DatabaseImporterException {
+    public State readFromApp(Shell shell) throws PackageManager.NameNotFoundException, DatabaseImporterException {
         SuFile path = getAppPath();
+        path.setShell(shell);
 
         JSONArray array;
         JSONArray authyArray;
         try {
-            array = readFile(new SuFile(path, String.format("%s.xml", _authFilename)), String.format("%s.key", _authFilename));
-            authyArray = readFile(new SuFile(path, String.format("%s.xml", _authyFilename)), String.format("%s.key", _authyFilename));
+            SuFile file1 = new SuFile(path, String.format("%s.xml", _authFilename));
+            file1.setShell(shell);
+            SuFile file2 = new SuFile(path, String.format("%s.xml", _authyFilename));
+            file2.setShell(shell);
+
+            array = readFile(file1, String.format("%s.key", _authFilename));
+            authyArray = readFile(file2, String.format("%s.key", _authyFilename));
         } catch (IOException | XmlPullParserException e) {
             throw new DatabaseImporterException(e);
         }
@@ -129,7 +136,7 @@ public class AuthyImporter extends DatabaseImporter {
     }
 
     private JSONArray readFile(SuFile file, String key) throws IOException, XmlPullParserException {
-        try (SuFileInputStream inStream = new SuFileInputStream(file)) {
+        try (InputStream inStream = SuFileInputStream.open(file)) {
             XmlPullParser parser = Xml.newPullParser();
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
             parser.setInput(inStream, null);

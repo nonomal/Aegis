@@ -3,6 +3,7 @@ package com.beemdevelopment.aegis.icons;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.beemdevelopment.aegis.util.JsonUtils;
 import com.google.common.base.Objects;
 import com.google.common.io.Files;
 
@@ -17,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class IconPack {
     private UUID _uuid;
@@ -58,9 +58,21 @@ public class IconPack {
             return new ArrayList<>();
         }
 
-        return _icons.stream()
-                .filter(i -> i.isSuggestedFor(issuer))
-                .collect(Collectors.toList());
+        List<Icon> icons = new ArrayList<>();
+        for (Icon icon : _icons) {
+            MatchType matchType = icon.getMatchFor(issuer);
+            if (matchType != null) {
+                // Inverse matches (entry issuer contains icon name) are less likely
+                // to be good, so position them at the end of the list.
+                if (matchType.equals(MatchType.NORMAL)) {
+                    icons.add(0, icon);
+                } else if (matchType.equals(MatchType.INVERSE)) {
+                    icons.add(icon);
+                }
+            }
+        }
+
+        return icons;
     }
 
     @Nullable
@@ -120,13 +132,15 @@ public class IconPack {
 
     public static class Icon implements Serializable {
         private final String _relFilename;
+        private final String _name;
         private final String _category;
         private final List<String> _issuers;
 
         private File _file;
 
-        protected Icon(String filename, String category, List<String> issuers) {
+        protected Icon(String filename, String name, String category, List<String> issuers) {
             _relFilename = filename;
+            _name = name;
             _category = category;
             _issuers = issuers;
         }
@@ -148,8 +162,10 @@ public class IconPack {
             return IconType.fromFilename(_relFilename);
         }
 
-        @SuppressWarnings("UnstableApiUsage")
         public String getName() {
+            if (_name != null) {
+                return _name;
+            }
             return Files.getNameWithoutExtension(new File(_relFilename).getName());
         }
 
@@ -157,19 +173,29 @@ public class IconPack {
             return _category;
         }
 
-        public List<String> getIssuers() {
-            return Collections.unmodifiableList(_issuers);
-        }
+        private MatchType getMatchFor(String issuer) {
+            String lowerEntryIssuer = issuer.toLowerCase();
 
-        public boolean isSuggestedFor(String issuer) {
-            String lowerIssuer = issuer.toLowerCase();
-            return getIssuers().stream()
-                    .map(String::toLowerCase)
-                    .anyMatch(is -> is.contains(lowerIssuer) || lowerIssuer.contains(is));
+            boolean inverseMatch = false;
+            for (String is : _issuers) {
+                String lowerIconIssuer = is.toLowerCase();
+                if (lowerIconIssuer.contains(lowerEntryIssuer)) {
+                    return MatchType.NORMAL;
+                }
+                if (lowerEntryIssuer.contains(lowerIconIssuer)) {
+                    inverseMatch = true;
+                }
+            }
+            if (inverseMatch) {
+                return MatchType.INVERSE;
+            }
+
+            return null;
         }
 
         public static Icon fromJson(JSONObject obj) throws JSONException {
             String filename = obj.getString("filename");
+            String name = JsonUtils.optString(obj, "name");
             String category = obj.isNull("category") ? null : obj.getString("category");
             JSONArray array = obj.getJSONArray("issuer");
 
@@ -179,7 +205,12 @@ public class IconPack {
                 issuers.add(issuer);
             }
 
-            return new Icon(filename, category, issuers);
+            return new Icon(filename, name, category, issuers);
         }
+    }
+
+    private enum MatchType {
+        NORMAL,
+        INVERSE
     }
 }

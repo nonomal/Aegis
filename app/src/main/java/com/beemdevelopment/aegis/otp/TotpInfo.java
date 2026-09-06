@@ -26,16 +26,13 @@ public class TotpInfo extends OtpInfo {
     }
 
     @Override
-    public String getOtp() {
-        try {
-            OTP otp = TOTP.generateOTP(getSecret(), getAlgorithm(true), getDigits(), getPeriod());
-            return otp.toString();
-        } catch (InvalidKeyException | NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+    public String getOtp() throws OtpInfoException {
+        return getOtp(System.currentTimeMillis() / 1000);
     }
 
-    public String getOtp(long time) {
+    public String getOtp(long time) throws OtpInfoException {
+        checkSecret();
+
         try {
             OTP otp = TOTP.generateOTP(getSecret(), getAlgorithm(true), getDigits(), getPeriod(), time);
             return otp.toString();

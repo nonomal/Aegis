@@ -28,7 +28,12 @@ public class ImportFileTask extends ProgressDialogTask<ImportFileTask.Params, Im
         Context context = getDialog().getContext();
 
         Params p = params[0];
-        try (InputStream inStream = context.getContentResolver().openInputStream(p.getUri())) {
+        Uri uri = p.getUri();
+        try (InputStream inStream = context.getContentResolver().openInputStream(uri)) {
+            if (inStream == null) {
+                throw new IOException("openInputStream returned null");
+            }
+
             String prefix = p.getNamePrefix() != null ? p.getNamePrefix() + "-" : "";
             String suffix = p.getNameSuffix() != null ? "-" + p.getNameSuffix() : "";
 
@@ -37,10 +42,10 @@ public class ImportFileTask extends ProgressDialogTask<ImportFileTask.Params, Im
                 IOUtils.copy(inStream, outStream);
             }
 
-            return new Result(tempFile, null);
+            return new Result(uri, tempFile);
         } catch (IOException e) {
             e.printStackTrace();
-            return new Result(null, e);
+            return new Result(uri, e);
         }
     }
 
@@ -79,20 +84,34 @@ public class ImportFileTask extends ProgressDialogTask<ImportFileTask.Params, Im
     }
 
     public static class Result {
-        private final File _file;
-        private final Exception _e;
+        private final Uri _uri;
+        private File _file;
+        private Exception _e;
 
-        public Result(File file, Exception e) {
+        public Result(Uri uri, File file) {
+            _uri = uri;
             _file = file;
+        }
+
+        public Result(Uri uri, Exception e) {
+            _uri = uri;
             _e = e;
+        }
+
+        public Uri getUri() {
+            return _uri;
         }
 
         public File getFile() {
             return _file;
         }
 
-        public Exception getException() {
-            return _e;
+        public String getError() {
+            if (_e == null) {
+                return null;
+            }
+
+            return String.format("ImportFileTask(uri=\"%s\"): %s", _uri, _e);
         }
     }
 }

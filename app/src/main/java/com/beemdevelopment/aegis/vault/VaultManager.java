@@ -1,207 +1,169 @@
 package com.beemdevelopment.aegis.vault;
 
+import android.app.Activity;
 import android.app.backup.BackupManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 
-import androidx.core.util.AtomicFile;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
+import com.beemdevelopment.aegis.BackupsVersioningStrategy;
 import com.beemdevelopment.aegis.Preferences;
-import com.beemdevelopment.aegis.otp.GoogleAuthInfo;
-import com.beemdevelopment.aegis.util.IOUtils;
+import com.beemdevelopment.aegis.R;
+import com.beemdevelopment.aegis.crypto.KeyStoreHandle;
+import com.beemdevelopment.aegis.crypto.KeyStoreHandleException;
+import com.beemdevelopment.aegis.database.AuditLogRepository;
+import com.beemdevelopment.aegis.services.NotificationService;
+import com.beemdevelopment.aegis.ui.dialogs.Dialogs;
 
-import org.json.JSONObject;
-
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
-import java.text.Collator;
-import java.util.Collection;
-import java.util.TreeSet;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VaultManager {
-    public static final String FILENAME = "aegis.json";
-    public static final String FILENAME_PREFIX_EXPORT = "aegis-export";
-    public static final String FILENAME_PREFIX_EXPORT_PLAIN = "aegis-export-plain";
-    public static final String FILENAME_PREFIX_EXPORT_URI = "aegis-export-uri";
+    private final Context _context;
+    private final Preferences _prefs;
 
-    private Vault _vault;
-    private VaultFileCredentials _creds;
+    private VaultRepository _repo;
 
-    private Context _context;
-    private Preferences _prefs;
-    private VaultBackupManager _backups;
-    private BackupManager _androidBackups;
+    private final VaultBackupManager _backups;
+    private final BackupManager _androidBackups;
 
-    public VaultManager(Context context, Vault vault, VaultFileCredentials creds) {
+    private final List<LockListener> _lockListeners;
+    private boolean _blockAutoLock;
+
+    private final AuditLogRepository _auditLogRepository;
+
+    public VaultManager(@NonNull Context context, AuditLogRepository auditLogRepository) {
         _context = context;
-        _prefs = new Preferences(context);
-        _backups = new VaultBackupManager(context);
+        _prefs = new Preferences(_context);
+        _backups = new VaultBackupManager(_context, auditLogRepository);
         _androidBackups = new BackupManager(context);
-        _vault = vault;
-        _creds = creds;
+        _lockListeners = new ArrayList<>();
+        _auditLogRepository = auditLogRepository;
     }
 
-    public VaultManager(Context context, Vault vault) {
-        this(context, vault, null);
+    /**
+     * Initializes the vault repository with a new empty vault and the given creds. It can
+     * only be called if isVaultLoaded() returns false.
+     */
+    @NonNull
+    public VaultRepository initNew(@Nullable VaultFileCredentials creds) throws VaultRepositoryException {
+        if (isVaultLoaded()) {
+            throw new IllegalStateException("Vault manager is already initialized");
+        }
+
+        VaultRepository repo = new VaultRepository(_context, new Vault(), creds);
+        repo.save();
+        _repo = repo;
+
+        if (getVault().isEncryptionEnabled()) {
+            startNotificationService();
+        }
+
+        return getVault();
     }
 
-    public static AtomicFile getAtomicFile(Context context) {
-        return new AtomicFile(new File(context.getFilesDir(), FILENAME));
+    /**
+     * Initializes the vault repository by decrypting the given vaultFile with the given
+     * creds. It can only be called if isVaultLoaded() returns false.
+     */
+    @NonNull
+    public VaultRepository loadFrom(@NonNull VaultFile vaultFile, @Nullable VaultFileCredentials creds) throws VaultRepositoryException {
+        if (isVaultLoaded()) {
+            throw new IllegalStateException("Vault manager is already initialized");
+        }
+
+        _repo = VaultRepository.fromFile(_context, vaultFile, creds);
+
+        if (getVault().isEncryptionEnabled()) {
+            startNotificationService();
+        }
+
+        return getVault();
     }
 
-    public static boolean fileExists(Context context) {
-        File file = getAtomicFile(context).getBaseFile();
-        return file.exists() && file.isFile();
+    @NonNull
+    public VaultRepository loadFrom(@NonNull VaultFile vaultFile) throws VaultRepositoryException {
+        return loadFrom(vaultFile, null);
     }
 
-    public static void deleteFile(Context context) {
-        getAtomicFile(context).delete();
+    /**
+     * Locks the vault and the app.
+     * @param userInitiated whether or not the user initiated the lock in MainActivity.
+     */
+    public void lock(boolean userInitiated) {
+        _repo = null;
+
+        for (LockListener listener : _lockListeners) {
+            listener.onLocked(userInitiated);
+        }
+
+        stopNotificationService();
     }
 
-    public static VaultFile readVaultFile(Context context) throws VaultManagerException {
-        AtomicFile file = getAtomicFile(context);
+    public void enableEncryption(VaultFileCredentials creds) throws VaultRepositoryException {
+        getVault().setCredentials(creds);
+        saveAndBackup();
+        startNotificationService();
+    }
 
+    public void disableEncryption() throws VaultRepositoryException {
+        getVault().setCredentials(null);
+        save();
+
+        // remove any keys that are stored in the KeyStore
         try {
-            byte[] fileBytes = file.readFully();
-            return VaultFile.fromBytes(fileBytes);
-        } catch (IOException | VaultFileException e) {
-            throw new VaultManagerException(e);
+            KeyStoreHandle handle = new KeyStoreHandle();
+            handle.clear();
+        } catch (KeyStoreHandleException e) {
+            // this cleanup operation is not strictly necessary, so we ignore any exceptions here
+            e.printStackTrace();
         }
+
+        stopNotificationService();
     }
 
-    public static void writeToFile(Context context, InputStream inStream) throws IOException {
-        AtomicFile file = VaultManager.getAtomicFile(context);
-
-        FileOutputStream outStream = null;
-        try {
-            outStream = file.startWrite();
-            IOUtils.copy(inStream, outStream);
-            file.finishWrite(outStream);
-        } catch (IOException e) {
-            if (outStream != null) {
-                file.failWrite(outStream);
-            }
-            throw e;
-        }
+    public void save() throws VaultRepositoryException {
+        getVault().save();
     }
 
-    public static VaultManager init(Context context, VaultFile file, VaultFileCredentials creds) throws VaultManagerException {
-        if (file.isEncrypted() && creds == null) {
-            throw new IllegalArgumentException("The VaultFile is encrypted but the given VaultFileCredentials is null");
-        }
+    public void saveAndBackup() throws VaultRepositoryException {
+        save();
 
-        Vault vault;
-        try {
-            JSONObject obj;
-            if (!file.isEncrypted()) {
-                obj = file.getContent();
-            } else {
-                obj = file.getContent(creds);
-            }
-
-            vault = Vault.fromJson(obj);
-        } catch (VaultException | VaultFileException e) {
-            throw new VaultManagerException(e);
-        }
-
-        return new VaultManager(context, vault, creds);
-    }
-
-    public static void save(Context context, VaultFile vaultFile) throws VaultManagerException {
-        try {
-            byte[] bytes = vaultFile.toBytes();
-            writeToFile(context, new ByteArrayInputStream(bytes));
-        } catch (IOException e) {
-            throw new VaultManagerException(e);
-        }
-    }
-
-    public void destroy() {
-        _backups.destroy();
-    }
-
-    public void save(boolean backup) throws VaultManagerException {
-        try {
-            JSONObject obj = _vault.toJson();
-
-            VaultFile file = new VaultFile();
-            if (isEncryptionEnabled()) {
-                file.setContent(obj, _creds);
-            } else {
-                file.setContent(obj);
-            }
-
-            save(_context, file);
-        } catch (VaultFileException e) {
-            throw new VaultManagerException(e);
-        }
-
-        if (backup) {
+        boolean backedUp = false;
+        if (getVault().isEncryptionEnabled()) {
             if (_prefs.isBackupsEnabled()) {
+                backedUp = true;
                 try {
-                    backup();
-                    _prefs.setBackupsError(null);
-                } catch (VaultManagerException e) {
-                    _prefs.setBackupsError(e);
+                    scheduleBackup();
+                } catch (VaultRepositoryException e) {
+                    _prefs.setBuiltInBackupResult(new Preferences.BackupResult(e));
                 }
             }
 
             if (_prefs.isAndroidBackupsEnabled()) {
-                androidBackupDataChanged();
+                backedUp = true;
+                scheduleAndroidBackup();
             }
+        }
+
+        if (!backedUp) {
+            _prefs.setIsBackupReminderNeeded(true);
         }
     }
 
-    /**
-     * Exports the vault bt serializing it and writing it to the given OutputStream. If encryption
-     * is enabled, the vault will be encrypted automatically.
-     */
-    public void export(OutputStream stream) throws VaultManagerException {
-        export(stream, getCredentials());
-    }
+    public void scheduleBackup() throws VaultRepositoryException {
+        _prefs.setIsBackupReminderNeeded(false);
 
-    /**
-     * Exports the vault by serializing it and writing it to the given OutputStream. If creds is
-     * not null, it will be used to encrypt the vault first.
-     */
-    public void export(OutputStream stream, VaultFileCredentials creds) throws VaultManagerException {
-        try {
-            VaultFile vaultFile = new VaultFile();
-            if (creds != null) {
-                vaultFile.setContent(_vault.toJson(), creds);
-            } else {
-                vaultFile.setContent(_vault.toJson());
-            }
-
-            byte[] bytes = vaultFile.toBytes();
-            stream.write(bytes);
-        } catch (IOException | VaultFileException e) {
-            throw new VaultManagerException(e);
-        }
-    }
-
-    /**
-     * Exports the vault by serializing the list of entries to a newline-separated list of
-     * Google Authenticator URI's and writing it to the given OutputStream.
-     */
-    public void exportGoogleUris(OutputStream outStream) throws VaultManagerException {
-        try (PrintStream stream = new PrintStream(outStream, false, StandardCharsets.UTF_8.name())) {
-            for (VaultEntry entry : getEntries()) {
-                GoogleAuthInfo info = new GoogleAuthInfo(entry.getInfo(), entry.getName(), entry.getIssuer());
-                stream.println(info.getUri().toString());
-            }
-        } catch (IOException e) {
-            throw new VaultManagerException(e);
-        }
-    }
-
-    public void backup() throws VaultManagerException {
         try {
             File dir = new File(_context.getCacheDir(), "backup");
             if (!dir.exists() && !dir.mkdir()) {
@@ -209,83 +171,139 @@ public class VaultManager {
             }
 
             File tempFile = File.createTempFile(VaultBackupManager.FILENAME_PREFIX, ".json", dir);
-            try (InputStream inStream = getAtomicFile(_context).openRead();
-                OutputStream outStream = new FileOutputStream(tempFile)) {
-                IOUtils.copy(inStream, outStream);
+            try (OutputStream outStream = new FileOutputStream(tempFile)) {
+                _repo.export(outStream);
             }
+            BackupsVersioningStrategy strategy = _prefs.getBackupVersioningStrategy();
+            Uri uri = _prefs.getBackupsLocation();
+            int versionsToKeep = _prefs.getBackupsVersionCount();
 
-            _backups.scheduleBackup(tempFile, _prefs.getBackupsLocation(), _prefs.getBackupsVersionCount());
+            _backups.scheduleBackup(tempFile, strategy, uri, versionsToKeep);
         } catch (IOException e) {
-            throw new VaultManagerException(e);
+            throw new VaultRepositoryException(e);
         }
     }
 
-    public void androidBackupDataChanged() {
+    public void scheduleAndroidBackup() {
+        _prefs.setIsBackupReminderNeeded(false);
         _androidBackups.dataChanged();
     }
 
-    public void addEntry(VaultEntry entry) {
-        _vault.getEntries().add(entry);
+    public boolean isAutoLockEnabled(int autoLockType) {
+        return _prefs.isAutoLockTypeEnabled(autoLockType)
+                && isVaultLoaded()
+                && getVault().isEncryptionEnabled();
     }
 
-    public VaultEntry getEntryByUUID(UUID uuid) {
-        return _vault.getEntries().getByUUID(uuid);
+    public void registerLockListener(LockListener listener) {
+        _lockListeners.add(listener);
     }
 
-    public VaultEntry removeEntry(VaultEntry entry) {
-        return _vault.getEntries().remove(entry);
+    public void unregisterLockListener(LockListener listener) {
+        _lockListeners.remove(listener);
     }
 
-    public void wipeEntries() {
-        _vault.getEntries().wipe();
+    /**
+     * Sets whether to block automatic lock on minimization. This should only be called
+     * by activities before invoking an intent that shows a DocumentsUI, because that
+     * action leads AppLifecycleObserver to believe that the app has been minimized.
+     */
+    public void setBlockAutoLock(boolean block) {
+        _blockAutoLock = block;
     }
 
-    public VaultEntry replaceEntry(VaultEntry entry) {
-        return _vault.getEntries().replace(entry);
+    /**
+     * Reports whether automatic lock on minimization is currently blocked.
+     */
+    public boolean isAutoLockBlocked() {
+        return _blockAutoLock;
     }
 
-    public void swapEntries(VaultEntry entry1, VaultEntry entry2) {
-        _vault.getEntries().swap(entry1, entry2);
+    public boolean isVaultLoaded() {
+        return _repo != null;
     }
 
-    public boolean isEntryDuplicate(VaultEntry entry) {
-        return _vault.getEntries().has(entry);
+    public boolean isVaultInitNeeded() {
+        return !isVaultLoaded() && !VaultRepository.fileExists(_context);
     }
 
-    public Collection<VaultEntry> getEntries() {
-        return _vault.getEntries().getValues();
+    @NonNull
+    public VaultRepository getVault() {
+        if (!isVaultLoaded()) {
+            throw new IllegalStateException("Vault manager is not initialized");
+        }
+
+        return _repo;
     }
 
-    public TreeSet<String> getGroups() {
-        TreeSet<String> groups = new TreeSet<>(Collator.getInstance());
-        for (VaultEntry entry : getEntries()) {
-            String group = entry.getGroup();
-            if (group != null) {
-                groups.add(group);
+    /**
+     * Starts an external activity, temporarily blocks automatic lock of Aegis and
+     * shows an error dialog if the target activity is not found.
+     */
+    public void fireIntentLauncher(Activity activity, Intent intent, ActivityResultLauncher<Intent> resultLauncher) {
+        setBlockAutoLock(true);
+
+        try {
+            resultLauncher.launch(intent);
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+
+            if (isDocsAction(intent.getAction())) {
+                Dialogs.showErrorDialog(activity, R.string.documentsui_error, e);
+            } else {
+                throw e;
             }
         }
-        return groups;
     }
 
-    public VaultFileCredentials getCredentials() {
-        return _creds;
+    /**
+     * Starts an external activity, temporarily blocks automatic lock of Aegis and
+     * shows an error dialog if the target activity is not found.
+     */
+    public void fireIntentLauncher(Fragment fragment, Intent intent, ActivityResultLauncher<Intent> resultLauncher) {
+        setBlockAutoLock(true);
+
+        try {
+            resultLauncher.launch(intent);
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+
+            if (isDocsAction(intent.getAction())) {
+                Dialogs.showErrorDialog(fragment.requireContext(), R.string.documentsui_error, e);
+            } else {
+                throw e;
+            }
+        }
     }
 
-    public void setCredentials(VaultFileCredentials creds) {
-        _creds = creds;
+    private void startNotificationService() {
+        // NOTE: Disabled for now. See issue: #1047
+        /*if (PermissionHelper.granted(_context, Manifest.permission.POST_NOTIFICATIONS)) {
+            _context.startService(getNotificationServiceIntent());
+        }*/
     }
 
-    public boolean isEncryptionEnabled() {
-        return _creds != null;
+    private void stopNotificationService() {
+        // NOTE: Disabled for now. See issue: #1047
+        //_context.stopService(getNotificationServiceIntent());
     }
 
-    public void enableEncryption(VaultFileCredentials creds) throws VaultManagerException {
-        _creds = creds;
-        save(true);
+    private Intent getNotificationServiceIntent() {
+        return new Intent(_context, NotificationService.class);
     }
 
-    public void disableEncryption() throws VaultManagerException {
-        _creds = null;
-        save(true);
+    private static boolean isDocsAction(@Nullable String action) {
+        return action != null && (action.equals(Intent.ACTION_GET_CONTENT)
+                || action.equals(Intent.ACTION_CREATE_DOCUMENT)
+                || action.equals(Intent.ACTION_OPEN_DOCUMENT)
+                || action.equals(Intent.ACTION_OPEN_DOCUMENT_TREE));
+    }
+
+    public interface LockListener {
+        /**
+         * Called when the vault lock status changes
+         * @param userInitiated whether or not the user initiated the lock in MainActivity.
+         */
+        void onLocked(boolean userInitiated);
     }
 }

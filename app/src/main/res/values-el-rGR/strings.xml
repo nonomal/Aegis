@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="action_settings">Ρυθμίσεις</string>
     <string name="action_about">Σχετικά</string>
-    <string name="action_import">Εισαγωγή</string>
     <string name="action_delete">Διαγραφή</string>
     <string name="action_transfer">Μεταφορά</string>
     <string name="action_edit_icon">Επεξεργασία εικονιδίου</string>
@@ -11,10 +10,13 @@
     <string name="action_default_icon">Επαναφορά προεπιλεγμένου εικονιδίου</string>
     <string name="discard">Απόρριψη</string>
     <string name="save">Αποθήκευση</string>
+    <string name="all">Όλα</string>
     <string name="issuer">Εκδότης</string>
+    <string name="yandex_pin">PIN (4-16 ψηφία)</string>
+    <string name="motp_pin">PIN (4 ψηφία)</string>
     <string name="suggested">Προτεινόμενο</string>
     <string name="usage_count">Αριθμός χρήσεων</string>
-    <string name="settings">Προτιμήσεις</string>
+    <string name="warning">Προειδοποίηση</string>
     <string name="pref_cat_appearance_app">Εφαρμογή</string>
     <string name="pref_cat_appearance_entries">Καταχωρήσεις</string>
     <string name="pref_cat_backups_android">Android</string>
@@ -27,42 +29,72 @@
     <string name="pref_section_security_summary">Ρύθμιση κρυπτογράφησης, βιομετρικού ξεκλειδώματος, αυτόματου κλειδώματος και άλλων ρυθμίσεων ασφαλείας.</string>
     <string name="pref_section_import_export_title">Εισαγωγή &amp; Εξαγωγή</string>
     <string name="pref_section_import_export_summary">Εισαγωγή αντιγράφων ασφαλείας Aegis ή άλλων εφαρμογών ελέγχου ταυτότητας. Δημιουργήστε χειροκίνητες εξαγωγές της κρύπτης Aegis.</string>
+    <string name="pref_section_audit_log_title">Αρχείο καταγραφής ελέγχου</string>
+    <string name="pref_section_audit_log_summary">Βρείτε μια λίστα με όλα τα αναφερόμενα σημαντικά γεγονότα που συνέβησαν στην εφαρμογή.</string>
     <string name="pref_section_backups_title">Αντίγραφα Ασφαλείας</string>
-    <string name="pref_section_backups_summary">Ρυθμίστε αυτόματα αντίγραφα ασφαλείας σε μια τοποθεσία της επιλογής σας ή ενεργοποιήσετε τη συμμετοχή στο σύστημα αντιγράφων ασφαλείας του Android.</string>
+    <string name="pref_section_backups_summary">Ρυθμίστε αυτόματα αντίγραφα ασφαλείας σε μια τοποθεσία της επιλογής σας ή ενεργοποιήστε τη συμμετοχή στο σύστημα αντιγράφων ασφαλείας του Android.</string>
     <string name="pref_section_icon_packs">Πακέτα εικονιδίων</string>
     <string name="pref_section_icon_packs_summary">Διαχείριση και εισαγωγή πακέτων εικονιδίων</string>
     <string name="pref_select_theme_title">Θέμα</string>
+    <string name="pref_dynamic_colors_title">Δυναμικά χρώματα</string>
+    <string name="pref_dynamic_colors_summary">Εφαρμόστε μια επικάλυψη με βάση τα χρώματα του θέματός σας Android</string>
     <string name="pref_view_mode_title">Τρόπος προβολής</string>
     <string name="pref_lang_title">Γλώσσα</string>
+    <string name="pref_show_icons_title">Εμφάνιση εικονιδίων</string>
+    <string name="pref_show_icons_summary">Εμφάνιση εικονιδίων δίπλα σε κάθε καταχώρηση</string>
     <string name="pref_code_group_size_title">Ομαδοποίηση ψηφίων κωδικού</string>
-    <string name="pref_code_group_size_summary">Εμφάνιση κωδικού σε διψήφια ομαδοποίηση αντί για τριψήφια ομαδοποίηση</string>
-    <string name="pref_account_name_title">Εμφάνιση του ονόματος λογαριασμού</string>
-    <string name="pref_account_name_summary">Ενεργοποίηση προβολής ονόματος λογαριασμού δίπλα στον εκδότη</string>
-    <string name="pref_timeout_title">Χρονικό όριο</string>
-    <string name="pref_timeout_summary">Αυτόματο κλείδωμα κρύπτης μετά από %1$s δευτερόλεπτα αδράνειας</string>
-    <string name="pref_slots_title">Υποδοχή κλειδιών</string>
-    <string name="pref_slots_summary">Διαχείριση λίστας κλειδιών που μπορούν να αποκρυπτογραφήσουν την κρύπτη</string>
+    <string name="pref_code_group_size_summary">Επιλέξτε τον αριθμό των ψηφίων για να ομαδοποιήσετε τους κωδικούς κατά</string>
+    <string name="pref_account_name_position_title">Εμφάνιση του ονόματος λογαριασμού</string>
+    <string name="pref_show_next_code_title">Εμφάνιση επόμενου κωδικού</string>
+    <string name="pref_show_next_code_summary">Δημιουργία και εμφάνιση του επόμενου κωδικού νωρίτερα</string>
+    <string name="pref_expiration_state_title">Ένδειξη όταν οι κωδικοί πρόκειται να λήξουν</string>
+    <string name="pref_expiration_state_summary">Αλλάζει το χρώμα των κωδικών και τους κάνει να αναβοσβήνουν όταν πρόκειται να λήξουν</string>
+    <string name="pref_expiration_state_fallback">Αλλάζει το χρώμα των κωδικών όταν πρόκειται να λήξουν</string>
+    <string name="pref_shared_issuer_account_name_title">Προβολή ονόματος λογαριασμού μόνο αν είναι απαραίτητο</string>
+    <string name="pref_shared_issuer_account_name_summary">Εμφάνιση ονομάτων λογαριασμών μόνο όταν μοιράζονται τον ίδιο εκδότη. Άλλα ονόματα λογαριασμών θα αποκρύπτονται.</string>
+    <string name="pref_account_name_position_summary_override">Αυτή η ρύθμιση αντικαθίσταται από τη λειτουργία προβολής πλακιδίων. Το όνομα λογαριασμού θα εμφανίζεται κάτω από τον εκδότη.</string>
     <string name="pref_import_file_title">Εισαγωγή από αρχείο</string>
     <string name="pref_import_file_summary">Εισαγωγή αναγνωριστικών από αρχείο</string>
-    <string name="pref_android_backups_title">Συμμετοχή στο σύστημα αντιγράφων ασφαλείας του Android</string>
-    <string name="pref_android_backups_summary">Επιτρέψτε στο σύστημα αντιγράφων ασφαλείας του Android να συμπεριλαμβάνει την κρύπτη του Aegis στα αντίγραφα ασφαλείας. Αυτό υποστηρίζεται μόνο για κρυπτογραφημένες κρύπτες.</string>
+    <string name="pref_android_backups_title">Αντίγραφα ασφαλείας cloud Android</string>
+    <string name="pref_android_backups_summary">Επιτρέψτε στο σύστημα δημιουργίας αντιγράφων ασφαλείας cloud του Android να προσθέσει την κρύπτη του Aegis στα αντίγραφα του. Μόνο για κρυπτογραφημένες κρύπτες.</string>
+    <string name="pref_android_backups_hint"><i>Τα αντίγραφα ασφαλείας από συσκευή σε συσκευή (D2D) επιτρέπονται πάντα, ανεξάρτητα από την παραπάνω ρύθμιση</i></string>
     <string name="pref_backups_title">Αυτόματη δημιουργία αντιγράφων ασφαλείας της κρύπτης</string>
-    <string name="pref_backups_summary">Αυτόματη δημιουργία αντιγραφών ασφαλείας της κρύπτης σε εξωτερικό χώρο αποθήκευσης όταν γίνονται αλλαγές. Αυτό υποστηρίζεται μόνο για κρυπτογραφημένες κρύπτες.</string>
-    <string name="pref_backups_location_title">Κατάλογος για τα αντίγραφα ασφαλείας αρχείων</string>
+    <string name="pref_backups_summary">Αυτόματη δημιουργία αντιγραφών ασφαλείας της κρύπτης σε εξωτερικό χώρο αποθήκευσης όταν γίνονται αλλαγές. Υποστηρίζεται μόνο για κρυπτογραφημένες κρύπτες.</string>
+    <string name="pref_backups_reminder_title">Υπενθύμιση για αντίγραφα</string>
+    <string name="pref_backups_reminder_summary">Εμφάνιση υπενθύμισης για δημιουργία αντιγράφων ασφαλείας σε περίπτωση που δεν έχετε δημιουργήσει αντίγραφα των τελευταίων σας αλλαγών.</string>
+    <string name="pref_backups_reminder_dialog_title">Απενεργοποίηση υπενθύμισης αντιγράφων</string>
+    <string name="pref_backups_reminder_dialog_summary">Η απενεργοποίηση αυτής της υπενθύμισης σημαίνει ότι το Aegis δεν θα σας ενημερώσει εάν έχετε ή όχι αλλαγές για τις οποίες δεν έχουν δημιουργηθεί ακόμα αντίγραφα. Μπορεί να χάσετε την πρόσβαση στα διακριτικά σας. Σίγουρα θέλετε να απενεργοποιήσετε την υπενθύμιση;</string>
+    <string name="pref_backups_versioning_strategy_title">Στρατηγική αντιγράφων ασφαλείας</string>
+    <string name="pref_backups_versioning_strategy_keep_x_versions">Διατήρηση αρκετών εκδόσεων</string>
+    <string name="pref_backups_versioning_strategy_single_backup">Μονό αντίγραφο ασφαλείας</string>
+    <string name="pref_backups_versioning_strategy_single_backup_warning">Η επιλεγμένη στρατηγική δημιουργίας αντιγράφων ασφαλείας δεν είναι αξιόπιστη και δεν συνιστάται. Μια μεμονωμένη αποτυχία δημιουργίας αντιγράφων ασφαλείας μπορεί να οδηγήσει στην απώλεια του μοναδικού αντιγράφου ασφαλείας.</string>
+    <string name="pref_backups_versioning_strategy_dialog_title">Επιλέξτε την στρατηγική αντιγράφων</string>
+    <string name="pref_backups_location_title">Τοποθεσία αντιγράφου ασφαλείας</string>
     <string name="pref_backups_location_summary">Τα αντίγραφα ασφαλείας θα αποθηκευτούν στo</string>
+    <string name="pref_backup_location_summary">Το αντίγραφο ασφαλείας θα αποθηκευτεί στο</string>
     <string name="pref_backups_trigger_title">\'Εναυσμα αντιγράφου ασφαλείας</string>
-    <string name="pref_backups_trigger_summary">Χειροκίνητη ενεργοποίηση δημιουργίας αντιγράφου ασφαλείας</string>
+    <string name="pref_backups_trigger_summary">Χειροκίνητη δημιουργία αντιγράφου</string>
     <string name="pref_backups_versions_title">Αριθμός εκδόσεων που θα κρατηθούν</string>
+    <string name="pref_backups_versions_infinite">\u221E</string>
     <plurals name="pref_backups_versions_summary">
         <item quantity="one">Διατηρήστε την %1$d έκδοση του αντιγράφου ασφαλείας</item>
         <item quantity="other">Διατηρήστε τις %1$d εκδόσεις του αντιγράφου ασφαλείας</item>
     </plurals>
+    <string name="pref_backups_versions_infinite_summary">Διατηρήστε έναν άπειρο αριθμό εκδόσεων του αντιγράφου ασφαλείας</string>
     <string name="pref_import_app_title">Εισαγωγή από εφαρμογή</string>
     <string name="pref_import_app_summary">Εισαγωγή αναγνωριστικών από εφαρμογή (απαιτείται πρόσβαση root)</string>
     <string name="pref_export_title">Εξαγωγή</string>
     <string name="pref_export_summary">Εξαγωγή κρύπτης</string>
     <string name="pref_password_reminder_title">Υπενθύμιση κωδικού</string>
-    <string name="pref_password_reminder_summary">Προβολή υπενθύμισης για εισαγωγή κωδικού περιστασιακά, έτσι ώστε να μην τον ξεχάσετε.</string>
+    <string name="pref_google_auth_export_title">Εξαγωγή για τον Επαληθευτή Google</string>
+    <string name="pref_google_auth_export_descriptor">Δημιουργεί εξαγωγή κωδικών QR συμβατών με το Google Authenticator</string>
+    <string name="pref_google_auth_export_no_data">Δεν υπάρχουν δεδομένα για εξαγωγή</string>
+    <plurals name="pref_google_auth_export_incompatible_entries">
+        <item quantity="one">Παράλειψη %d μη συμβατής καταχώρησης</item>
+        <item quantity="other">Παράλειψη %d μη συμβατών καταχωρήσεων</item>
+    </plurals>
+    <string name="pref_password_reminder_summary">Προβολή μιας υπενθύμισης %s για να εισαγάγετε τον κωδικό πρόσβασης, ώστε να μην τον ξεχάσετε.</string>
+    <string name="pref_password_reminder_summary_disabled">Απενεργοποιημένο</string>
     <string name="pref_secure_screen_title">Ασφάλεια οθόνης</string>
     <string name="pref_secure_screen_summary">Αποκλεισμός στιγμιότυπων οθόνης και άλλων προσπαθειών για καταγραφή της οθόνης μέσα στην εφαρμογή</string>
     <string name="pref_tap_to_reveal_title">Πατήστε για εμφάνιση</string>
@@ -75,19 +107,60 @@
     <string name="pref_auto_lock_type_back_button">Πατάτε το κουμπί πίσω</string>
     <string name="pref_auto_lock_type_minimize">Η εφαρμογή ελαχιστοποιείται</string>
     <string name="pref_auto_lock_type_device_lock">Η συσκευή είναι κλειδωμένη</string>
+    <string name="pref_backup_password_category">Αντίγραφα ασφαλείας &amp; Εξαγωγή</string>
+    <string name="pref_backup_password_title">Ξεχωριστός κωδικός για δημιουργία αντίγραφα &amp; εξαγωγή</string>
+    <string name="pref_backup_password_summary">Εάν είναι ενεργοποιημένο, ο κωδικός πρόσβασης που χρησιμοποιείται για το ξεκλείδωμα της εφαρμογής δεν μπορεί πλέον να χρησιμοποιηθεί για την αποκρυπτογράφηση αντιγράφων ασφαλείας και εξαγωγές.</string>
+    <string name="pref_backup_password_change_title">Αλλαγή κωδικού πρόσβασης για δημιουργία αντιγράφων &amp; εξαγωγή</string>
+    <string name="pref_backup_password_change_summary">Ορίστε έναν νέο κωδικό πρόσβασης που θα χρησιμοποιείται για την κρυπτογράφηση της κρύπτης κατά τη δημιουργία αντιγράφων και την εξαγωγή.</string>
     <string name="pref_encryption_title">Κρυπτογράφηση</string>
     <string name="pref_encryption_summary">Κρυπτογράφηση της κρύπτης και ξεκλείδωμα με κωδικό ή βιομετρία</string>
     <string name="pref_biometrics_title">Βιομετρικό ξεκλείδωμα</string>
-    <string name="pref_biometrics_summary">Αποδοχή βιομετρικής πιστοποίησης για να ξεκλειδώσετε την κρύπτη</string>
+    <string name="pref_biometrics_summary">Αποδοχή βιομετρικής πιστοποίησης για να ξεκλείδωμα κρύπτης</string>
+    <string name="pref_search_behavior_summary">Αναζήτηση μέσω: %s</string>
+    <string name="pref_search_behavior_prompt">Αναζήτηση σε οποιοδήποτε από τα ακόλουθα πεδία</string>
+    <string name="pref_search_behavior_type_name">Όνομα</string>
+    <string name="pref_search_behavior_type_issuer">Εκδότης</string>
+    <string name="pref_search_behavior_type_note">Σημείωση</string>
+    <string name="pref_search_behavior_type_groups">Ομάδες</string>
     <string name="pref_set_password_title">Αλλαγή κωδικού</string>
     <string name="pref_set_password_summary">Ορισμός νέου κωδικού που θα χρειαστεί για να ξεκλειδώσετε την κρύπτης σας</string>
+    <string name="no_events_title">Δεν έχουν αναφερθεί συμβάντα</string>
+    <string name="no_events_description">Δεν έχουν αναφερθεί σημαντικά συμβάντα στην εφαρμογή</string>
+    <string name="event_title_vault_unlocked">Η κρύπτη ξεκλειδώθηκε</string>
+    <string name="event_description_vault_unlocked">Η κρύπτη ξεκλειδώθηκε επιτυχώς</string>
+    <string name="event_title_backup_created">Δημιουργήθηκε αντίγραφο ασφαλείας</string>
+    <string name="event_description_backup_created">Ένα αντίγραφο ασφαλείας της κρύπτης δημιουργήθηκε με επιτυχία</string>
+    <string name="event_title_android_backup_created">Δημιουργήθηκε αντίγραφο ασφαλείας από το Android</string>
+    <string name="event_description_android_backup_created">Δημιουργήθηκε ένα αντίγραφο ασφαλείας επιτυχώς από το Android</string>
+    <string name="event_title_vault_exported">Η κρύπτη εξήχθη</string>
+    <string name="event_description_vault_exported">Ένα αντίγραφο της κρύπτης έχει εξαχθεί</string>
+    <string name="event_title_entry_shared">Η καταχώριση κοινοποιήθηκε</string>
+    <string name="event_description_entry_shared">Μια καταχώρηση κοινοποιήθηκε</string>
+    <string name="event_title_vault_unlock_failed_password">Το ξεκλείδωμα της κρύπτης απέτυχε (κωδικός)</string>
+    <string name="event_description_vault_unlock_failed_password">Αποτυχία προσπάθειας ξεκλειδώματος της κρύπτης με κωδικό πρόσβασης</string>
+    <string name="event_title_vault_unlock_failed_biometrics">Το ξεκλείδωμα της κρύπτης απέτυχε (βιομετρικά)</string>
+    <string name="event_description_vault_unlock_failed_biometrics">Αποτυχία προσπάθειας ξεκλειδώματος της κρύπτης με βιομετρικά στοιχεία</string>
+    <string name="event_unknown">Άγνωστος τύπος συμβάντος</string>
+    <string name="audit_log_entry_deleted">(διαγράφηκε)</string>
+    <string name="today_at_time">Σήμερα στις %1$s</string>
+    <string name="day_of_week_at_time">%1$s στις %2$s</string>
     <string name="export_encrypted">Κρυπτογράφηση κρύπτης</string>
     <string name="export_help">Αυτή η ενέργεια θα εξάγει την κρύπτη έξω από τον εσωτερικό χώρο αποθήκευσης του Aegis. Επιλέξτε τη μορφή στην οποία θέλετε να είναι η εξαγωγή σας:</string>
     <string name="export_warning_unencrypted">Πρόκειται να εξαγάγετε ένα μη κρυπτογραφημένο αντίγραφο της Aegis κρύπτης σας. <b> Αυτό δεν συνιστάται </b>.</string>
-    <string name="export_warning_accept">Κατανοώ τους κινδύνους</string>
+    <string name="export_warning_password">Οι εξαγωγές κρυπτογραφούνται χρησιμοποιώντας ένα ξεχωριστό κωδικό πρόσβασης που έχει ρυθμιστεί στις ρυθμίσεις ασφαλείας.</string>
+    <string name="understand_risk_accept">Κατανοώ τους κινδύνους</string>
     <string name="export_format_aegis">Aegis (.JSON)</string>
     <string name="export_format_google_auth_uri">Αρχείο κειμένου (*.TXT)</string>
+    <string name="export_format_html">Ιστοσελίδα (.HTML)</string>
     <string name="export_format_hint">Μορφή εξαγωγής</string>
+    <string name="export_all_groups">Εξαγωγή όλων των ομάδων</string>
+    <string name="export_choose_groups">Επιλέξτε ποιες ομάδες θα εξαχθούν</string>
+    <plurals name="export_groups_selected_count">
+        <item quantity="one">%d ομάδα επιλέχθηκε</item>
+        <item quantity="other">%d ομάδες επιλέχθηκαν</item>
+    </plurals>
+    <string name="export_no_groups_selected">Δεν επιλέχθηκαν ομάδες για εξαγωγή</string>
+    <string name="export_html_title" comment="The title of an HTML export document">Εξαγωγή Aegis Authenticator</string>
     <string name="choose_authentication_method">Ασφάλεια</string>
     <string name="authentication_method_explanation">Το Aegis είναι μια εφαρμογή 2FA επικεντρωμένη στην ασφάλεια. Τα αναγνωριστικά αποθηκεύονται σε μία κρύπτη, η οποία μπορεί προαιρετικά να κρυπτογραφηθεί με έναν κωδικό της επιλογής σας. Αν κάποιος εισβολέας αποκτήσει το κρυπτογραφημένο αρχείο της κρύπτης σας, δεν θα έχει πρόσβαση στα περιεχόμενα χωρίς να γνωρίζει τον κωδικό.\n\nΈχουμε προεπιλέξει την επιλογή που νομίζουμε ότι θα ταιριάζει καλύτερα στη συσκευή σας.</string>
     <string name="authentication_method_none">Καμία</string>
@@ -97,11 +170,8 @@
     <string name="authentication_method_password_explanation">Προειδοποίηση: Εάν ξεχάσετε τον κωδικό πρόσβασης σας, θα χάσετε μόνιμα πρόσβαση στα αναγνωριστικά σας. Δεν υπάρχει τρόπος να τα ανακτήσετε χωρίς τον κωδικό πρόσβασης.</string>
     <string name="authentication_method_biometrics">Βιομετρικά</string>
     <string name="authentication_method_biometrics_description">Εκτός από έναν κωδικό πρόσβασης, τα βιομετρικά στοιχεία που έχουν καταχωρηθεί σε αυτήν τη συσκευή, όπως ένα δακτυλικό αποτύπωμα ή το πρόσωπό σας, μπορούν να χρησιμοποιηθούν για να ξεκλειδώσετε την κρύπτη σας.</string>
-    <string name="authentication_method_set_password">Κωδικός πρόσβασης</string>
-    <string name="authentication_enter_password">Εισάγετε τον κωδικό σας</string>
     <string name="authentication">Ξεκλείδωμα της κρύπτης</string>
-    <!-- The newline (\n) on the following line is just for aesthetic purposes !-->
-    <string name="authentication_multiline">Ξεκλείδωμα\nτης κρύπτης</string>
+    <string name="authentication_multiline" comment="The newline in the middle is used for aesthetic purposes">Ξεκλείδωμα\nτης κρύπτης</string>
     <string name="auth_use_biometrics">Ή πατήστε εδώ για να χρησιμοποιήσετε <font fgcolor="#FF0D86C1">βιομετρία</font></string>
     <string name="set_password">Παρακαλώ εισάγετε έναν κωδικό πρόσβασης</string>
     <string name="set_group">Παρακαλώ εισάγετε όνομα ομάδας</string>
@@ -109,16 +179,26 @@
     <string name="set_password_confirm">Παρακαλώ επιβεβαιώστε τον κωδικό</string>
     <string name="invalid_password">Ο κωδικός πρόσβασης είναι λάθος</string>
     <string name="invalidated_biometrics">Έχει εντοπιστεί μια αλλαγή στις ρυθμίσεις ασφαλείας της συσκευής σας. Παρακαλώ μεταβείτε στο \"Aegis -&gt; Ρυθμίσεις -&gt; Ασφάλεια -&gt; Βιομετρικό ξεκλείδωμα\" για να απενεργοποιήσετε και να ξανά ενεργοποιήσετε το βιομετρικό ξεκλείδωμα.</string>
-    <string name="password_reminder">Παρακαλώ εισάγετε τον κωδικό σας. Σας ζητάμε περιστασιακά να το κάνετε αυτό, ώστε να μην το ξεχάσετε.</string>
+    <string name="password_reminder">Παρακαλούμε εισάγετε τον κωδικό σας. Σας ζητάμε περιστασιακά να το κάνετε αυτό ώστε να μην τον ξεχάσετε.</string>
+    <string name="password_reminder_dialog_title">Βιομετρικό ξεκλείδωμα από προεπιλογή</string>
+    <string name="password_reminder_dialog_message">Σας προτρέπουμε περιστασιακά να εισάγετε τον κωδικό πρόσβασής σας για να διασφαλίσετε ότι δεν τον έχετε ξεχάσει και δεν μείνετε εκτός της κρύπτης σας. Μετά την εισαγωγή του κωδικού πρόσβασής σας μία φορά, το Aegis θα επανέλθει στο βιομετρικό ξεκλείδωμα μέχρι να έρθει η ώρα για μια άλλη υπενθύμιση κωδικού πρόσβασης.</string>
+    <string name="password_reminder_freq_never">Ποτέ</string>
+    <string name="password_reminder_freq_weekly">Εβδομαδιαία</string>
+    <string name="password_reminder_freq_biweekly">Ανά δύο εβδομάδες</string>
+    <string name="password_reminder_freq_monthly">Μηνιαία</string>
+    <string name="password_reminder_freq_quarterly">Τριμηνιαία</string>
+    <string name="enter_password_proton_message">Φαίνεται ότι αυτό το αντίγραφο ασφαλείας επαληθευτή Proton είναι κρυπτογραφημένο. Παρακαλώ εισάγετε τον κωδικό πρόσβασης παρακάτω.</string>
+    <string name="enter_password_2fas_message">Φαίνεται ότι αυτό το αντίγραφο ασφαλείας 2FAS είναι κρυπτογραφημένο. Παρακαλώ εισάγετε τον κωδικό πρόσβασης παρακάτω.</string>
     <string name="enter_password_authy_message">Φαίνεται ότι τα Authy αναγνωριστικά σας είναι κρυπτογραφημένα. Κλείστε το Aegis, ανοίξτε το Authy και ξεκλειδώστε τα αναγνωριστικά με τον κωδικό πρόσβασής σας. Αντ \'αυτού, ο Aegis μπορεί επίσης να προσπαθήσει να αποκρυπτογραφήσει τα διακριτικά Authy για εσάς, εάν εισαγάγετε τον κωδικό πρόσβασής σας παρακάτω.</string>
+    <string name="enter_password_aegis_title">Παρακαλώ εισάγετε τον κωδικό εισαγωγής</string>
     <string name="period_hint">Περίοδος (δευτερόλεπτα)</string>
     <string name="algorithm_hint">Λειτουργία Hash</string>
     <string name="type">Τύπος</string>
     <string name="share">Κοινοποίηση</string>
     <string name="yes">Ναι</string>
     <string name="no">Όχι</string>
+    <string name="undo">Αναίρεση</string>
     <string name="unlock">Ξεκλείδωμα</string>
-    <string name="biometrics">Βιομετρική</string>
     <string name="advanced">Σύνθετες</string>
     <string name="counter">Μετρητής</string>
     <string name="digits">Ψηφία</string>
@@ -126,14 +206,17 @@
     <string name="scan">Σάρωση κωδικού QR</string>
     <string name="scan_image">Σάρωση εικόνας</string>
     <string name="enter_manually">Χειροκίνητη εισαγωγή</string>
-    <string name="add_biometric">Προσθήκη βιομετρίας</string>
-    <string name="add_biometric_slot">Προσθήκη βιομετρικής υποδοχής</string>
     <string name="set_up_biometric">Ρύθμιση βιομετρικού ξεκλειδώματος</string>
-    <string name="add_password">Προσθήκη κωδικού πρόσβασης</string>
-    <string name="slots_warning">Η κρύπτη σας είναι τόσο ασφαλής όσο με το πιο αδύναμο μυστικό σας. Εάν αλλάξετε τις ρυθμίσεις βιομετρικού ελέγχου ταυτότητας της συσκευής σας, θα χρειαστεί να ενεργοποιήσετε ξανά το βιομετρικό ξεκλείδωμα μέσα από το Aegis.</string>
     <string name="copy">Αντιγραφή</string>
     <string name="edit">Επεξεργασία</string>
-    <string name="delete">Διαγραφή</string>
+    <string name="select_all">Επιλογή όλων</string>
+    <string name="assign_icons">Αντιστοίχιση εικονιδίων</string>
+    <string name="assign_groups">Αντιστοίχιση σε ομάδα</string>
+    <string name="assign_groups_dialog_summary">Επιλέξτε μια ομάδα στην οποία θέλετε να αντιστοιχίσετε τις επιλεγμένες καταχωρήσεις.</string>
+    <string name="assign_groups_dialog_dropdown">Επιλογή ομάδας</string>
+    <string name="favorite" comment="Verb">Προσθήκη στα αγαπημένα</string>
+    <string name="unfavorite" comment="Verb">Αφαίρεση από αγαπημένα</string>
+    <string name="error_all_caps">ΣΦΑΛΜΑ</string>
     <string name="password">Κωδικός πρόσβασης</string>
     <string name="confirm_password">Επιβεβαίωση κωδικού</string>
     <string name="show_password">Προβολή κωδικού</string>
@@ -145,11 +228,20 @@
     <string name="snackbar_authentication_method">Παρακαλώ επιλέξτε μέθοδο ελέγχου ταυτότητας</string>
     <string name="encrypting_vault">Κρυπτογράφηση κρύπτης</string>
     <string name="exporting_vault">Εξαγωγή της κρύπτης</string>
+    <string name="optimizing_icon">Βελτιστοποίηση εικονιδίου</string>
+    <string name="optimizing_icon_multiple">Βελτιστοποίηση εικονιδίων %1$d/%2$d</string>
     <string name="reading_file">Ανάγνωση αρχείου</string>
+    <string name="requesting_root_access">Αίτηση πρόσβασης root</string>
+    <string name="analyzing_qr">Ανάλυση κωδικού QR</string>
+    <string name="analyzing_qr_multiple">Ανάλυση κωδικού QR %1$d/%2$d (%3$s)</string>
+    <plurals name="added_new_entries">
+        <item quantity="one">Προστέθηκε %d νέα καταχώρηση στην κρύπτη</item>
+        <item quantity="other">Προστέθηκαν %d νέες καταχωρήσεις στην κρύπτη</item>
+    </plurals>
     <string name="importing_icon_pack">Εισαγωγή πακέτου εικονιδίων</string>
     <string name="delete_entry">Διαγραφή καταχώρησης</string>
     <string name="delete_entry_description">Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την καταχώρηση;</string>
-    <string name="delete_entry_explanation">Αυτή η ενέργεια δεν απενεργοποιεί το 2FA για <b>%s</b>. Για να αποτρέψετε την απώλεια πρόσβασης, βεβαιωθείτε ότι έχετε απενεργοποιήσει το 2FA ή ότι έχετε έναν εναλλακτικό τρόπο να δημιουργήσετε κωδικούς για αυτήν την υπηρεσία.</string>
+    <string name="delete_entry_explanation">Αυτή η ενέργεια δεν απενεργοποιεί το 2FA για:\n<b>%s</b>\n\nΓια να αποτρέψετε την απώλεια πρόσβασης, βεβαιωθείτε ότι έχετε απενεργοποιήσει το 2FA ή ότι έχετε έναν εναλλακτικό τρόπο δημιουργίας κωδικών για αυτήν την υπηρεσία.</string>
     <string name="delete_entries">Διαγραφή καταχωρήσεων</string>
     <plurals name="delete_entries_description">
         <item quantity="one">Είστε βέβαιοι ότι θέλετε να διαγράψετε %d καταχώρηση;</item>
@@ -157,9 +249,8 @@
     </plurals>
     <string name="discard_changes">Απόρριψη αλλαγών;</string>
     <string name="discard_changes_description">Οι αλλαγές σας δεν έχουν αποθηκευτεί</string>
-    <string name="folder">Φάκελος</string>
-    <string name="tap_to_select">Πατήστε για να επιλέξετε</string>
     <string name="saving_profile_error">Σφάλμα κατά την αποθήκευση προφίλ</string>
+    <string name="saving_assign_icons_error">Σφάλμα κατά την αντιστοίχιση εικονιδίων</string>
     <string name="welcome">Καλώς ήρθατε</string>
     <string name="app_description">Το Aegis είναι μια δωρεάν, ασφαλής και ανοικτού κώδικα εφαρμογή 2FA</string>
     <string name="setup_completed">Η εγκατάσταση ολοκληρώθηκε</string>
@@ -168,6 +259,7 @@
     <string name="copied">Αντιγράφηκε</string>
     <string name="errors_copied">Αντιγράφηκαν σφάλματα στο πρόχειρο</string>
     <string name="version_copied">Η έκδοση αντιγράφτηκε στο πρόχειρο</string>
+    <string name="error_required_field">Αυτό το πεδίο είναι υποχρεωτικό</string>
     <string name="error_occurred">Παρουσιάστηκε σφάλμα</string>
     <string name="decryption_error">Παρουσιάστηκε σφάλμα κατά την προσπάθεια ξεκλειδώματος της κρύπτης</string>
     <string name="decryption_corrupt_error">Παρουσιάστηκε σφάλμα κατά την προσπάθεια ξεκλειδώματος της κρύπτης. Το αρχείο κρύπτης σας ενδέχεται να είναι κατεστραμμένο.</string>
@@ -175,13 +267,17 @@
     <string name="vault_init_error">Παρουσιάστηκε σφάλμα κατά την προσπάθεια προετοιμασίας της κρύπτης</string>
     <string name="vault_load_error">Παρουσιάστηκε σφάλμα κατά την προσπάθεια φόρτωσης της κρύπτης από τον χώρο αποθήκευσης</string>
     <string name="biometric_decrypt_error">Παρουσιάστηκε σφάλμα κατά την προσπάθεια αποκρυπτογράφησης της κρύπτης με βιομετρικό έλεγχο ταυτότητας. Αυτό συμβαίνει συνήθως μόνο εάν αλλάξουν οι ρυθμίσεις ασφαλείας της συσκευής σας. Ξεκλειδώστε την κρύπτη με τον κωδικό πρόσβασής σας και διαμορφώστε εκ νέου τον βιομετρικό έλεγχο ταυτότητας στις ρυθμίσεις του Aegis.</string>
-    <string name="biometric_init_error">Παρουσιάστηκε σφάλμα κατά την προσπάθεια προετοιμασίας βιομετρικού ελέγχου ταυτότητας. Αυτό συμβαίνει συνήθως μόνο εάν αλλάξουν οι ρυθμίσεις ασφαλείας της συσκευής σας. Ξεκλειδώστε την κρύπτη με τον κωδικό πρόσβασής σας και αναδιαμορφώστε τον βιομετρικό έλεγχο ταυτότητας στις ρυθμίσεις του Aegis.</string>
+    <string name="biometric_init_error">Παρουσιάστηκε σφάλμα κατά την προσπάθεια προετοιμασίας βιομετρικού ελέγχου ταυτότητας. Αυτό συμβαίνει συνήθως μόνο εάν αλλάξουν οι ρυθμίσεις ασφαλείας της συσκευής σας. Ξεκλειδώστε την κρύπτη με τον κωδικό πρόσβασης σας και αναδιαμορφώστε τον βιομετρικό έλεγχο ταυτότητας στις ρυθμίσεις του Aegis.</string>
     <string name="disable_encryption">Απενεργοποίηση κρυπτογράφησης</string>
-    <string name="disable_encryption_description">Είστε βέβαιοι ότι θέλετε να απενεργοποιήσετε την κρυπτογράφηση? Αυτό θα έχει ως αποτέλεσμα η κρύπτη να αποθηκευτεί σε απλό κείμενο. <b>Τα αυτόματα αντίγραφα ασφαλείας θα απενεργοποιηθούν επίσης</b>.</string>
+    <string name="disable_encryption_description">Είστε βέβαιοι ότι θέλετε να απενεργοποιήσετε την κρυπτογράφηση; Αυτό θα έχει ως αποτέλεσμα η κρύπτη να αποθηκευτεί σε απλό κείμενο. <b>Τα αυτόματα αντίγραφα ασφαλείας θα απενεργοποιηθούν επίσης</b>.</string>
     <string name="enable_encryption_error">Παρουσιάστηκε σφάλμα κατά την ενεργοποίηση της κρυπτογράφησης</string>
     <string name="disable_encryption_error">Παρουσιάστηκε σφάλμα κατά την απενεργοποίηση της κρυπτογράφησης</string>
     <string name="backup_successful">Το αντίγραφο ασφαλείας προγραμματίστηκε με επιτυχία</string>
     <string name="backup_error">Παρουσιάστηκε σφάλμα κατά την προσπάθεια δημιουργίας αντιγράφου ασφαλείας</string>
+    <string name="backup_status_success">Η πιο πρόσφατη δημιουργία αντιγράφων ασφαλείας ήταν επιτυχής: %s</string>
+    <string name="backup_status_failed">Η πιο πρόσφατη δημιουργία αντιγράφων ασφαλείας απέτυχε: %s</string>
+    <string name="backup_status_none">Δεν έχουν δημιουργηθεί ακόμα αντίγραφα ασφαλείας</string>
+    <string name="backup_warning_password">Τα αντίγραφα ασφαλείας κρυπτογραφούνται χρησιμοποιώντας ένα ξεχωριστό κωδικό πρόσβασης που έχει ρυθμιστεί στις ρυθμίσεις ασφαλείας</string>
     <string name="documentsui_error">Το DocumentsUI φαίνεται να λείπει από τη συσκευή σας. Αυτό είναι ένα σημαντικό στοιχείο συστήματος απαραίτητο για την επιλογή και τη δημιουργία εγγράφων. Εάν χρησιμοποιήσατε ένα εργαλείο για να κάνετε &quot;debloat&quot; τη συσκευή σας, μπορεί να το έχετε διαγράψει κατά λάθος και θα πρέπει να το επανεγκαταστήσετε.</string>
     <string name="icon_pack_import_error">Παρουσιάστηκε σφάλμα κατά την εισαγωγή ενός πακέτου εικονιδίων</string>
     <string name="icon_pack_import_exists_error">Το πακέτο εικονιδίων που προσπαθείτε να εισαγάγετε υπάρχει ήδη. Θέλετε να το αντικαταστήσετε;</string>
@@ -190,7 +286,6 @@
         <item quantity="one">%d εικονίδιο</item>
         <item quantity="other">%d εικονίδια</item>
     </plurals>
-    <string name="icon_pack">Πακέτο εικονιδίων</string>
     <string name="icon_custom">Προσαρμοσμένο</string>
     <string name="permission_denied">Η άδεια απορρίφθηκε</string>
     <string name="andotp_new_format">Νέα μορφή (v0.6.3 ή νεότερη) </string>
@@ -199,16 +294,24 @@
     <string name="choose_totpauth_importer">Είναι αυτό το αντίγραφο ασφαλείας TOTP Authenticator κρυπτογραφημένο με κωδικό πρόσβασης;</string>
     <string name="choose_application">Επιλέξτε την εφαρμογή από την οποία θέλετε να εισαγάγετε</string>
     <string name="choose_theme">Επιλέξτε το θέμα που θέλετε</string>
+    <string name="choose_account_name_position">Επιλέξτε την επιθυμητή θέση ονόματος λογαριασμού</string>
     <string name="choose_view_mode">Επιλέξτε τη λειτουργία προβολής που θέλετε</string>
+    <string name="choose_copy_behavior">Επιλέξτε την επιθυμητή συμπεριφορά αντιγραφής</string>
     <string name="parsing_file_error">Παρουσιάστηκε σφάλμα κατά την προσπάθεια ανάλυσης του αρχείου</string>
     <string name="file_not_found">Σφάλμα: Το αρχείο δεν βρέθηκε</string>
     <string name="reading_file_error">Παρουσιάστηκε σφάλμα κατά την προσπάθεια ανάγνωσης του αρχείου</string>
     <string name="app_lookup_error">Σφάλμα: Η εφαρμογή δεν έχει εγκατασταθεί</string>
-    <string name="root_error">Σφάλμα: Δεν είναι δυνατή η απόκτηση πρόσβασης root</string>
+    <string name="app_version_error">Η έκδοση του %s που έχει εγκατασταθεί δεν υποστηρίζεται. Πρόσφατες εκδόσεις έχουν αρχίσει να κρυπτογραφούν μερικά από τα αρχεία στον εσωτερικό κατάλογο αποθήκευσης, καθιστώντας το Aegis ανίκανο να αποκτήσει πρόσβαση στις πληροφορίες που χρειάζεται για την εισαγωγή. Η προσπάθεια εισαγωγής είναι πιθανό να οδηγήσει σε σφάλμα. Θα θέλατε να συνεχίσετε ούτως ή άλλως;</string>
+    <string name="root_error">Σφάλμα: Αδυναμία απόκτησης πρόσβασης root</string>
     <plurals name="imported_entries_count">
         <item quantity="one">Εισήχθησαν %d καταχώρηση</item>
         <item quantity="other">Εισήχθησαν %d καταχωρήσεις</item>
     </plurals>
+    <plurals name="entries_shown">
+        <item quantity="one">Εμφάνιση %d καταχώρησης</item>
+        <item quantity="other">Εμφάνιση %d καταχωρήσεων</item>
+    </plurals>
+    <string name="intro_import_error_title">Παρουσιάστηκε σφάλμα κατά την εισαγωγή της κρύπτης</string>
     <string name="import_error_title">Παρουσιάστηκαν ένα ή περισσότερα σφάλματα κατά την εισαγωγή</string>
     <string name="exporting_vault_error">Παρουσιάστηκε σφάλμα κατά την προσπάθεια εξαγωγής της κρύπτης</string>
     <string name="exported_vault">Η κρύπτη έχει εξαχθεί</string>
@@ -217,32 +320,41 @@
     <string name="no_cameras_available">Καμία διαθέσιμη κάμερα</string>
     <string name="read_qr_error">Παρουσιάστηκε σφάλμα κατά την προσπάθεια ανάγνωσης του κωδικού QR</string>
     <string name="read_qr_error_phonefactor">Το Aegis δεν είναι συμβατό με τον ιδιόκτητο αλγόριθμο 2FA της Microsoft. Βεβαιωθείτε να επιλέξετε \"Ρύθμιση εφαρμογής χωρίς ειδοποιήσεις\" κατά τη διαμόρφωση του 2FA στο Office 365.</string>
-    <string name="authentication_method_raw">Ακατέργαστη</string>
+    <string name="partial_google_auth_import">Εντοπίστηκε ημιτελής εξαγωγή του Επαληθευτή Google</string>
+    <string name="partial_google_auth_import_warning">Ορισμένοι κωδικοί QR λείπουν από την εισαγωγή σας. Οι ακόλουθοι κωδικοί δεν βρέθηκαν:\n\n<b>%s</b>\n\nΜπορείτε να συνεχίσετε την εισαγωγή αυτής της μερικής εξαγωγής, αλλά σας συνιστούμε να ξαναδοκιμάσετε με όλους τους κωδικούς QR ώστε να μην κινδυνεύετε να χάσετε πρόσβαση σε οποιαδήποτε αναγνωστικά.</string>
+    <string name="missing_qr_code_descriptor">• Κωδικός QR %d</string>
+    <plurals name="import_partial_export_anyway">
+        <item quantity="one">Εισαγωγή %d αναγνωριστικού ούτως ή άλλως</item>
+        <item quantity="other">Εισαγωγή %d αναγνωριστικών ούτως ή άλλως</item>
+    </plurals>
+    <string name="import_google_auth_failure">Η εισαγωγή της εξαγωγής του Επαληθευτή Google απέτυχε</string>
+    <string name="unrelated_google_auth_batches_error">Η εξαγωγή περιέχει πληροφορίες για μια άσχετη παρτίδα. Δοκιμάστε να εισαγάγετε 1 παρτίδα τη φορά.</string>
+    <string name="no_tokens_can_be_imported">Ως αποτέλεσμα, δεν μπορούν να εισαχθούν αναγνωστικά</string>
     <string name="unlocking_vault">Ξεκλείδωμα κρύπτης</string>
-    <string name="unlocking_vault_repair">Ξεκλείδωμα κρύπτης (επισκευή)</string>
-    <string name="password_slot_error">Πρέπει να έχετε τουλάχιστον μία υποδοχή κωδικού</string>
-    <string name="slot_this_device">(αυτή η συσκευή)</string>
-    <string name="remove_slot">Κατάργηση υποδοχής</string>
-    <string name="remove_slot_description">Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτή την υποδοχή;</string>
+    <string name="rename_group">Μετονομασία Ομάδας</string>
+    <string name="no_group_selection">Εάν μια καταχώρηση δεν αποτελεί μέρος οποιασδήποτε ομάδας, μπορεί να βρεθεί στο \"Χωρίς ομάδα\".</string>
     <string name="remove_group">Κατάργηση ομάδας</string>
     <string name="remove_group_description">Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτήν την ομάδα; Οι καταχωρίσεις σε αυτήν θα μεταβούν αυτόματα στο \"Χωρίς ομάδα\".</string>
+    <string name="remove_unused_groups">Διαγραφή αχρησιμοποίητων ομάδων</string>
+    <string name="remove_unused_groups_description">Είστε βέβαιοι ότι θέλετε να διαγράψετε όλες τις ομάδες που δεν έχουν αντιστοιχιστεί σε μια καταχώρηση;</string>
     <string name="remove_icon_pack">Αφαίρεση πακέτου εικονιδίων</string>
-    <string name="remove_icon_pack_description">Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτό το πακέτο εικονιδίων? Καταχωρήσεις που χρησιμοποιούν εικονίδια από αυτό το πακέτο δεν θα επηρεαστούν.</string>
-    <string name="adding_new_slot_error">Παρουσιάστηκε σφάλμα κατά την προσπάθεια προσθήκης νέας υποδοχής:</string>
-    <string name="progressbar_error">Δεν είναι δυνατή η επαναφορά της κλίμακας. Οι γραμμές προόδου θα είναι αόρατες.</string>
+    <string name="remove_icon_pack_description">Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτό το πακέτο εικονιδίων; Καταχωρήσεις που χρησιμοποιούν εικονίδια από αυτό το πακέτο δεν θα επηρεαστούν.</string>
     <string name="details">Λεπτομέρειες</string>
+    <string name="show_error_details">Εμφάνιση λεπτομερειών σφάλματος</string>
     <string name="lock">Κλείδωμα</string>
     <string name="name">Όνομα</string>
     <string name="no_group">Χωρίς ομάδα</string>
-    <string name="sort">Ταξινόμηση</string>
+    <string name="sort" comment="Title of the Sort button in the top action bar of the main view">Ταξινόμηση</string>
     <string name="sort_alphabetically">Εκδότης (Α προς Ζ)</string>
     <string name="sort_alphabetically_reverse">Εκδότης (Ζ προς Α)</string>
     <string name="sort_alphabetically_name">Λογαριασμός (Α προς Ζ)</string>
     <string name="sort_alphabetically_name_reverse">Λογαριασμός (Z προς A)</string>
     <string name="sort_usage_count">Αριθμός χρήσεων</string>
+    <string name="sort_last_used">Τελευταία χρήση</string>
     <string name="sort_custom">Προσαρμογή</string>
+    <string name="last_used">Τελευταία χρήση</string>
+    <string name="last_used_never">ποτέ</string>
     <string name="new_group">Νέα ομάδα…</string>
-    <string name="enter_group_name">Εισαγωγή ονόματος ομάδας</string>
     <string name="group">Ομάδα</string>
     <string name="group_name_hint">Όνομα ομάδας</string>
     <string name="preference_manage_groups">Επεξεργασία ομάδων</string>
@@ -250,12 +362,31 @@
     <string name="preference_reset_usage_count">Επαναφορά αριθμού χρήσης</string>
     <string name="preference_reset_usage_count_summary">Επαναφορά του αριθμού χρήσης κάθε καταχώρησης στην κρύπτη σας</string>
     <string name="preference_reset_usage_count_dialog">Είστε βέβαιοι ότι θέλετε να ορίσετε τον αριθμό χρήσης κάθε εισόδου στην κρύπτη σας στο 0;</string>
-    <string name="note">Σημείωση</string>
+    <string name="note" comment="Users can add a note to an entry">Σημείωση</string>
     <string name="clear">Εκκαθάριση</string>
-    <string name="pref_highlight_entry_title">Επισήμανση αναγνωριστικών όταν πατηθεί</string>
+    <string name="dialog_duplicate_entry_title" comment="'Duplicate' is a noun here">Διπλότυπη καταχώρηση</string>
+    <string name="dialog_duplicate_entry_message">Αυτή η καταχώρηση έχει το ίδιο όνομα και τον ίδιο εκδότη με μία ή περισσότερες υπάρχουσες καταχωρήσεις. Πώς θα θέλατε να προχωρήσετε;</string>
+    <string name="dialog_duplicate_entry_overwrite_title">Αντικατάσταση υπάρχουσας/ων καταχώρησης/ων</string>
+    <string name="dialog_duplicate_entry_overwrite_subtitle">Αντικατάσταση της υπάρχουσας καταχώρησης ή καταχωρήσεων με τη νέα. Αυτή η ενέργεια δεν μπορεί να αναιρεθεί</string>
+    <string name="dialog_duplicate_entry_suffix_title">Προσθήκη επιθήματος</string>
+    <string name="dialog_duplicate_entry_suffix_subtitle">Προσθέστε ένα επίθημα στο όνομα αυτής της νέας καταχώρησης. Το νέο όνομα θα είναι: %s</string>
+    <string name="dialog_duplicate_entry_cancel_title">Ακύρωση αποθήκευσης</string>
+    <string name="dialog_duplicate_entry_cancel_subtitle">Σας επιτρέπει να επεξεργαστείτε την καταχώρηση πριν επιχειρήσετε να την αποθηκεύσετε ξανά</string>
+    <plurals name="dialog_duplicate_entry_overwrite_dialog_message">
+        <item quantity="one">Είστε βέβαιοι ότι θέλετε να διαγράψετε την καταχώρηση %d με το ακόλουθο όνομα:\n\n%s - %s</item>
+        <item quantity="other">Είστε βέβαιοι ότι θέλετε να διαγράψετε καταχωρήσεις %d με το ακόλουθο όνομα:\n\n%s - %s</item>
+    </plurals>
+    <string name="dialog_duplicate_entry_overwrite_dialog_title">Επιβεβαίωση διαγραφής</string>
+    <string name="pref_haptic_feedback_summary">Κάντε τη συσκευή σας να δονείται όταν ανανεώνονται οι κωδικοί</string>
+    <string name="pref_haptic_feedback_title">Απτική ανάδραση</string>
+    <string name="pref_highlight_entry_title">Επισήμανση διακριτικών στο πάτημα</string>
     <string name="pref_highlight_entry_summary">Κάνετε τα αναγνωριστικά να ξεχωρίζουν ευκολότερα το ένα από το άλλο, επισημαίνοντας τα προσωρινά όταν τα πατήσετε</string>
-    <string name="pref_copy_on_tap_title">Αντιγράψτε τα αναγνωριστικά όταν τα πατάτε</string>
-    <string name="pref_copy_on_tap_summary">Αντιγράψτε τα αναγνωριστικά στο πρόχειρο πατώντας τα</string>
+    <string name="pref_groups_multiselect_title">Πολλαπλή επιλογή ομάδων</string>
+    <string name="pref_groups_multiselect_summary">Να επιτρέπεται η επιλογή πολλαπλών ομάδων ταυτόχρονα</string>
+    <string name="pref_minimize_on_copy_title">Ελαχιστοποίηση κατά την αντιγραφή</string>
+    <string name="pref_minimize_on_copy_summary">Ελαχιστοποίηση της εφαρμογής μετά την αντιγραφή ενός αναγνωριστικού</string>
+    <string name="pref_copy_behavior_title">Αντιγραφή αναγνωριστικών στο πρόχειρο</string>
+    <string name="pref_search_behavior_title">Συμπεριφορά αναζήτησης</string>
     <string name="pref_pause_entry_title">Πάγωμα αναγνωριστικών όταν πατηθούν</string>
     <string name="pref_pause_entry_summary">Παύση της αυτόματης ανανέωσης των αναγνωριστικών πατώντας τα. Τα αναγνωριστικά δεν θα ενημερώνονται όσο είναι συγκεντρωμένα. Απαιτεί \"Επισήμανση αναγνωριστικών όταν πατηθούν\" ή \"Πατήστε για αποκάλυψη\".</string>
     <string name="pin_keyboard_description">Εισαγάγετε τον κωδικό πρόσβασής σας για να ενεργοποιήσετε το πληκτρολόγιο PIN. Λάβετε υπόψη ότι αυτό λειτουργεί μόνο εάν ο κωδικός πρόσβασής σας αποτελείται μόνο από αριθμούς</string>
@@ -263,29 +394,35 @@
     <string name="pin_keyboard_error_description">Δεν είναι δυνατός ο ορισμός του πληκτρολογίου PIN. Ο κωδικός πρόσβασής σας πρέπει να αποτελείται μόνο από αριθμούς.</string>
     <string name="pin_keyboard_disabled">Ο κωδικός άλλαξε. Το πληκτρολόγιο PIN δεν θα εμφανίζεται πλέον.</string>
     <string name="selected">Επιλεγμένο</string>
-    <string name="dark_theme_title">Σκούρο θέμα</string>
-    <string name="light_theme_title">Φωτεινό θέμα</string>
-    <string name="amoled_theme_title">AMOLED θέμα</string>
-    <string name="system_theme_title">Ορισμός από το Battery Saver</string>
-    <string name="system_amoled_theme_title">Ορισμός από το Battery Saver (AMOLED)</string>
+    <string name="dark_theme_title">Σκούρο</string>
+    <string name="light_theme_title">Φωτεινό</string>
+    <string name="amoled_theme_title">AMOLED</string>
+    <string name="system_theme_title">Ορισμός από την Εξοικονόμηση Μπαταρίας</string>
+    <string name="system_amoled_theme_title">Ορισμός από την Εξοικονόμηση Μπαταρίας (AMOLED)</string>
     <string name="normal_viewmode_title">Κανονική</string>
     <string name="compact_mode_title">Συμπαγής</string>
     <string name="small_mode_title">Μικρή</string>
+    <string name="tiles_mode_title">Πλακίδια</string>
     <string name="unknown_issuer">Άγνωστος εκδότης</string>
     <string name="unknown_account_name">Άγνωστο όνομα λογαριασμού</string>
     <plurals name="import_error_dialog">
-        <item quantity="one">Το Aegis δεν μπόρεσε να εισαγάγει %d αναγνωριστικό. Αυτά θα παραληφθούν. Πατήστε \'Λεπτομέρειες\' για να δείτε περισσότερες πληροφορίες σχετικά με τα σφάλματα.</item>
+        <item quantity="one">Το Aegis δεν μπόρεσε να εισαγάγει %d αναγνωριστικό. Αυτό το αναγνωστικό θα παραληφθεί. Πατήστε \'Λεπτομέρειες\' για να δείτε περισσότερες πληροφορίες σχετικά με το σφάλμα.</item>
         <item quantity="other">Το Aegis δεν μπόρεσε να εισαγάγει %d αναγνωριστικά. Αυτά θα παραληφθούν. Πατήστε \'Λεπτομέρειες\' για να δείτε περισσότερες πληροφορίες σχετικά με τα σφάλματα.</item>
     </plurals>
-    <string name="unable_to_read_qrcode">Αδυναμία ανάγνωσης και επεξεργασίας κωδικού QR</string>
+    <string name="unable_to_process_deeplink">Δεν είναι δυνατή η επεξεργασία βαθιάς σύνδεσης</string>
+    <string name="unable_to_read_qrcode_file">Αδυναμία ανάγνωσης και επεξεργασίας QR κωδικού από αρχείο: %s.</string>
+    <string name="unable_to_process_shared_text">Δεν είναι δυνατή η επεξεργασία κοινόχρηστου κειμένου ως OTP</string>
+    <string name="unable_to_read_qrcode_files">Δεν είναι δυνατή η ανάγνωση και επεξεργασία μερικών QR κωδικών. Θα εισαχθούν μόνο %1$d/%2$d καταχωρήσεις.</string>
     <string name="unable_to_generate_qrcode">Δεν είναι δυνατή η δημιουργία κωδικού QR</string>
     <string name="select_picture">Επιλέξτε εικόνα</string>
     <string name="select_icon">Επιλέξτε εικονίδιο</string>
+    <string name="tile_open_vault" comment="label for a quick settings tile that opens the app when tapped">Άνοιγμα κρύπτης</string>
+    <string name="tile_open_scanner" comment="label for a quick settings tile that opens the QR code scanner when tapped">Άνοιγμα σαρωτή</string>
     <string name="toggle_checkboxes">Εναλλαγή πλαισίων ελέγχου</string>
     <string name="search">Αναζήτηση</string>
     <string name="channel_name_lock_status">Κατάσταση κλειδώματος</string>
     <string name="channel_description_lock_status">To Aegis μπορεί να δημιουργήσει μια επίμονη ειδοποίηση για να σας ειδοποιήσει όταν η λίστα είναι κλειδωμένη</string>
-    <string name="vault_unlocked_state">Η κρύπτη είναι ξεκλείδωτη. Πατήστε εδώ κλείδωμα.</string>
+    <string name="vault_unlocked_state">Η κρύπτη είναι ξεκλείδωτη. Πατήστε εδώ για κλείδωμα.</string>
     <string name="version">Έκδοση</string>
     <string name="changelog">Αρχείο καταγραφής αλλαγών</string>
     <string name="whats_new">Τι νέο υπάρχει</string>
@@ -307,35 +444,61 @@
     <string name="time_sync_warning_disable">Σταμάτα να με προειδοποιείς. Ξέρω τι κάνω.</string>
     <string name="google_qr_export_unrelated">Βρέθηκε μη σχετικός κωδικός QR. Δοκιμάστε να κάνετε επανεκκίνηση του σαρωτή.</string>
     <plurals name="google_qr_export_scanned">
-        <item quantity="one">Σαρωμένος %d/%d κωδικός QR</item>
-        <item quantity="other">Σαρωμένοι %d/%d κωδικοί QR</item>
+        <item quantity="one">Σαρωμένος %1$d/%2$d κωδικός QR</item>
+        <item quantity="other">Σαρωμένοι %1$d/%2$d κωδικοί QR</item>
     </plurals>
-    <string name="google_qr_export_unexpected">Αναμενόταν κωδικός QR #%d, αλλά σαρώθηκε #%d αντί αυτού</string>
+    <string name="google_qr_export_unexpected">Αναμενόταν κωδικός QR #%1$d, αλλά σαρώθηκε #%2$d αντί αυτού</string>
     <string name="backup_error_bar_message"><b>Η δημιουργία αντιγράφων ασφαλείας κρύπτης απέτυχε πρόσφατα</b></string>
+    <string name="backup_error_dialog_details" comment="The first parameter is the type of backup (e.g. built-in or Android backup). The second parameter is an elapsed time in the style of 'x seconds/minutes/days ago'.">
+        Μια πρόσφατη προσπάθεια δημιουργίας αντιγράφων ασφαλείας κρύπτης με χρήση %1$s απέτυχε επειδή παρουσιάστηκε σφάλμα. Έγινε προσπάθεια δημιουργίας αντιγράφων ασφαλείας %2$s. Παρακαλώ ελέγξτε τις ρυθμίσεις δημιουργίας αντιγράφων ασφαλείας για να βεβαιωθείτε ότι τα αντίγραφα ασφαλείας μπορούν να ολοκληρωθούν με επιτυχία.
+    </string>
+    <string name="backup_permission_error_dialog_details" comment="The first parameter is the type of backup (e.g. built-in or Android backup). The second parameter is an elapsed time in the style of 'x seconds/minutes/days ago'.">
+        Μια πρόσφατη προσπάθεια δημιουργίας αντιγράφων ασφαλείας κρύπτης με χρήση %1$s απέτυχε επειδή το Aegis δεν είχε άδεια να εγγράψει στον προορισμό αντιγράφου ασφαλείας. Το αντίγραφο ασφαλείας επιχειρήθηκε %2$s. Αυτό το σφάλμα μπορεί να συμβεί αν μετακινήσατε / μετονομάσατε τον προορισμό αντιγράφου ασφαλείας ή αν αποκαταστήσατε πρόσφατα το Aegis από ένα αντίγραφο ασφαλείας. Παρακαλώ ρυθμίστε ξανά τον προορισμό του αντιγράφου ασφαλείας.
+    </string>
+    <string name="backup_system_builtin">Ενσωματωμένα αυτόματα αντίγραφα ασφαλείας του Aegis</string>
+    <string name="backup_system_android">Σύστημα αντιγράφων ασφαλείας στο cloud του Android</string>
+    <string name="backup_reminder_bar_message_with_latest" comment="The parameter is an elapsed time in the style of 'x seconds/minutes/days ago'">
+        Το τελευταίο αντίγραφο ασφαλείας είναι παρωχημένο (%s)
+    </string>
+    <string name="backup_reminder_bar_message">
+        Δε λαμβάνονται αντίγραφα ασφαλείας των αλλαγών    </string>
+    <string name="backup_reminder_bar_dialog_title">Δε δημιουργούνται αντίγραφα ασφαλείας των αλλαγών σας</string>
+    <string name="backup_reminder_bar_dialog_summary">
+        Οι πρόσφατες αλλαγές στην κρύπτη δεν έχουν δημιουργηθεί ακόμα αντίγραφα ασφαλείας.  Είναι σημαντικό να λαμβάνετε τακτικά αντίγραφα ασφαλείας για να αποτρέψετε την απώλεια πρόσβασης στους λογαριασμούς σας. Εξετάστε το ενδεχόμενο να δημιουργήσετε αυτόματα αντίγραφα ασφαλείας στο μενού ρυθμίσεων.
+    </string>
+    <string name="backup_reminder_bar_dialog_accept">Ρύθμιση αντιγράφων ασφαλείας</string>
+    <string name="backup_plaintext_export_warning"><b>Η κρύπτη εξήχθη πρόσφατα σε απλό κείμενο</b></string>
+    <string name="pref_show_plaintext_warning_hint">Να μην εμφανιστεί ξανά αυτή η προειδοποίηση</string>
+    <string name="backup_plaintext_warning_explanation">Αυτή η προειδοποίηση εμφανίζεται επειδή πρόσφατα εξάγατε ένα μη κρυπτογραφημένο αντίγραφο της κρύπτης. Για να διατηρήσετε την ασφάλεια των αναγνωριστικών σας, σας συνιστούμε να διαγράψετε αυτό το αρχείο μόλις δεν είναι πλέον απαραίτητο.</string>
     <string name="switch_camera">Εναλλαγή κάμερας</string>
     <string name="empty_list">Δεν υπάρχουν κωδικοί προς εμφάνιση. Ξεκινήστε να προσθέτετε καταχωρήσεις πατώντας το σύμβολο συν στην κάτω δεξιά γωνία</string>
     <string name="empty_list_title">Δεν βρέθηκαν καταχωρήσεις</string>
     <string name="empty_group_list">Δεν υπάρχουν ομάδες προς εμφάνιση. Προσθέστε ομάδες στην οθόνη επεξεργασίας μιας καταχώρισης</string>
     <string name="empty_group_list_title">Δεν βρέθηκαν ομάδες</string>
-    <string name="no_icon_packs">Δεν έχουν εισαχθεί ακόμα πακέτα εικονιδίων. Πατήστε το σύμβολο συν για να εισαγάγετε ένα. Συμβουλή: δοκιμάστε <a href="https://aegis-icons.github.io">εικονίδια-aegis-</a>.</string>
+    <string name="no_icon_packs">Δεν έχουν εισαχθεί ακόμα πακέτα εικονιδίων. Πατήστε το σύμβολο + για να εισάγετε ένα. Συμβουλή: δοκιμάστε τα <a href="https://aegis-icons.github.io">εικονίδια-aegis</a>.</string>
     <string name="no_icon_packs_title">Χωρίς πακέτα εικονιδίων</string>
     <string name="pick_icon">Επιλέξτε ένα εικονίδιο</string>
     <string name="uncategorized">Μη κατηγοριοποιημένο</string>
     <string name="done">Ολοκληρώθηκε</string>
-    <plurals name="entries_count">
-        <item quantity="one">%d / %d καταχώρηση</item>
-        <item quantity="other">%d / %d καταχωρήσεις</item>
+    <plurals name="qr_count">
+        <item quantity="one">%d / %d κωδικός QR</item>
+        <item quantity="other">%d / %d κωδικοί QR</item>
     </plurals>
     <string name="next">Επόμενο</string>
     <string name="previous">Προηγούμενο</string>
-    <string name="transfer_entry">Μεταφορά καταχώρησης</string>
+    <string name="copy_uri">Αντιγραφή URI</string>
+    <string name="unable_to_copy_uri_to_clipboard">Αδυναμία αντιγραφής του URI στο πρόχειρο</string>
+    <string name="uri_copied_to_clipboard">Το URI αντιγράφηκε στο πρόχειρο</string>
     <string name="transfer_entry_description">Σαρώστε αυτόν τον κωδικό QR με την εφαρμογή ελέγχου ταυτότητας στην οποία θέλετε να μεταφέρετε αυτήν την καταχώριση</string>
+    <string name="transfer_entry_brightness">Πατήστε τον κωδικό QR για εναλλαγή φωτεινότητας πλήρους οθόνης</string>
+    <string name="google_auth_compatible_transfer_description">Σαρώστε αυτούς τους κωδικούς QR με το Aegis ή το Google Authenticator.\n\nΛόγω περιορισμών της εφαρμογής Google Authenticator, περιλαμβάνονται μόνο αναγνωριστικά TOTP &amp; HOTP που χρησιμοποιούν SHA1 και παράγουν 6ψήφιους κωδικούς</string>
     <string name="password_strength_very_weak">Πολύ αδύναμος</string>
     <string name="password_strength_weak">Αδύναμος</string>
     <string name="password_strength_fair">Μέτριος</string>
     <string name="password_strength_good">Καλός</string>
     <string name="password_strength_strong">Ισχυρός</string>
-    <string name="pref_pin_keyboard_title">Χρησιμοποιήστε το πληκτρολόγιο PIN στην οθόνη κλειδώματος</string>
+    <string name="password_strength_unknown">Ο κωδικός πρόσβασης είναι πολύ μεγάλος για ανάλυση της ισχύος του</string>
+    <string name="pref_pin_keyboard_title">Χρήση πληκτρολογίου PIN σε οθόνη κλειδώματος</string>
     <string name="pref_pin_keyboard_summary">Ενεργοποιήστε αυτό εάν θέλετε να ενεργοποιήσετε το πληκτρολόγιο PIN στην οθόνη κλειδώματος. Αυτό λειτουργεί μόνο για αριθμητικούς κωδικούς πρόσβασης</string>
     <string name="title_activity_preferences">Ρυθμίσεις</string>
     <string name="title_activity_manage_groups">Διαχείριση Ομάδων</string>
@@ -343,27 +506,84 @@
     <string name="title_activity_about">Σχετικά</string>
     <string name="title_activity_edit_entry">Επεξεργασία καταχώρησης</string>
     <string name="title_activity_scan_qr">Σάρωση κωδικού QR</string>
-    <string name="title_activity_manage_slots">Διαχείριση κλειδιών υποδοχής</string>
     <string name="title_activity_import_entries">Εισαγωγή καταχωρήσεων</string>
+    <string name="title_activity_assign_icons">Αντιστοίχιση εικονιδίων</string>
+    <string name="title_activity_licenses">Άδειες χρήσης τρίτων</string>
     <string name="dialog_wipe_entries_title">Διαγραφή καταχωρήσεων</string>
     <string name="dialog_wipe_entries_message">Η κρύπτη σας περιέχει ήδη καταχωρήσεις. Θέλετε να καταργήσετε αυτές τις καταχωρήσεις πριν από την εισαγωγή αυτού του αρχείου;\n\n <b> Με αυτόν τον τρόπο, θα χάσετε μόνιμα την πρόσβαση στις υπάρχουσες καταχωρήσεις στην κρύπτη. </b></string>
     <string name="dialog_wipe_entries_checkbox">Διαγραφή περιεχομένων κρύπτης</string>
-    <string name="panic_trigger_ignore_toast">Ο Aegis έλαβε έναυσμα πανικού αλλά η ρύθμιση είναι απενεργοποιημένη, αγνόηση</string>
+    <string name="import_from_clipboard_title">Εισαγωγή από πρόχειρο</string>
+    <string name="import_from_clipboard_message">Βρήκαμε ένα έγκυρο otpauth uri στο πρόχειρο σας.\n\n<b>Όνομα</b>: %1$s\n<b>Εκδότης</b>: %2$s\n\nΘέλετε να το χρησιμοποιήσετε για να προσυμπληρώσετε αυτή την καταχώρηση;</string>
+    <string name="panic_trigger_ignore_toast">Το Aegis έλαβε έναυσμα πανικού αλλά η ρύθμιση είναι απενεργοποιημένη, αγνόηση</string>
     <string name="pref_panic_trigger_title">Διαγραφή κρύπτης στο έναυσμα πανικού</string>
     <string name="pref_panic_trigger_summary">Διαγραφή κρύπτης όταν λαμβάνεται ένα έναυσμα πανικού από το Ripple</string>
+    <string name="import_vault">Εισαγωγή κρύπτης Aegis</string>
+    <string name="import_vault_hint">Θέλετε να κάνετε εισαγωγή από μια διαφορετική εφαρμογή 2FA; Ολοκληρώστε πρώτα τη ρύθμιση εγκατάστασης και μετά μεταβείτε στο μενού ρυθμίσεων.</string>
+    <plurals name="import_duplicate_toast">
+        <item quantity="one">Μη επιλεγμένο %d πιθανό διπλότυπο. Παρακαλούμε εξετάστε τη λίστα καταχωρήσεων.</item>
+        <item quantity="other">Μη επιλεγμένα %d πιθανά διπλότυπα. Παρακαλούμε εξετάστε τη λίστα καταχωρήσεων.</item>
+    </plurals>
     <string name="importer_help_2fas">Παρέχετε ένα αντίγραφο ασφαλείας 2FAS Authenticator.</string>
-    <string name="importer_help_aegis">Παρέχει ένα αρχείο εξαγωγής/αντιγράφων ασφαλείας Aegis.</string>
-    <string name="importer_help_authenticator_plus">Παρέχει ένα αρχείο εξαγωγής Authenticator Plus που αποκτήθηκε μέσω των <b> Ρυθμίσεων - &gt; Αντιγράφων ασφαλείας &amp; Επαναφορά - &gt; Εξαγωγή ως Κείμενο και HTML </b>.</string>
-    <string name="importer_help_authy">Παρέχει ένα αντίγραφο του <b>/data/data/com.authy.authy/shared_prefs/com.authy.storage.tokens.authenticator.xml</b>, που βρίσκεται στον κατάλογο εσωτερικής αποθήκευσης του Authy.</string>
-    <string name="importer_help_andotp">Παρέχει ένα αρχείο εξαγωγής/αντιγράφου ασφαλείας andOTP.</string>
-    <string name="importer_help_freeotp">Παρέχει ένα αντίγραφο του <b> /data/data/org.fedorahosted.freeotp/shared_prefs/tokens.xml </b>, που βρίσκεται στον κατάλογο εσωτερικής αποθήκευσης του FreeOTP.</string>
-    <string name="importer_help_freeotp_plus">Παρέχει ένα αρχείο εξαγωγής FreeOTP +.</string>
-    <string name="importer_help_google_authenticator">Παρέχει ένα αντίγραφο του <b> /data/data/com.google.android.apps.authenticator2/databases/databases </b>, που βρίσκεται στον κατάλογο εσωτερικού χώρου αποθήκευσης του Επαληθευτή Google.</string>
+    <string name="importer_help_aegis">Παρέχετε ένα αρχείο εξαγωγής/αντιγράφων ασφαλείας Aegis.</string>
+    <string name="importer_help_authenticator_plus">Παρέχετε ένα αρχείο εξαγωγής Authenticator Plus που αποκτήθηκε μέσω των <b> Ρυθμίσεων - &gt; Αντιγράφων ασφαλείας &amp; Επαναφορά - &gt; Εξαγωγή ως Κείμενο και HTML </b>.</string>
+    <string name="importer_help_authy">Παρέχετε ένα αντίγραφο του <b>/data/data/com.authy.authy/shared_prefs/com.authy.storage.tokens.authenticator.xml</b>, που βρίσκεται στον κατάλογο εσωτερικής αποθήκευσης του Authy.</string>
+    <string name="importer_help_andotp">Παρέχετε ένα αρχείο εξαγωγής/αντιγράφου ασφαλείας andOTP.</string>
+    <string name="importer_help_bitwarden">Παρέχετε ένα αρχείο εξαγωγής/αντιγράφων ασφαλείας Bitwarden. Τα κρυπτογραφημένα αρχεία δεν υποστηρίζονται.</string>
+    <string name="importer_help_battle_net_authenticator">Παρέχει ένα αντίγραφο του <b> /data/data/com.blizzard.messenger/shared_prefs/com.blizzard.messenger.authenticator_preferences.xml </b>, που βρίσκεται στον κατάλογο εσωτερικού χώρου αποθήκευσης του Επαληθευτή Battle.net.</string>
+    <string name="importer_help_duo">Παρέχετε ένα αντίγραφο του <b>/data/data/com.duosecurity.duomobile/files/duokit/accounts.json</b>, που βρίσκεται στον εσωτερικό κατάλογο αποθήκευσης του DUO.</string>
+    <string name="importer_help_ente_auth">Παρέχετε ένα αρχείο εξαγωγής Ente Auth. Προς το παρόν υποστηρίζονται μόνο μη κρυπτογραφημένα αρχεία.</string>
+    <string name="importer_help_freeotp">FreeOTP 2: Παρέχετε ένα αρχείο αντιγράφου ασφαλείας.\nFreeOTP 1.x: Παρέχετε ένα αντίγραφο του <b>/data/org.fedorahosted.freeotp/shared_prefs/tokens.xml</b>, που βρίσκεται στον εσωτερικό κατάλογο αποθήκευσης του FreeOTP.</string>
+    <string name="importer_help_freeotp_plus">Παρέχετε ένα αρχείο εξαγωγής FreeOTP +.</string>
+    <string name="importer_warning_title_freeotp2">Συμβατότητα FreeOTP 2</string>
+    <string name="importer_warning_message_freeotp2">Υπάρχουν μια σειρά από ζητήματα στο FreeOTP 2 που μπορεί να οδηγήσει σε κατεστραμμένα αντίγραφα ασφαλείας. Το Aegis θα προσπαθήσει να διασώσει όσο το δυνατόν περισσότερες καταχωρήσεις, αλλά είναι πιθανό η εισαγωγή κάποιων ή ακόμα και όλων να αποτύχει.</string>
+    <string name="importer_help_google_authenticator"><b>Υποστηρίζονται μόνο αρχεία βάσης δεδομένων από το Google Authenticator έκδοση 5.10 και παλαιότερα</b>.\n\nΠαρέχετε ένα αντίγραφο του <b>/data/data/com.google.android.apps.authenticator2/databases/databases</b>, που βρίσκεται στον εσωτερικό κατάλογο αποθήκευσης του Google Authenticator.</string>
     <string name="importer_help_microsoft_authenticator">Παρέχεi ένα αντίγραφο του <b> /data/data/com.azure.authenticator/databases/PhoneFactor </b>, που βρίσκεται στον κατάλογο εσωτερικής αποθήκευσης του Microsoft Authenticator.</string>
     <string name="importer_help_plain_text">Παρέχεi ένα αρχείο απλού κειμένου με ένα URI Επαληθευτή Google σε κάθε γραμμή.</string>
-    <string name="importer_help_steam">Παρέχει ένα αντίγραφο του <b> /data/data/com.valvesoftware.android.steam.community/files/Steamguard-*.json </b>, που βρίσκεται στον εσωτερικό κατάλογο αποθήκευσης του Steam.</string>
-    <string name="importer_help_totp_authenticator">Παρέι ένα αρχείο εξαγωγής TOTP Authenticator.</string>
-    <string name="importer_help_winauth">Παρέχει ένα αρχείο εξαγωγής WinAuth.</string>
+    <string name="importer_help_proton_authenticator">Προμήθεια ενός αρχείου εξαγωγής επαληθευτή Proton (.json) που λαμβάνεται μέσω <b>Ρυθμίσεις -&gt; Εξαγωγή</b>.</string>
+    <string name="importer_help_steam"><b>Το Steam v3.0 και νεότερα δεν υποστηρίζονται</b>. Παρέχετε αντίγραφο του <b>/data/data/com.valvesoftware. ndroid.steam.community/files/Steamguard-*.json</b>, που βρίσκεται στον εσωτερικό κατάλογο αποθήκευσης του Steam.</string>
+    <string name="importer_help_stratum">Παροχή ενός αρχείου εξαγωγής Stratum που λαμβάνεται μέσω <b>Ρυθμίσεις -&gt; Αντίγραφα ασφαλείας -&gt; Δημιουργία αντιγράφου ασφαλείας σε κρυπτογραφημένο αρχείο (συνιστάται)</b>.</string>
+    <string name="importer_help_totp_authenticator">Παρέχετε ένα αρχείο εξαγωγής TOTP Authenticator.</string>
+    <string name="importer_help_winauth">Παρέχετε ένα αρχείο εξαγωγής WinAuth.</string>
+    <string name="import_assign_icons_dialog_title">Αντιστοίχιση εικονιδίων</string>
+    <string name="import_assign_icons_dialog_text">Θέλετε να αντιστοιχίσετε εικονίδια στις εισαγόμενες καταχωρήσεις;</string>
+    <string name="importer_encrypted_exception_google_authenticator">Η κρυπτογραφημένη καταχώρηση παραλείφθηκε: %s</string>
     <string name="importer_help_direct">Εισαγάγετε καταχωρήσεις απευθείας από το %s. Αυτό απαιτεί την εγκατάσταση της εφαρμογής σε αυτήν τη συσκευή και την πρόσβαση root στο Aegis.</string>
     <string name="groups">Ομάδες</string>
+    <string name="pref_focus_search">Εστίαση αναζήτησης στο άνοιγμα της εφαρμογής</string>
+    <string name="pref_focus_search_summary">Εστίαση της αναζήτησης αμέσως μετά το άνοιγμα της εφαρμογής.</string>
+    <string name="pref_grouping_halves">Μισά</string>
+    <string name="pref_grouping_none">Χωρίς ομαδοποίηση</string>
+    <string name="pref_grouping_size_two">Ομάδες των 2</string>
+    <string name="pref_grouping_size_three">Ομάδες των 3</string>
+    <string name="pref_grouping_size_four">Ομάδες των 4</string>
+    <string name="pref_copy_behavior_never">Ποτέ</string>
+    <string name="pref_copy_behavior_single_tap">Μονό άγγιγμα</string>
+    <string name="pref_copy_behavior_double_tap">Διπλό άγγιγμα</string>
+    <string name="pref_account_name_position_hidden">Κρυφό</string>
+    <string name="pref_account_name_position_end">Δίπλα στον εκδότη</string>
+    <string name="pref_account_name_position_below">Κάτω από τον εκδότη</string>
+    <plurals name="time_elapsed_seconds" tools:ignore="UnusedResources">
+        <item quantity="one">%d δευτερόλεπτο πριν</item>
+        <item quantity="other">%d δευτερόλεπτα πριν</item>
+    </plurals>
+    <plurals name="time_elapsed_minutes" tools:ignore="UnusedResources">
+        <item quantity="one">%d λεπτό πριν</item>
+        <item quantity="other">%d λεπτά πριν</item>
+    </plurals>
+    <plurals name="time_elapsed_hours" tools:ignore="UnusedResources">
+        <item quantity="one">%d ώρα πριν</item>
+        <item quantity="other">%d ώρες πριν</item>
+    </plurals>
+    <plurals name="time_elapsed_days" tools:ignore="UnusedResources">
+        <item quantity="one">%d ημέρα πριν</item>
+        <item quantity="other">%d ημέρες πριν</item>
+    </plurals>
+    <plurals name="time_elapsed_years" tools:ignore="UnusedResources">
+        <item quantity="one">%d χρόνο πριν</item>
+        <item quantity="other">%d χρόνια πριν</item>
+    </plurals>
+    <plurals name="dropdown_checkboxes_default_count">
+        <item quantity="one">%d επιλεγμένο στοιχείο</item>
+        <item quantity="other">%d επιλεγμένα στοιχεία</item>
+    </plurals>
 </resources>

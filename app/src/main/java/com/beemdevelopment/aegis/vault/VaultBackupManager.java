@@ -1,5 +1,6 @@
 package com.beemdevelopment.aegis.vault;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.UriPermission;
 import android.net.Uri;
@@ -9,7 +10,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.documentfile.provider.DocumentFile;
 
+import com.beemdevelopment.aegis.BackupsVersioningStrategy;
 import com.beemdevelopment.aegis.Preferences;
+import com.beemdevelopment.aegis.database.AuditLogRepository;
 import com.beemdevelopment.aegis.util.IOUtils;
 
 import java.io.File;
@@ -37,35 +40,75 @@ public class VaultBackupManager {
             new StrictDateFormat("yyyyMMdd-HHmmss", Locale.ENGLISH);
 
     public static final String FILENAME_PREFIX = "aegis-backup";
+    public static final String FILENAME_SINGLE = String.format("%s.json", FILENAME_PREFIX);
 
     private final Context _context;
     private final Preferences _prefs;
     private final ExecutorService _executor;
+    private final AuditLogRepository _auditLogRepository;
 
-    public VaultBackupManager(Context context) {
+    public VaultBackupManager(Context context, AuditLogRepository auditLogRepository) {
         _context = context;
         _prefs = new Preferences(context);
         _executor = Executors.newSingleThreadExecutor();
+        _auditLogRepository = auditLogRepository;
     }
 
-    public void destroy() {
-        Log.i(TAG, "Shutting down backup manager thread");
-        _executor.shutdown();
-    }
-
-    public void scheduleBackup(File tempFile, Uri dirUri, int versionsToKeep) {
+    public void scheduleBackup(File tempFile, BackupsVersioningStrategy strategy, Uri uri, int versionsToKeep) {
         _executor.execute(() -> {
             try {
-                createBackup(tempFile, dirUri, versionsToKeep);
-                _prefs.setBackupsError(null);
-            } catch (VaultManagerException e) {
+                createBackup(tempFile, strategy, uri, versionsToKeep);
+                _auditLogRepository.addBackupCreatedEvent();
+                _prefs.setBuiltInBackupResult(new Preferences.BackupResult(null));
+            } catch (VaultRepositoryException | VaultBackupPermissionException e) {
                 e.printStackTrace();
-                _prefs.setBackupsError(e);
+                _prefs.setBuiltInBackupResult(new Preferences.BackupResult(e));
             }
         });
     }
 
-    private void createBackup(File tempFile, Uri dirUri, int versionsToKeep) throws VaultManagerException {
+    private void createBackup(File tempFile, BackupsVersioningStrategy strategy, Uri uri, int versionsToKeep)
+            throws VaultRepositoryException, VaultBackupPermissionException {
+        if (uri == null) {
+            throw new VaultRepositoryException("getBackupsLocation returned null");
+        }
+        if (strategy == BackupsVersioningStrategy.SINGLE_BACKUP) {
+            createBackup(tempFile, uri);
+        } else if (strategy == BackupsVersioningStrategy.MULTIPLE_BACKUPS) {
+            createBackup(tempFile, uri, versionsToKeep);
+        } else {
+            throw new VaultRepositoryException("Invalid backups versioning strategy");
+        }
+    }
+
+    private void createBackup(File tempFile, Uri fileUri)
+            throws VaultRepositoryException, VaultBackupPermissionException {
+        Log.i(TAG, String.format("Creating backup at %s", fileUri));
+        try {
+            if (!hasPermissionsAt(fileUri)) {
+                throw new VaultBackupPermissionException("No persisted URI permissions");
+            }
+            ContentResolver resolver = _context.getContentResolver();
+            try (FileInputStream inStream = new FileInputStream(tempFile);
+                 OutputStream outStream = resolver.openOutputStream(fileUri, "wt")
+            ) {
+                if (outStream == null) {
+                    throw new IOException("openOutputStream returned null");
+                }
+                IOUtils.copy(inStream, outStream);
+            } catch (IOException exception) {
+                throw new VaultRepositoryException(exception);
+            }
+        } catch (VaultRepositoryException | VaultBackupPermissionException exception) {
+            Log.e(TAG, String.format("Unable to create backup: %s", exception));
+            throw exception;
+        } finally {
+            tempFile.delete();
+        }
+    }
+
+    private void createBackup(File tempFile, Uri dirUri, int versionsToKeep)
+            throws VaultRepositoryException, VaultBackupPermissionException {
         FileInfo fileInfo = new FileInfo(FILENAME_PREFIX);
         DocumentFile dir = DocumentFile.fromTreeUri(_context, dirUri);
 
@@ -73,28 +116,31 @@ public class VaultBackupManager {
             Log.i(TAG, String.format("Creating backup at %s: %s", Uri.decode(dir.getUri().toString()), fileInfo.toString()));
 
             if (!hasPermissionsAt(dirUri)) {
-                throw new VaultManagerException("No persisted URI permissions");
+                throw new VaultBackupPermissionException("No persisted URI permissions");
             }
 
             // If we create a file with a name that already exists, SAF will append a number
             // to the filename and write to that instead. We can't overwrite existing files, so
             // just avoid that altogether by checking beforehand.
             if (dir.findFile(fileInfo.toString()) != null) {
-                throw new VaultManagerException("Backup file already exists");
+                throw new VaultRepositoryException("Backup file already exists");
             }
 
             DocumentFile file = dir.createFile("application/json", fileInfo.toString());
             if (file == null) {
-                throw new VaultManagerException("createFile returned null");
+                throw new VaultRepositoryException("createFile returned null");
             }
 
             try (FileInputStream inStream = new FileInputStream(tempFile);
                  OutputStream outStream = _context.getContentResolver().openOutputStream(file.getUri())) {
+                if (outStream == null) {
+                    throw new IOException("openOutputStream returned null");
+                }
                 IOUtils.copy(inStream, outStream);
             } catch (IOException e) {
-                throw new VaultManagerException(e);
+                throw new VaultRepositoryException(e);
             }
-        } catch (VaultManagerException e) {
+        } catch (VaultRepositoryException | VaultBackupPermissionException e) {
             Log.e(TAG, String.format("Unable to create backup: %s", e.toString()));
             throw e;
         } finally {
@@ -115,6 +161,10 @@ public class VaultBackupManager {
     }
 
     private void enforceVersioning(DocumentFile dir, int versionsToKeep) {
+        if (versionsToKeep <= 0) {
+            return;
+        }
+
         Log.i(TAG, String.format("Scanning directory %s for backup files", Uri.decode(dir.getUri().toString())));
 
         List<BackupFile> files = new ArrayList<>();
@@ -252,7 +302,7 @@ public class VaultBackupManager {
             int posIndex = pos.getIndex();
             Date d = super.parse(text, pos);
             if (!isLenient() && d != null) {
-                String format = this.format(d);
+                String format = format(d);
                 if (posIndex + format.length() != text.length() ||
                         !text.endsWith(format)) {
                     d = null; // Not exact match

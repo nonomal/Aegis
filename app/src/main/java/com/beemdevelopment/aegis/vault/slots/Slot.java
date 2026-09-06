@@ -27,7 +27,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 public abstract class Slot extends UUIDMap.Value {
     public final static byte TYPE_RAW = 0x00;
-    public final static byte TYPE_DERIVED = 0x01;
+    public final static byte TYPE_PASSWORD = 0x01;
     public final static byte TYPE_BIOMETRIC = 0x02;
 
     private byte[] _encryptedMasterKey;
@@ -132,7 +132,7 @@ public abstract class Slot extends UUIDMap.Value {
                 case Slot.TYPE_RAW:
                     slot = new RawSlot(uuid, key, keyParams);
                     break;
-                case Slot.TYPE_DERIVED:
+                case Slot.TYPE_PASSWORD:
                     SCryptParameters scryptParams = new SCryptParameters(
                             obj.getInt("n"),
                             obj.getInt("r"),
@@ -140,7 +140,8 @@ public abstract class Slot extends UUIDMap.Value {
                             Hex.decode(obj.getString("salt"))
                     );
                     boolean repaired = obj.optBoolean("repaired", false);
-                    slot = new PasswordSlot(uuid, key, keyParams, scryptParams, repaired);
+                    boolean isBackup = obj.optBoolean("is_backup", false);
+                    slot = new PasswordSlot(uuid, key, keyParams, scryptParams, repaired, isBackup);
                     break;
                 case Slot.TYPE_BIOMETRIC:
                     slot = new BiometricSlot(uuid, key, keyParams);

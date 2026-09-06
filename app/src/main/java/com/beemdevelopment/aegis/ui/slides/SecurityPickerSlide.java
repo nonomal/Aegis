@@ -46,7 +46,7 @@ public class SecurityPickerSlide extends SlideFragment {
      * if the API version is new enough, permission is granted and a scanner is found.
      */
     private void updateBiometricsOption(boolean autoSelect) {
-        boolean canUseBio = BiometricsHelper.isAvailable(getContext());
+        boolean canUseBio = BiometricsHelper.isAvailable(requireContext());
         _bioButton.setEnabled(canUseBio);
         _bioText.setEnabled(canUseBio);
 
@@ -66,7 +66,7 @@ public class SecurityPickerSlide extends SlideFragment {
 
     @Override
     public void onNotFinishedError() {
-         Toast.makeText(getContext(), R.string.snackbar_authentication_method, Toast.LENGTH_SHORT).show();
+         Toast.makeText(requireContext(), R.string.snackbar_authentication_method, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -74,18 +74,14 @@ public class SecurityPickerSlide extends SlideFragment {
         int buttonId = _buttonGroup.getCheckedRadioButtonId();
 
         int type;
-        switch (buttonId) {
-            case R.id.rb_none:
-                type = CRYPT_TYPE_NONE;
-                break;
-            case R.id.rb_password:
-                type = CRYPT_TYPE_PASS;
-                break;
-            case R.id.rb_biometrics:
-                type = CRYPT_TYPE_BIOMETRIC;
-                break;
-            default:
-                throw new RuntimeException(String.format("Unsupported security type: %d", buttonId));
+        if (buttonId == R.id.rb_none) {
+            type = CRYPT_TYPE_NONE;
+        } else if (buttonId == R.id.rb_password) {
+            type = CRYPT_TYPE_PASS;
+        } else if (buttonId == R.id.rb_biometrics) {
+            type = CRYPT_TYPE_BIOMETRIC;
+        } else {
+            throw new RuntimeException(String.format("Unsupported security type: %d", buttonId));
         }
 
         introState.putInt("cryptType", type);

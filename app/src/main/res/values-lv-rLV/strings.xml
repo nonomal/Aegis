@@ -1,69 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="action_settings">Iestatījumi</string>
     <string name="action_about">Par</string>
-    <string name="action_import">Ievietot</string>
     <string name="action_delete">Dzēst</string>
     <string name="action_transfer">Pārsūtīt</string>
     <string name="action_edit_icon">Labot ikonu</string>
     <string name="action_reset_usage_count">Atiestatīt izmantošanas reižu skaitu</string>
-    <string name="action_reset_usage_count_dialog">Vai tiešām kā šī ieraksta izmantošanas reižu skaitu norādīt 0?</string>
+    <string name="action_reset_usage_count_dialog">Vai tiešām iestatīt šī ieraksta izmantošanas reižu skaitu 0?</string>
     <string name="action_default_icon">Atjaunot noklusējuma ikonu</string>
     <string name="discard">Atmest</string>
     <string name="save">Saglabāt</string>
+    <string name="all">Visas</string>
     <string name="issuer">Izsniedzējs</string>
+    <string name="yandex_pin">PIN (4-16 cipari)</string>
+    <string name="motp_pin">PIN (4 cipari)</string>
     <string name="suggested">Ieteikts</string>
     <string name="usage_count">Izmantošanas reižu skaits</string>
-    <string name="settings">Uzstādījumi</string>
+    <string name="warning">Brīdinājums</string>
     <string name="pref_cat_appearance_app">Lietotne</string>
     <string name="pref_cat_appearance_entries">Ieraksti</string>
     <string name="pref_cat_backups_android">Android</string>
-    <string name="pref_cat_backups_auto">Automātiska dublēšana</string>
+    <string name="pref_cat_backups_auto">Automātiska rezerves kopēšana</string>
     <string name="pref_section_behavior_title">Uzvedība</string>
     <string name="pref_section_behavior_summary">Pielāgot uzvedību, kad notiek mijiedarbība ar ierakstu sarakstu.</string>
     <string name="pref_section_appearance_title">Izskats</string>
     <string name="pref_section_appearance_summary">Pielāgot izskatu, valodu un citus iestatījumus, kas ietekmē lietotnes veidolu.</string>
     <string name="pref_section_security_title">Drošība</string>
     <string name="pref_section_security_summary">Uzstādīt šifrēšanu, atslēgšanu ar biometriju, automātisku aizslēgšanu un citus drošības iestatījumus.</string>
-    <string name="pref_section_import_export_title">Ievietot un izdot</string>
-    <string name="pref_section_import_export_summary">Aegis vai citu autentificēšanāš lietotņu rezerves kopiju ievietošana. Aegis glabātavas satura pašrocīga izdošana.</string>
+    <string name="pref_section_import_export_title">Ievietot un izgūt</string>
+    <string name="pref_section_import_export_summary">Aegis vai citu autentificēšanās lietotņu rezerves kopiju ievietošana. Aegis glabātavas satura pašrocīga izgūšana.</string>
+    <string name="pref_section_audit_log_title">Audita žurnāls</string>
+    <string name="pref_section_audit_log_summary">Saraksts, kurā ir ierakstīti visi svarīgie notiekumi, kas ir bijuši lietotnē.</string>
     <string name="pref_section_backups_title">Rezerves kopijas</string>
-    <string name="pref_section_backups_summary">Uzstādīt automātisko dublēšanu paša izvēlētā vietā vai iespējot dalību Android dublēšanas sistēmā.</string>
+    <string name="pref_section_backups_summary">Uzstādīt automātisko rezerves kopēšanu paša izvēlētā vietā vai iespējot dalību Android mākoņa dublēšanas sistēmā.</string>
     <string name="pref_section_icon_packs">Ikonu pakotnes</string>
     <string name="pref_section_icon_packs_summary">Pārvaldīt un ievietot ikonu pakotnes</string>
     <string name="pref_select_theme_title">Izskats</string>
+    <string name="pref_dynamic_colors_title">Dinamiskas krāsas</string>
+    <string name="pref_dynamic_colors_summary">Pielietot pārklājumu, kas pielāgots izvēlētā Android izskata krāsām</string>
     <string name="pref_view_mode_title">Skata veids</string>
     <string name="pref_lang_title">Valoda</string>
+    <string name="pref_show_icons_title">Rādīt ikonas</string>
+    <string name="pref_show_icons_summary">Rādīt ikonu pie katra ieraksta</string>
     <string name="pref_code_group_size_title">Koda ciparu kopošana</string>
-    <string name="pref_code_group_size_summary">Rādīt kodu ar divciparu kopām 3 ciparu kopu vietā</string>
-    <string name="pref_account_name_title">Rādīt konta nosaukumu</string>
-    <string name="pref_account_name_summary">Iespējot, lai rādītu konta nosaukumu blakus izsniedzējam</string>
-    <string name="pref_timeout_title">Noildze</string>
-    <string name="pref_timeout_summary">Aizslēgt glabātavu pēc %1$s sekundes(žu) bezdarbības</string>
-    <string name="pref_slots_title">Atslēgas vieta</string>
-    <string name="pref_slots_summary">Pārvaldīt atslēgu, ar kurām var atšifrēt glabātavu, sarakstu</string>
-    <string name="pref_import_file_title">Izgūt no datnes</string>
+    <string name="pref_code_group_size_summary">Atlasīt koda ciparu kopu lielumu</string>
+    <string name="pref_account_name_position_title">Rādīt konta nosaukumu</string>
+    <string name="pref_show_next_code_title">Rādīt nākamo kodu</string>
+    <string name="pref_show_next_code_summary">Izveidot un rādīt nākamo kodu pirms laika</string>
+    <string name="pref_expiration_state_title">Norādīt, kad beigsies kodu derīgums</string>
+    <string name="pref_expiration_state_summary">Mainīt kodu krāsu un likt tiem mirgot, kad to derīgums tūlīt beigsies</string>
+    <string name="pref_expiration_state_fallback">Mainīt kodu krāsu, kad to derīgums tūlīt beigsies</string>
+    <string name="pref_shared_issuer_account_name_title">Radīt konta nosaukumu tikai tad, kad nepieciešams</string>
+    <string name="pref_shared_issuer_account_name_summary">Rādīt kontu nosaukumu kad vien tiem ir viens un tas pats izdevējs. Citu kontu nosaukums būs paslēpts.</string>
+    <string name="pref_account_name_position_summary_override">Šis iestatījums netiek ņemts vērā mozaīkas skatā. Konta nosaukums tiks parādīts zem izdevēja.</string>
+    <string name="pref_import_file_title">Ievietot no datnes</string>
     <string name="pref_import_file_summary">Ievietot kodus no datnes</string>
-    <string name="pref_android_backups_title">Ņemt dalību Android dublēšanas sistēmā</string>
-    <string name="pref_android_backups_summary">Ļaut Android dublēšanas sistēmai iekļaut Aegis glabātavu rezerves kopijās. Tas tiek atbalstīts tikai šifrētām glabātavām.</string>
-    <string name="pref_backups_title">Automātiski dublēt glabātavu</string>
-    <string name="pref_backups_summary">Automātiski izveidot glabātavas rezerves kopijas ārējā krātuvē, kad tiek veiktas izmaiņas. Tas tiek atbalstīts tikai šifrētās glabātavās.</string>
-    <string name="pref_backups_location_title">Rezerves kopiju datņu mape</string>
+    <string name="pref_android_backups_title">Android mākoņa rezerves kopijas</string>
+    <string name="pref_android_backups_summary">Ļaut Android mākoņa rezerves kopēšanas sistēmai iekļaut Aegis glabātavu rezerves kopijās. Tas tiek nodrošināts tikai šifrētām glabātavām.</string>
+    <string name="pref_android_backups_hint"><i>No ierīces uz ierīci (angliski Device-to-device (D2D)) rezerves kopijas vienmēr ir atļautas, neatkarīgi no augstāk esošā iestatījuma</i></string>
+    <string name="pref_backups_title">Automātiski veikt glabātavas rezerves kopēšanu</string>
+    <string name="pref_backups_summary">Automātiski izveidot glabātavas rezerves kopijas ārējā krātuvē, kad tiek veiktas izmaiņas. Tas tiek nodrošināts tikai šifrētām glabātavām.</string>
+    <string name="pref_backups_reminder_title">Rezerves kopiju veidošanas atgādinājums</string>
+    <string name="pref_backups_reminder_summary">Rādīt glabātavas rezerves kopijas izveidošanas atgādinājumu gadījumā, ja pēdējās izmaiņas nav iekļautas rezerves kopijās.</string>
+    <string name="pref_backups_reminder_dialog_title">Atspējot rezerves kopiju izveidošanas atgādinājumu</string>
+    <string name="pref_backups_reminder_dialog_summary">Šī atgādinājuma atspējošana nozīmē, ka Aegis neziņos, vai ir vai nav izmaiņu, kuras vēl nav iekļautas rezerves kopijās. Tas rada iespējamību zaudēt piekļuvi kodiem. Vai tiešām atspējot atgādinājumu?</string>
+    <string name="pref_backups_versioning_strategy_title">Rezerves kopiju stratēģija</string>
+    <string name="pref_backups_versioning_strategy_keep_x_versions">Paturēt noteiktu versiju skaitu</string>
+    <string name="pref_backups_versioning_strategy_single_backup">Viena rezerves kopija</string>
+    <string name="pref_backups_versioning_strategy_single_backup_warning">Atlasītā rezerves kopiju stratēģija nav uzticama, tāpēc tā nav ieteicama. Kļūme vienīgajā rezerves kopijā var novest pie vienīgās rezerves kopijas zaudēšanas.</string>
+    <string name="pref_backups_versioning_strategy_dialog_title">Atlasīt rezerves kopiju stratēģiju</string>
+    <string name="pref_backups_location_title">Rezerves kopiju atrašanās vieta</string>
     <string name="pref_backups_location_summary">Rezerves kopijas tiks glabātas</string>
-    <string name="pref_backups_trigger_title">Veikt dublēšanu</string>
-    <string name="pref_backups_trigger_summary">Pašrocīgi veikt dublēšanu</string>
+    <string name="pref_backup_location_summary">Rezerves kopijas tiks glabātas</string>
+    <string name="pref_backups_trigger_title">Izraisīt rezerves kopēšanu</string>
+    <string name="pref_backups_trigger_summary">Pašrocīgi izraisīt rezerves kopēšanu</string>
     <string name="pref_backups_versions_title">Paturamo rezerves kopiju skaits</string>
+    <string name="pref_backups_versions_infinite">\u221E</string>
     <plurals name="pref_backups_versions_summary">
         <item quantity="zero">Paturēt %1$d rezerves kopijas</item>
         <item quantity="one">Paturēt %1$d rezerves kopiju</item>
         <item quantity="other">Paturēt %1$d rezerves kopijas</item>
     </plurals>
-    <string name="pref_import_app_title">Izgūt no lietotnes</string>
+    <string name="pref_backups_versions_infinite_summary">Paturēt neierobežotu skaitu rezerves kopiju</string>
+    <string name="pref_import_app_title">Ievietot no lietotnes</string>
     <string name="pref_import_app_summary">Ievietot kodus no lietotnes (nepieciešama saknes piekļuve)</string>
-    <string name="pref_export_title">Izdot</string>
-    <string name="pref_export_summary">Izdot glabātavas saturu</string>
+    <string name="pref_export_title">Izgūt</string>
+    <string name="pref_export_summary">Izgūt glabātavas saturu</string>
     <string name="pref_password_reminder_title">Paroles atgādinājums</string>
-    <string name="pref_password_reminder_summary">Rādīt atgādinājumu, lai laiku pa laikam ievadītu paroli, lai to neaizmirstu.</string>
+    <string name="pref_google_auth_export_title">Izgūt izmantošanai Google Authenticator</string>
+    <string name="pref_google_auth_export_descriptor">Izveido izgūšanas kvadrātkodus, kas ir saderīgi ar Google Authenticator</string>
+    <string name="pref_google_auth_export_no_data">Nav satura, ko izgūt</string>
+    <plurals name="pref_google_auth_export_incompatible_entries">
+        <item quantity="zero">Izlaisti %d nesaderīgu ierakstu</item>
+        <item quantity="one">Izlaists %d nesaderīgs ieraksts</item>
+        <item quantity="other">Izlaisti %d nesaderīgi ieraksti</item>
+    </plurals>
+    <string name="pref_password_reminder_summary">Rādīt %s atgādinājumu, lai laiku pa laikam ievadītu paroli, lai to neaizmirstu.</string>
+    <string name="pref_password_reminder_summary_disabled">Atspējots</string>
     <string name="pref_secure_screen_title">Ekrāna drošība</string>
     <string name="pref_secure_screen_summary">Lietotnē neļaut ekrānuzņēmumus un citus ekrāna tveršanas mēģinājumus</string>
     <string name="pref_tap_to_reveal_title">Piesist, lai atklātu</string>
@@ -76,19 +109,61 @@
     <string name="pref_auto_lock_type_back_button">Ir nospiesta poga \"Atpakaļ\"</string>
     <string name="pref_auto_lock_type_minimize">Lietotne ir samazināta</string>
     <string name="pref_auto_lock_type_device_lock">Ierīce ir aizslēgta</string>
+    <string name="pref_backup_password_category">Rezerves kopēšana un izgūšana</string>
+    <string name="pref_backup_password_title">Atsevišķa rezerves kopēšanas un izgūšanas parole</string>
+    <string name="pref_backup_password_summary">Ja iespējots, paroli, kas tiek izmantota lietotnes atslēgšanai, nevarēs izmantot rezerves kopiju un izgūšanas datņu atšifrēšanai.</string>
+    <string name="pref_backup_password_change_title">Mainīt rezerves kopēšanas un izgūšanas paroli</string>
+    <string name="pref_backup_password_change_summary">Iestatīt jaunu paroli, kas tiks izmantota, lai šifrētu glabātavu rezerves kopēšanas un izgūšanas laikā.</string>
     <string name="pref_encryption_title">Šifrēšana</string>
     <string name="pref_encryption_summary">Šifrēt glabātavu un atslēgt to ar paroli vai biometriju</string>
     <string name="pref_biometrics_title">Atslēgšana ar biometriju</string>
     <string name="pref_biometrics_summary">Ļaut atslēgt glabātavu ar biometriju</string>
+    <string name="pref_search_behavior_summary">Meklē: %s</string>
+    <string name="pref_search_behavior_prompt">Meklēt jebkurā no zemāk esošajiem laukiem</string>
+    <string name="pref_search_behavior_type_name">Nosaukums</string>
+    <string name="pref_search_behavior_type_issuer">Izsniedzējs</string>
+    <string name="pref_search_behavior_type_note">Piezīme</string>
+    <string name="pref_search_behavior_type_groups">Kopas</string>
     <string name="pref_set_password_title">Mainīt paroli</string>
     <string name="pref_set_password_summary">Uzstādīt jaunu paroli, kas būs nepieciešama, lai atslēgtu glabātavu</string>
+    <string name="no_events_title">Nav notikumu</string>
+    <string name="no_events_description">Nav ziņots par svarīgiem notikumiem, kas ir bijuši lietotnē</string>
+    <string name="event_title_vault_unlocked">Glabātava atslēgta</string>
+    <string name="event_description_vault_unlocked">Glabātava tika sekmīgi atslēgta</string>
+    <string name="event_title_backup_created">Rezerves kopija izveidota</string>
+    <string name="event_description_backup_created">Glabātavas rezerves kopija tika sekmīgi izveidota</string>
+    <string name="event_title_android_backup_created">Android izveidota rezerves kopija</string>
+    <string name="event_description_android_backup_created">Android sekmīgi izveidoja glabātavas rezerves kopiju</string>
+    <string name="event_title_vault_exported">Glabātava izgūta</string>
+    <string name="event_description_vault_exported">Tika izgūta glabātavas kopija</string>
+    <string name="event_title_entry_shared">Ieraksts kopīgots</string>
+    <string name="event_description_entry_shared">Ieraksts tika kopīgots</string>
+    <string name="event_title_vault_unlock_failed_password">Glabātavas atslēgšana neizdevās (parole)</string>
+    <string name="event_description_vault_unlock_failed_password">Mēģinājums atslēgt glabātavu ar paroli neizdevās</string>
+    <string name="event_title_vault_unlock_failed_biometrics">Glabātavas atslēgšana neizdevās (biometrija)</string>
+    <string name="event_description_vault_unlock_failed_biometrics">Mēģinājums atslēgt glabātavu ar biometriju neizdevās</string>
+    <string name="event_unknown">Nezināms notikuma veids</string>
+    <string name="audit_log_entry_deleted">(izdzēsts)</string>
+    <string name="today_at_time">Šodien %1$s</string>
+    <string name="day_of_week_at_time">%1$s %2$s</string>
     <string name="export_encrypted">Šifrēt glabātavu</string>
-    <string name="export_help">Šī darbība izdos glabātavas saturu no Aegis iekšējās krātuves. Atlasīt veidolu, kādā izdot datus:</string>
-    <string name="export_warning_unencrypted">Tiks izdots nešifrēts Aegis glabātavas atveidojums. <b>Tas nav ieteicams</b>.</string>
-    <string name="export_warning_accept">Es apzinos bīstamību</string>
+    <string name="export_help">Šī darbība izgūs glabātavas saturu no Aegis iekšējās krātuves. Jāatlasa veidols, kurā izgūt datus:</string>
+    <string name="export_warning_unencrypted">Tiks izgūts nešifrēts Aegis glabātavas atveidojums. <b>Tas nav ieteicams</b>.</string>
+    <string name="export_warning_password">Izgūstamās datnes ir šifrētas ar paroli, kas ir norādīta drošības iestatījumos.</string>
+    <string name="understand_risk_accept">Es apzinos bīstamību</string>
     <string name="export_format_aegis">Aegis (.json)</string>
     <string name="export_format_google_auth_uri">Teksta datne (.txt)</string>
-    <string name="export_format_hint">Izdošanas veidols</string>
+    <string name="export_format_html">Tīmekļa lapa (.HTML)</string>
+    <string name="export_format_hint">Izgūšanas veidols</string>
+    <string name="export_all_groups">Izgūt visas kopas</string>
+    <string name="export_choose_groups">Jāatlasa, kuras kopas izgūt</string>
+    <plurals name="export_groups_selected_count">
+        <item quantity="zero">Atlasītas %d kopu</item>
+        <item quantity="one">Atlasīta %d kopa</item>
+        <item quantity="other">Atlasītas %d kopas</item>
+    </plurals>
+    <string name="export_no_groups_selected">Nav atlasītu kopu izgūšanai</string>
+    <string name="export_html_title" comment="The title of an HTML export document">Aegis Authenticator izgūšana</string>
     <string name="choose_authentication_method">Drošība</string>
     <string name="authentication_method_explanation">Aegis ir uz drošību vērsta 2FA lietotne. Kodi tiek turēti glabātavā, ko ir iespējams šifrēt ar paša izvēlētu paroli. Ja uzbrucēji iegūst šifrēto glabātavas datni, tie nevarēs piekļūt tās saturam, nezinot paroli.\n\nTika atlasīta iespēja, kurai vajadzētu būt vispiemērotākajai šai ierīcei.</string>
     <string name="authentication_method_none">Nekas</string>
@@ -98,11 +173,8 @@
     <string name="authentication_method_password_explanation">Brīdinājums: ja tiks aizmirsta parole, neatgriezeniski tiks zaudēta piekļuve kodiem. Bez paroles nav iespējams tos atgūt.</string>
     <string name="authentication_method_biometrics">Biometrija</string>
     <string name="authentication_method_biometrics_description">Papildus parolei glabātavas atslēgšanai var izmantot arī ierīcē pievinotos biometriskos datus, piemēram, pirkstu nospiedumu vai seju.</string>
-    <string name="authentication_method_set_password">Parole</string>
-    <string name="authentication_enter_password">Ievadīt paroli</string>
     <string name="authentication">Atslēgt glabātavu</string>
-    <!-- The newline (\n) on the following line is just for aesthetic purposes !-->
-    <string name="authentication_multiline">Atslēgt\nglabātavu</string>
+    <string name="authentication_multiline" comment="The newline in the middle is used for aesthetic purposes">Atslēgt\nglabātavu</string>
     <string name="auth_use_biometrics">Vai piesist šeit, lai izmantotu <font fgcolor="#FF0D86C1">biometriju</font></string>
     <string name="set_password">Lūgums ievadīt paroli</string>
     <string name="set_group">Lūgums ievadīt kopas nosaukumu</string>
@@ -111,30 +183,42 @@
     <string name="invalid_password">Parole ir nepareiza</string>
     <string name="invalidated_biometrics">Ir noteiktas izmaiņas ierīces drošības iestatījumos. Lūgums doties uz \"Aegis -&gt; Iestatījumi -&gt; Drošība -&gt; Atslēgšana ar biometriju\", lai atspējotu un atkal iespējotu atslēgšanu ar biometriju.</string>
     <string name="password_reminder">Lūgums ievadīt paroli. Tā laiku pa laikam tiks vaicāta, lai netiktu aizmirsta.</string>
+    <string name="password_reminder_dialog_title">Biometriskā atslēgšana pēc noklusējuma</string>
+    <string name="password_reminder_dialog_message">Laiku pa laikam tiks vaicāts pēc paroles, lai nodrošinātu, ka tā nav aizmirsta, tādējādi zaudējot piekļuvi glabātavai. Kad parole būs vienreiz ievadīta, Aegis pēc noklusējuma izmantos biometrisko atslēgšanu līdz pienāks laiks nākamajam paroles atgādinājumam.</string>
+    <string name="password_reminder_freq_never">Nekad</string>
+    <string name="password_reminder_freq_weekly">Ik nedēļu</string>
+    <string name="password_reminder_freq_biweekly">Divreiz nedēļā</string>
+    <string name="password_reminder_freq_monthly">Ik mēnesi</string>
+    <string name="password_reminder_freq_quarterly">Ik ceturksni</string>
+    <string name="enter_password_2fas_message">Izskatās, ka šī 2FAS rezerves kopija ir šifrēta. Lūgums zemāk ievadīt paroli.</string>
     <string name="enter_password_authy_message">Izskatās, ka Authy kodi ir šifrēti. Lūgums aizvērt Aegis, atvērt Authy un atslēgt kodus ar paroli. Aegis var arī mēģināt atšifrēt Authy kodus, ja tiek ievadīta parole zemāk esošajā laukā.</string>
+    <string name="enter_password_aegis_title">Lūgums ievadīt ievietošanas paroli</string>
     <string name="period_hint">Laika posms (sekundes)</string>
     <string name="algorithm_hint">Jaukšanas funkcija</string>
     <string name="type">Veids</string>
     <string name="share">Kopīgot</string>
     <string name="yes">Jā</string>
     <string name="no">Nē</string>
+    <string name="undo">Atsaukt</string>
     <string name="unlock">Atslēgt</string>
-    <string name="biometrics">Biometrija</string>
-    <string name="advanced">Papildus</string>
+    <string name="advanced">Papildu</string>
     <string name="counter">Skaitītājs</string>
     <string name="digits">Cipari</string>
     <string name="secret">Noslēpums</string>
     <string name="scan">Nolasīt kvadrātkodu</string>
     <string name="scan_image">Nolasīt attēlu</string>
     <string name="enter_manually">Ievadīt pašrocīgi</string>
-    <string name="add_biometric">Pievienot biometriju</string>
-    <string name="add_biometric_slot">Pievienot biometrijas vietu</string>
     <string name="set_up_biometric">Uzstādīt atslēgšanu ar biometriju</string>
-    <string name="add_password">Pievienot paroli</string>
-    <string name="slots_warning">Glabātava ir tikai tik droša, cik tās vājākais noslēpums. Ja tiks mainīti ierīces biometriskās pieteikšanās iestatījumi, būs nepieciešams atkārtoti iespējot atslēgšanu ar biometriju Aegis lietotnē.</string>
     <string name="copy">Ievietot starpliktuvē</string>
     <string name="edit">Labot</string>
-    <string name="delete">Dzēst</string>
+    <string name="select_all">Atlasīt visus</string>
+    <string name="assign_icons">Piešķirt ikonas</string>
+    <string name="assign_groups">Piešķirt kopai</string>
+    <string name="assign_groups_dialog_summary">Jāatlasa kopa, kurai piešķirt atlasītos ierakstus.</string>
+    <string name="assign_groups_dialog_dropdown">Atlasīt kopu</string>
+    <string name="favorite" comment="Verb">Pievienot izlasei</string>
+    <string name="unfavorite" comment="Verb">Izņemt no izlases</string>
+    <string name="error_all_caps">KĻŪDA</string>
     <string name="password">Parole</string>
     <string name="confirm_password">Apstiprināt paroli</string>
     <string name="show_password">Rādīt paroli</string>
@@ -145,12 +229,22 @@
     <string name="password_equality_error">Parolēm ir jāsakrīt un tās nedrīkst būt tukšas</string>
     <string name="snackbar_authentication_method">Lūgums atlasīt autentificēšanās veidu</string>
     <string name="encrypting_vault">Šifrē glabātavu</string>
-    <string name="exporting_vault">Izdod glabātavas saturu</string>
+    <string name="exporting_vault">Izgūst glabātavu</string>
+    <string name="optimizing_icon">Optimizē ikonu</string>
+    <string name="optimizing_icon_multiple">Optimizē ikonas: %1$d/%2$d</string>
     <string name="reading_file">Nolasa datni</string>
+    <string name="requesting_root_access">Pieprasa neierobežotu piekļuvi</string>
+    <string name="analyzing_qr">Notiek kvadrātkoda nolasīšana</string>
+    <string name="analyzing_qr_multiple">Apstrādā kvadrātkodu %1$d/%2$d (%3$s)</string>
+    <plurals name="added_new_entries">
+        <item quantity="zero">Glabātavai pievienoti %d jaunu ierakstu</item>
+        <item quantity="one">Glabātavai pievienots %d jauns ieraksts</item>
+        <item quantity="other">Glabātavai pievienoti %d jauni ieraksti</item>
+    </plurals>
     <string name="importing_icon_pack">Ievieto ikonu pakotni</string>
     <string name="delete_entry">Dzēst ierakstu</string>
     <string name="delete_entry_description">Vai tiešām izdzēst šo ierakstu?</string>
-    <string name="delete_entry_explanation">Šī darbība neatspējo <b>%s</b> 2FA. Lai novērstu piekļuves zaudēšanu, jāpārliecinās, ka ir atspējots 2FA vai ka ir cits veids, kā izveidot kodus šim pakalpojumam.</string>
+    <string name="delete_entry_explanation">Šī darbība neatspējo 2FA:\n<b>%s</b>\n\nLai novērstu piekļuves zaudēšanu, jāpārliecinās, ka ir atspējots 2FA vai ka ir cits veids, kā izveidot kodus šim pakalpojumam.</string>
     <string name="delete_entries">Dzēst ierakstus</string>
     <plurals name="delete_entries_description">
         <item quantity="zero">Vai tiešām izdēst %d ierakstu?</item>
@@ -159,17 +253,17 @@
     </plurals>
     <string name="discard_changes">Atmest izmaiņas?</string>
     <string name="discard_changes_description">Izmaiņas netika saglabātas</string>
-    <string name="folder">Mape</string>
-    <string name="tap_to_select">Piesist, lai atlasītu</string>
     <string name="saving_profile_error">Kļūda saglabājot profilu</string>
+    <string name="saving_assign_icons_error">Ikonu piešķiršanā atgadījās kļūda</string>
     <string name="welcome">Sveiciens!</string>
-    <string name="app_description">Aegis ir bezmaksas, droša un atvērtā pirmkoda 2FA lietotne</string>
+    <string name="app_description">Aegis ir bezmaksas, atvērta pirmkoda un droša 2FA lietotne</string>
     <string name="setup_completed">Uzstādīšana pabeigta</string>
     <string name="setup_completed_description">Aegis ir uzstādīta un ir gatava izmantošanai.</string>
     <string name="vault_not_found">Nav atrasta glabātava, tiek uzsākta uzstādīšana…</string>
     <string name="copied">Ievietots starpliktuvē</string>
     <string name="errors_copied">Kļūdas ir ievietotas starpliktuvē</string>
     <string name="version_copied">Laidiena numurs ir ievietots starpliktuvē</string>
+    <string name="error_required_field">Šis lauks ir nepieciešams</string>
     <string name="error_occurred">Atgadījusies kļūda</string>
     <string name="decryption_error">Atgadījusies kļūda glabātavas atslēgšanā</string>
     <string name="decryption_corrupt_error">Atgadījusies kļūda glabātavas atslēgšanā. Tās datne var būt bojāta.</string>
@@ -179,11 +273,15 @@
     <string name="biometric_decrypt_error">Atgadījusies kļūda glabātavas atšifrēšanā ar biometrisko autentificēšanos. Tā parasti notiek tikai tad, ja tika mainīti ierīces drošības iestatījumi. Lūgums atslēgt glabātavu ar paroli un atkārtoti uzstādīt biometrisko autentificēšanos Aegis iestatījumos.</string>
     <string name="biometric_init_error">Atgadījusies kļūda biometriskās autentificēšanās sagatavošanā. Tā parasti notiek tikai tad, ja tika mainīti ierīces drošības iestatījumi. Lūgums atslēgt glabātavu ar paroli un atkārtoti uzstādīt biometrisko autentificēšanos Aegis iestatījumos.</string>
     <string name="disable_encryption">Atspējot šifrēšanu</string>
-    <string name="disable_encryption_description">Vai tiešām atspējot šifrēšanu? Tādējādi glabātava tiks glabāta kā vienkāršs teksts. <b>Tiks atspējota arī automātiskā dublēšana</b>.</string>
+    <string name="disable_encryption_description">Vai tiešām atspējot šifrēšanu? Tādējādi glabātava tiks glabāta kā vienkāršs teksts. <b>Tiks atspējota arī automātiskā rezerves kopēšana</b>.</string>
     <string name="enable_encryption_error">Atgadījusies kļūda šifrēšanas iespējošanā</string>
     <string name="disable_encryption_error">Atgadījusies kļūda šifrēšanas atspējošanā</string>
-    <string name="backup_successful">Dublēšana ir veiksmīgi ieplānota</string>
-    <string name="backup_error">Atgadījusies kļūda dublējuma izveidošanā</string>
+    <string name="backup_successful">Rezerves kopēšana tika sekmīgi ieplānota</string>
+    <string name="backup_error">Atgadījusies kļūda rezerves kopijas izveidošanā</string>
+    <string name="backup_status_success">Visjaunākā sekmīgā rezerves kopija: %s</string>
+    <string name="backup_status_failed">Visjaunākā neizdevusies rezerves kopija: %s</string>
+    <string name="backup_status_none">Vēl nav veikta neviena rezerves kopēšana</string>
+    <string name="backup_warning_password">Rezerves kopijas ir ar šifrētas ar paroli, kas ir norādīta drošības iestatījumos</string>
     <string name="documentsui_error">Izskatās, ka ierīcē nav DocumentsUI. Tā ir būtiska sistēmas sastāvdaļa, kas nepieciešama dokumentu atlasīšanai un izveidošanai. Var gadīties, ka tā ir nejauši izdzēsta, ja ir izmantots rīks lieko sistēmas lietotņu noņemšanai, un ir nepieciešams DocumentsUI pārinstalēt.</string>
     <string name="icon_pack_import_error">Atgadījusies kļūda ikonu pakotnes ievietošanas mēģinājumā</string>
     <string name="icon_pack_import_exists_error">Ievietojamā ikonu pakotne jau pastāv. Vai pārrakstīt to?</string>
@@ -193,7 +291,6 @@
         <item quantity="one">%d ikona</item>
         <item quantity="other">%d ikonas</item>
     </plurals>
-    <string name="icon_pack">Ikonu pakotne</string>
     <string name="icon_custom">Pielāgots</string>
     <string name="permission_denied">Atļauja liegta</string>
     <string name="andotp_new_format">Jaunais veidols (v0.6.3 vai jaunāks) </string>
@@ -202,51 +299,70 @@
     <string name="choose_totpauth_importer">Vai šī TOTP autentificētāja rezerves kopija ir šifrēta ar paroli?</string>
     <string name="choose_application">Atlasīt lietotni, no kuras ievietot</string>
     <string name="choose_theme">Atlasīt vēlamo izskatu</string>
+    <string name="choose_account_name_position">Atlasīt vēlamo konta nosaukuma atrašanās vietu</string>
     <string name="choose_view_mode">Atlasīt vēlamo skata veidu</string>
+    <string name="choose_copy_behavior">Atlasīt vēlamo kopēšanas uzvedību</string>
     <string name="parsing_file_error">Atgadījusies kļūda datnes satura apstrādāšanā</string>
     <string name="file_not_found">Kļūda: datne nav atrasta</string>
     <string name="reading_file_error">Atgadījusies kļūda datnes nolasīšanā</string>
     <string name="app_lookup_error">Kļūda: lietotne nav uzstādīta</string>
-    <string name="root_error">Kļūda: neizdodas iegūt root pieeju</string>
+    <string name="app_version_error">%s laidiens, kas ir uzstādīts, netiek atbalstīts. Neseās versijās ir uzsākta atsevišķu datņu šifrēšana iekšējā krātuves mapē, padarot nepieejamu nepieciešamo informāciju, kas Aegis ir nepieciešama ievietošanai. Ievietošanas mēģinājums, visticamāk, beigsies ar kļūdu. Vai vienalga turpināt?</string>
+    <string name="root_error">Kļūda: Nav iespējams iegūt neirobežotu piekļuvi</string>
     <plurals name="imported_entries_count">
         <item quantity="zero">Ievietoti %d ierakstu</item>
         <item quantity="one">Ievietots %d ieraksts</item>
         <item quantity="other">Ievietoti %d ieraksti</item>
     </plurals>
+    <plurals name="entries_shown">
+        <item quantity="zero">Rāda %d ierakstu</item>
+        <item quantity="one">Rāda %d ierakstu</item>
+        <item quantity="other">Rāda %d ierakstus</item>
+    </plurals>
+    <string name="intro_import_error_title">Notika kļūda glabātavas ievietošanas laikā</string>
     <string name="import_error_title">Ievietošanas laikā radās viena vai vairākas kļūdas</string>
-    <string name="exporting_vault_error">Atgadījusies kļūda glabātavas satura izdošanā</string>
-    <string name="exported_vault">Glabātavas saturs ir izdots</string>
+    <string name="exporting_vault_error">Atgadījās kļūda glabātavas izgūšanas laikā</string>
+    <string name="exported_vault">Glabātava tika izgūta</string>
     <string name="encryption_set_password_error">Atgadījusies kļūda paroles uzstādīšanā.</string>
     <string name="encryption_enable_biometrics_error">Atgadījusies kļūda mēģinājumā iespējot atslēgšanu ar biometriju. Dažām ierīcēm ir vāji īstenota biometriskā autentifikācija, un ļoti iespējams, ka šī ir viena no tādām. Ieteicams apsvērt uzstādījumos izmantot tikai paroli.</string>
     <string name="no_cameras_available">Kameras nav pieejamas</string>
     <string name="read_qr_error">Atgadījusies kļūda kvadrātkoda nolasīšanā</string>
     <string name="read_qr_error_phonefactor">Aegis nav saderīgs ar Microsoft piederošo 2FA algoritmu. Lūgums pārliecināties, ka ir izvēlēts \"Uzstādīt lietotni bez paziņojumiem\", kad Office 365 tiek uzstādīts 2FA.</string>
-    <string name="authentication_method_raw">Neapstrādāts</string>
+    <string name="partial_google_auth_import">Noteikta nepilnīga Google Authenticator izgūšanas datne</string>
+    <string name="partial_google_auth_import_warning">Trūkst dažu kvadrātkodu no ievietošanas. Šie kodi netika atrasti:\n\n<b>%s</b>\n\nVar turpināt ievietošanu no šīs nepilnīgās izgūšanas datnes, bet mēs iesakām mēģināt atkārtoti ar visiem kvadrātkodiem, lai nebūtu jāzaudē piekļuve kodiem.</string>
+    <string name="missing_qr_code_descriptor">• kvadrātkods %d</string>
+    <plurals name="import_partial_export_anyway">
+        <item quantity="zero">Vienalga ievietot %d kodus</item>
+        <item quantity="one">Vienalga ievietot %d kodu</item>
+        <item quantity="other">Vienalga ievietot %d kodus</item>
+    </plurals>
+    <string name="import_google_auth_failure">Neizdevās ievietošana no Google Authenticator izgūšanas datnes</string>
+    <string name="unrelated_google_auth_batches_error">Izgūšanas datne satur informāciju par nesaistītu kopumu. Var mēģināt ievietot atsevišķi pa vienam kopumam.</string>
+    <string name="no_tokens_can_be_imported">Iznākumā nevar ievietot nevienu kodu</string>
     <string name="unlocking_vault">Atslēgšana ar biometriju</string>
-    <string name="unlocking_vault_repair">Notiek glabātavas atslēgšana (labojot)</string>
-    <string name="password_slot_error">Ir nepieciešama vismaz viena paroles vieta</string>
-    <string name="slot_this_device">(šī ierīce)</string>
-    <string name="remove_slot">Noņemt vietu</string>
-    <string name="remove_slot_description">Vai tiešām izdzēst šo vietu?</string>
+    <string name="rename_group">Pārdēvēt kopu</string>
+    <string name="no_group_selection">Ja ieraksts nav daļa no kādas kopas, to var atrast zem \"Nav kopas\".</string>
     <string name="remove_group">Noņemt kopu</string>
     <string name="remove_group_description">Vai tiešām noņemt šo kopu? Tās ieraksti tiks pārmainīti uz \"Nav kopas\".</string>
+    <string name="remove_unused_groups">Izdzēst neizmantotās kopas</string>
+    <string name="remove_unused_groups_description">Vai tiešām izdzēst visas kopas, kas nav piesaistītas kādam ierakstam?</string>
     <string name="remove_icon_pack">Noņemt ikonu pakotni</string>
     <string name="remove_icon_pack_description">Vai tiešām noņemt šo ikonu pakotni? Netiks ietekmēti ieraksti, kuros ir izmantotas pakotnē esošās ikonas.</string>
-    <string name="adding_new_slot_error">Atgadījusies kļūda jaunas vietas pievienošanā:</string>
-    <string name="progressbar_error">Nav iespējams atiestatīt animatora ilguma mērogu. Izpildes joslas būs neredzamas.</string>
     <string name="details">Izklāsts</string>
+    <string name="show_error_details">Rādīt kļūdu izklāstu</string>
     <string name="lock">Aizslēgt</string>
     <string name="name">Nosaukums</string>
     <string name="no_group">Bez kopas</string>
-    <string name="sort">Kārtot</string>
+    <string name="sort" comment="Title of the Sort button in the top action bar of the main view">Kārtot</string>
     <string name="sort_alphabetically">Izsniedzējs (no A līdz Z)</string>
     <string name="sort_alphabetically_reverse">Izsniedzējs (no Z līdz A)</string>
     <string name="sort_alphabetically_name">Konts (no A līdz Z)</string>
     <string name="sort_alphabetically_name_reverse">Konts (no Z līdz A)</string>
     <string name="sort_usage_count">Izmantošanas reižu skaits</string>
+    <string name="sort_last_used">Pēdējoreiz izmantots</string>
     <string name="sort_custom">Pielāgots</string>
+    <string name="last_used">Pēdējoreiz izmantots</string>
+    <string name="last_used_never">nekad</string>
     <string name="new_group">Jauna kopa…</string>
-    <string name="enter_group_name">Ievadīt kopas nosaukumu</string>
     <string name="group">Kopa</string>
     <string name="group_name_hint">Kopas nosaukums</string>
     <string name="preference_manage_groups">Labot kopas</string>
@@ -254,12 +370,32 @@
     <string name="preference_reset_usage_count">Atiestatīt izmantošanas reižu skaitu</string>
     <string name="preference_reset_usage_count_summary">Atiestatīt izmantošanas reižu skaitu ikkatram glabātavas ierakstam</string>
     <string name="preference_reset_usage_count_dialog">Vai tiešām kā visu glabātavas ierakstu izmantošanas reižu skaitu norādīt 0?</string>
-    <string name="note">Piezīme</string>
+    <string name="note" comment="Users can add a note to an entry">Piezīme</string>
     <string name="clear">Notīrīt</string>
+    <string name="dialog_duplicate_entry_title" comment="'Duplicate' is a noun here">Ieraksts atkārtojas</string>
+    <string name="dialog_duplicate_entry_message">Šim ierakstam ir tāds pats nosaukums un izdevējs kā vienaim vai vairākiem citiem esošiem ierakstiem. Kā Tu vēlētos turpināt?</string>
+    <string name="dialog_duplicate_entry_overwrite_title">Izvietot esošo ierakstu/ierakstus</string>
+    <string name="dialog_duplicate_entry_overwrite_subtitle">Aizvietot esošo ierakstu vai ierakstus ar jauno. Šī darbība ir neatgriezeniska</string>
+    <string name="dialog_duplicate_entry_suffix_title">Pievienot piedēkli</string>
+    <string name="dialog_duplicate_entry_suffix_subtitle">Pievienot piedēkli jaunajam ierakstam. Jaunais nosaukums būs: %s</string>
+    <string name="dialog_duplicate_entry_cancel_title">Atcelt saglabāšanu</string>
+    <string name="dialog_duplicate_entry_cancel_subtitle">Ļauj labot ierakstu pirms vēlreiz mēģināt to saglabāt</string>
+    <plurals name="dialog_duplicate_entry_overwrite_dialog_message">
+        <item quantity="zero">Vai tiešām izdzēst %d ierakstu ar šādu nosaukumu:\n\n%s - %s</item>
+        <item quantity="one">Vai tiešām izdzēst %d ierakstu ar šādu nosaukumu:\n\n%s - %s</item>
+        <item quantity="other">Vai tiešām izdzēst %d ierakstus ar šādu nosaukumu:\n\n%s - %s</item>
+    </plurals>
+    <string name="dialog_duplicate_entry_overwrite_dialog_title">Apstiprināt izdzēšanu</string>
+    <string name="pref_haptic_feedback_summary">Likt ierīcēi ietrīcēties, kad kodi tiek atsvaidzināti</string>
+    <string name="pref_haptic_feedback_title">Sajūtu atgriezeniskā saite</string>
     <string name="pref_highlight_entry_title">Izcelt kodus, kad piesit</string>
     <string name="pref_highlight_entry_summary">Padarīt kodus vieglāk atšķiramus citu no cita, īslaicīgi izceļot tos, kad tiem piesit</string>
-    <string name="pref_copy_on_tap_title">Ievietot kodus starpliktuvē, kad piesit</string>
-    <string name="pref_copy_on_tap_summary">Ievietot kodus starpliktuvē, piesitot tiem</string>
+    <string name="pref_groups_multiselect_title">Vairāku kopu atlasīšana</string>
+    <string name="pref_groups_multiselect_summary">Ļaut vienlaicīgi atlasīt vairākas kopas</string>
+    <string name="pref_minimize_on_copy_title">Samazināt pēc ievietošanas starpliktuvē</string>
+    <string name="pref_minimize_on_copy_summary">Samazināt lietotni pēc koda ievietošanas starpliktuvē</string>
+    <string name="pref_copy_behavior_title">Ievietot tekstvienības starpliktuvē</string>
+    <string name="pref_search_behavior_title">Meklēšanas uzvedība</string>
     <string name="pref_pause_entry_title">Iesaldēt kodus pēc piesišanas tiem</string>
     <string name="pref_pause_entry_summary">Apturēt kodu atsvaidzināšanu, kad piesit. Kods netiks atjaunots, kamēr vien tas ir izcelts. Ir nepieciešams ieslēgt iestatījumu \"Izcelt kodus, kad piesit\" vai \"Piesist, lai atklātu\".</string>
     <string name="pin_keyboard_description">Jāievada parole, lai iespējotu PIN tastatūru. Jāņem vērā, ka tā darbojas tikai tad, ja parole sastāv tikai no cipariem</string>
@@ -275,17 +411,23 @@
     <string name="normal_viewmode_title">Ierasts</string>
     <string name="compact_mode_title">Ciešs</string>
     <string name="small_mode_title">Mazs</string>
+    <string name="tiles_mode_title">Mozaīka</string>
     <string name="unknown_issuer">Nezināms izsniedzējs</string>
     <string name="unknown_account_name">Nezināms konta nosaukums</string>
     <plurals name="import_error_dialog">
-        <item quantity="zero">Aegis nevarēja ievietot %d kodu. Spiest uz \"Izklāsts\", lai redzētu vairāk informācijas par kļūdām.</item>
+        <item quantity="zero">Aegis nevarēja ievietot %d kodus. Tie tiks izlaisti. Spiest uz \"Izklāsts\", lai redzētu vairāk informācijas par kļūdām.</item>
         <item quantity="one">Aegis nevarēja ievietot %d kodu. Tas tiks izlaists. Spiest uz \"Izklāsts\", lai redzētu vairāk informācijas par kļūdām.</item>
         <item quantity="other">Aegis nevarēja ievietot %d kodus. Tie tiks izlaisti. Spiest uz \"Izklāsts\", lai redzētu vairāk informācijas par kļūdām.</item>
     </plurals>
-    <string name="unable_to_read_qrcode">Nav iespējams nolasīt un apstrādāt kvadrātkodu</string>
+    <string name="unable_to_process_deeplink">Nevar apstrādāt dziļo saiti</string>
+    <string name="unable_to_read_qrcode_file">Nav iespējams nolasīt un apstrādāt kvadrātkodu no datnes: %s.</string>
+    <string name="unable_to_process_shared_text">Nav iespējams apstrādāt kopīgoto tekstu kā OTP</string>
+    <string name="unable_to_read_qrcode_files">Nav iespējams nolasīt un apstrādāt dažus no kvadrātkodiem. Tiks ievietoti tikai %1$d/%2$d ieraksti.</string>
     <string name="unable_to_generate_qrcode">Nav iespējams izveidot kvadrātkodu</string>
     <string name="select_picture">Atlasīt attēlu</string>
     <string name="select_icon">Atlasīt ikonu</string>
+    <string name="tile_open_vault" comment="label for a quick settings tile that opens the app when tapped">Atvērt glabātavu</string>
+    <string name="tile_open_scanner" comment="label for a quick settings tile that opens the QR code scanner when tapped">Atvērt nolasītāju</string>
     <string name="toggle_checkboxes">Pārslēgt izvēles rūtiņas</string>
     <string name="search">Meklēt</string>
     <string name="channel_name_lock_status">Aizslēga stāvoklis</string>
@@ -310,14 +452,36 @@
     <string name="time_sync_warning_title">Automātiska laika sinhronizēšana</string>
     <string name="time_sync_warning_message">Aegis paļaujas, ka sistēmas laiks sakrīt, lai izveidotu pareizus kodus. Dažu sekunžu nobīde var izraisīt nepareizus kodus. Izskatās, ka šī ierīce nav uzstādīta, lai automātiski sinhronizētu laiku. Vai izdarīt to tagad?</string>
     <string name="time_sync_warning_disable">Nebrīdināt mani. Es zinu, ko es daru.</string>
-    <string name="google_qr_export_unrelated">Atrasts nesaistīts kvadrātkods. Pamēģini pārsāknēt nolasītāju!</string>
+    <string name="google_qr_export_unrelated">Atrasts nesaistīts kvadrātkods. Jāmēģina pārsāknēt nolasītāju.</string>
     <plurals name="google_qr_export_scanned">
-        <item quantity="zero">Nolasīti %d/%d kvadrātkodiem</item>
-        <item quantity="one">Nolasīts %d/%d kvadrātkodiem</item>
-        <item quantity="other">Nolasīti %d/%d kvadrātkodiem</item>
+        <item quantity="zero">Nolasīti %1$d/%2$d kvadrātkodi</item>
+        <item quantity="one">Nolasīts %1$d/%2$d kvadrātkods</item>
+        <item quantity="other">Nolasīti %1$d/%2$d QR attēliem</item>
     </plurals>
-    <string name="google_qr_export_unexpected">Sagaidāms kvadrātkods #%d, bet tā vietā nolasīts #%d</string>
-    <string name="backup_error_bar_message"><b>Glabātavas dublēšana nesen neizdevās</b></string>
+    <string name="google_qr_export_unexpected">Sagaidāms kvadrātkods #%1$d, bet tā vietā nolasīts #%2$d</string>
+    <string name="backup_error_bar_message"><b>Glabātavas rezerves kopēšana nesen neizdevās</b></string>
+    <string name="backup_error_dialog_details" comment="The first parameter is the type of backup (e.g. built-in or Android backup). The second parameter is an elapsed time in the style of 'x seconds/minutes/days ago'.">
+        Nesens rezerves kopijas veidošanas mēģinājums, izmantojot %1$s, neizdevās, jo atgadījās kļūda. Rezerves kopiju tika mēģināts izveidot %2$s. Lūgums pārskatīt rezerves kopēšanas iestatījumus, lai pārliecinātos, ka var sekmīgi veikt rezerves kopiju izveidošanu.
+    </string>
+    <string name="backup_permission_error_dialog_details" comment="The first parameter is the type of backup (e.g. built-in or Android backup). The second parameter is an elapsed time in the style of 'x seconds/minutes/days ago'.">
+        Nesens glabātavas rezerves kopēšanas mēģinājums ar %1$s neizdevās, jo Aegis nebija atļaujas rakstīt rezerves kopijas paredzētajā vietā. Rezerves kopēšana tika mēģināta %2$s. Šī kļūda var atgadīties, ja tika pārvietota vai pāsaukta rezerves kopiju atrašanās vieta vai ja nesen Aegis tika atjaunots no rezerves kopijas. Lūgums atkārtoti iestatīt rezerves kopiju atrašanās vietu.
+    </string>
+    <string name="backup_system_builtin">Aegis iebūvētā automātiskā rezerves kopēšana</string>
+    <string name="backup_system_android">Android mākoņa rezerves kopiju sistēma</string>
+    <string name="backup_reminder_bar_message_with_latest" comment="The parameter is an elapsed time in the style of 'x seconds/minutes/days ago'">
+        Jaunākā rezerves kopija ir novecojusi (%s)
+    </string>
+    <string name="backup_reminder_bar_message">
+        Izmaiņas nav rezerves kopijās
+    </string>
+    <string name="backup_reminder_bar_dialog_title">Izmaiņās nav rezerves kopijās</string>
+    <string name="backup_reminder_bar_dialog_summary">
+        Nesenas glabātavas izmaiņas vēl nav rezerves kopijās. Ir svarīgi laiku pa laikam veidot rezerves kopijas, lai novērstu kontu piekļuves zaudēšanu. Lūgums apsvērt iestatīt automātisko rezerves kopiju veidošanu iestatījumu izvēlnē.
+    </string>
+    <string name="backup_reminder_bar_dialog_accept">Iestatīt rezerves kopiju veidošanu</string>
+    <string name="backup_plaintext_export_warning"><b>Glabātava nesen tika izgūta kā vienkāršs teksts</b></string>
+    <string name="pref_show_plaintext_warning_hint">Vairs nerādīt šo brīdinājumu</string>
+    <string name="backup_plaintext_warning_explanation">Šis brīdinājums tiek parādīts, jo nesen tika izgūta nešifrēta glabātavas kopija. Lai nodrošinātu kodu drošību, ir ieteicams izdzēst šo datni, tiklīdz tā vairs nav nepieciešama.</string>
     <string name="switch_camera">Pārslēgt kameru</string>
     <string name="empty_list">Nav kodu, ko attēlot. Ierakstus var pievienot, piesitot apakšējā labajā stūrī esošajai \"+\" zīmei</string>
     <string name="empty_list_title">Nav atrastu ierakstu</string>
@@ -328,20 +492,25 @@
     <string name="pick_icon">Izvēlēties ikonu</string>
     <string name="uncategorized">Bez kopas</string>
     <string name="done">Izpildīts</string>
-    <plurals name="entries_count">
-        <item quantity="zero">%d / %d ierakstiem</item>
-        <item quantity="one">%d / %d ierakstiem</item>
-        <item quantity="other">%d / %d ierakstiem</item>
+    <plurals name="qr_count">
+        <item quantity="zero">%d / %d kvadrātkodu</item>
+        <item quantity="one">%d / %d kvadrātkods</item>
+        <item quantity="other">%d / %d kvadrātkodi</item>
     </plurals>
     <string name="next">Nākamais</string>
     <string name="previous">Iepriekšējais</string>
-    <string name="transfer_entry">Pārvietot ierakstu</string>
+    <string name="copy_uri">Ievietot URI starpliktuvē</string>
+    <string name="unable_to_copy_uri_to_clipboard">Nebija iespējams ievietot URI starpliktuvē</string>
+    <string name="uri_copied_to_clipboard">URI tika ievietots starpliktuvē</string>
     <string name="transfer_entry_description">Nolasīt šo kvadrātkodu ar autentificētāja lietotni, uz kuru ir vēlme pārvietot šo ierakstu</string>
+    <string name="transfer_entry_brightness">Piesist kvadrātkodam, lai pārslēgtu pilnu ekrāna spilgtumu</string>
+    <string name="google_auth_compatible_transfer_description">Nolasīt šos kvadrātkodus ar Aegis vai Google Authenticator.\n\nIerobežojumu dēļ Google Authenticator lietotnē, ir iekļautas tikai TOTP un HOTP pilnvaras, kam ir izmantots SHA1 un kas veido sešciparu kodus</string>
     <string name="password_strength_very_weak">Ļoti vāja</string>
     <string name="password_strength_weak">Vāja</string>
     <string name="password_strength_fair">Pieņemama</string>
     <string name="password_strength_good">Laba</string>
     <string name="password_strength_strong">Spēcīga</string>
+    <string name="password_strength_unknown">Parole ir pārāk gara stipruma novērtēšanai</string>
     <string name="pref_pin_keyboard_title">Izmantot PIN tastatūru slēgšanas ekrānā</string>
     <string name="pref_pin_keyboard_summary">Iespējot, ja ir vēlme izmantot PIN tastatūru slēgšanas ekrānā. Šī iespēja darbojas tikai ar parolēm, kas sastāv tikai no cipariem</string>
     <string name="title_activity_preferences">Iestatījumi</string>
@@ -350,27 +519,91 @@
     <string name="title_activity_about">Par</string>
     <string name="title_activity_edit_entry">Labot ierakstu</string>
     <string name="title_activity_scan_qr">Nolasīt kvadrātkodu</string>
-    <string name="title_activity_manage_slots">Pārvaldīt atslēgu vietas</string>
     <string name="title_activity_import_entries">Ievietot ierakstus</string>
+    <string name="title_activity_assign_icons">Piešķirt ikonas</string>
+    <string name="title_activity_licenses">Trešo pušu licences</string>
     <string name="dialog_wipe_entries_title">Notīrīt ierakstus</string>
     <string name="dialog_wipe_entries_message">Glabātava jau satur ierakstus. Vai tos noņemt, pirms tiek ievietota šī datne?\n\n<b>Šādi rīkojoties, tiks zaudēta piekļuve pašreizējiem glabātavas ierakstiem.</b></string>
     <string name="dialog_wipe_entries_checkbox">Notīrīt glabātavas saturu</string>
+    <string name="import_from_clipboard_title">Ievietot no starpliktuves</string>
+    <string name="import_from_clipboard_message">Starpliktuvē tika atrasts derīgs otpauth URI.\n\n<b>Nosaukums</b>:%1$s\n<b>Izdevējs</b>: %2$s\n\nVai izmantot to, lai aizpildītu šo ievadi?</string>
     <string name="panic_trigger_ignore_toast">Aegis saņēma trauksmes izsaukumu, bet iestatījums ir atspējots, tādēļ tas netiek ņemts vērā</string>
     <string name="pref_panic_trigger_title">Izdzēst glabātavu pēc trauksmes izsaukuma</string>
     <string name="pref_panic_trigger_summary">Izdzēst glabātavu, kad trauksmes izsaukums ir saņemts no Ripple</string>
-    <string name="importer_help_2fas">Padot 2FAS Authenticator izdošanas datni.</string>
-    <string name="importer_help_aegis">Padot Aegis izdošanas/rezerves kopijas datni.</string>
-    <string name="importer_help_authenticator_plus">Padot Authenticator Plus izdošanas datni, kas ir iegūta ar <b>Iestatījumi -&gt; Dublēšana un atjaunošana -&gt; Izdot kā tekstu un HTML</b>.</string>
-    <string name="importer_help_authy">Padot <b>/data/data/com.authy.authy/shared_prefs/com.authy.storage.tokens.authenticator.xml</b> kopiju, kas atrodas iekšējās krātuves Authy mapē.</string>
-    <string name="importer_help_andotp">Padot andOTP izdošanas/rezerves kopijas datni.</string>
-    <string name="importer_help_freeotp">Padot <b>/data/data/org.fedorahosted.freeotp/shared_prefs/tokens.xml</b> kopiju, kas atrodas iekšējās krātuves FreeOTP mapē.</string>
-    <string name="importer_help_freeotp_plus">Padot FreeOTP+ izdošanas datni.</string>
-    <string name="importer_help_google_authenticator">Padot <b>/data/data/com.google.android.apps.authenticator2/databases/databases</b> kopiju, kas atrodas iekšējās krātuves Google Authenticator mapē.</string>
-    <string name="importer_help_microsoft_authenticator">Padot <b>/data/data/com.azure.authenticator/databases/PhoneFactor</b> kopiju, kas atrodas iekšējās krātuves Microsoft Authenticator mapē.</string>
-    <string name="importer_help_plain_text">Padot tīra teksta datni, kuras katra līnija satur vienu Google Authenticator URI.</string>
-    <string name="importer_help_steam">Padot <b>/data/data/com.valvesoftware.android.steam.community/files/Steamguard-*.json</b> kopiju, kas atrodas iekšējās krātuves Steam mapē.</string>
-    <string name="importer_help_totp_authenticator">Padot TOTP Authenticator izdošanas datni.</string>
-    <string name="importer_help_winauth">Padot WinAuth izdošanas datni.</string>
+    <string name="import_vault">Ievietot Aegis glabātavu</string>
+    <string name="import_vault_hint">Ir vēlēšanās ievietot no citas 2FA lietotnes? Vispirms jāpabeidz uzstādīšana un tad jādodas uz iestatījumu izvēlni.</string>
+    <plurals name="import_duplicate_toast">
+        <item quantity="zero">Noņemta atzīme %d iespējamiem dublikātiem. Lūgums pārskatīt ierakstu sarakstu.</item>
+        <item quantity="one">Noņemta atzīme %d iespējamam dublikātam. Lūgums pārskatīt ierakstu sarakstu.</item>
+        <item quantity="other">Noņemta atzīme %d iespējamiem dublikātiem. Lūgums pārskatīt ierakstu sarakstu.</item>
+    </plurals>
+    <string name="importer_help_2fas">Jāiesniedz 2FAS Authenticator izgūšanas datne.</string>
+    <string name="importer_help_aegis">Jāiesniedz Aegis izgūšanas / rezerves kopijas datne.</string>
+    <string name="importer_help_authenticator_plus">Jāiesniedz Authenticator Plus izgūšanas datne, kas ir iegūta ar <b>Iestatījumi -&gt; Rezerves kopēšana un atjaunošana -&gt; Izgūt kā tekstu un HTML</b>.</string>
+    <string name="importer_help_authy">Jāiesniedz <b>/data/data/com.authy.authy/shared_prefs/com.authy.storage.tokens.authenticator.xml</b> kopija, kas atrodas iekšējās krātuves Authy mapē.</string>
+    <string name="importer_help_andotp">Jāiesniedz andOTP izgūšanas / rezerves kopijas datne.</string>
+    <string name="importer_help_bitwarden">Jāiesniedz Bitwarden izgūšanas / rezerves kopijas datne. Šifrētas datnes netiek atbalstītas.</string>
+    <string name="importer_help_battle_net_authenticator">Jāiesniedz <b>/data/data/com.blizzard.messenger/shared_prefs/com.blizzard.messenger.authenticator_preferences.xml</b> kopija, kas atrodas iekšējās krātuves Battle.net Authenticator mapē.</string>
+    <string name="importer_help_duo">Jāiesniedz <b>/data/data/com.duosecurity.duomobile/files/duokit/accounts.json</b> kopija, kas atrodas iekšējās krātuves DUO mapē.</string>
+    <string name="importer_help_ente_auth">Jāiesniedz Ente Auth izgūšanas datne. Pašlaik tiek atbalstītas tikai nešifrētas datnes.</string>
+    <string name="importer_help_freeotp">FreeOTP 2: jāpadod rezerves kopijas datne.\nFreeOTP 1.x: jāpadod <b>/data/data/org.fedorahosted.freeotp/shared_prefs/tokens.xml</b> kopija, kas atrodas iekšējās krātuves FreeOTP mapē.</string>
+    <string name="importer_help_freeotp_plus">Jāiesniedz FreeOTP+ izgūšanas datne.</string>
+    <string name="importer_warning_title_freeotp2">FreeOTP 2 saderība</string>
+    <string name="importer_warning_message_freeotp2">Pastāv vairākas FreeOTP 2 nepilnības, kas var beigties ar bojātām rezerves kopijām. Aegis mēģinās saglābt pēc iespējas vairāk ierakstu, bet ir iespējams, ka dažus no tiem vai pat visus neizdodas ievietot.</string>
+    <string name="importer_help_google_authenticator"><b>Tek atbalstītas tikai datubāzes datnes no Goole Authenticator v5.10 un agrāka</b>.\n\nJāiesniedz kopija no <b>/data/data/com.google.android.apps.authenticator2/databases/databases</b>, kas atrodas iekšējās krātuves Google Authenticator mapē.</string>
+    <string name="importer_help_microsoft_authenticator">Jāiesniedz <b>/data/data/com.azure.authenticator/databases/PhoneFactor</b> kopija, kas atrodas iekšējās krātuves Microsoft Authenticator mapē.</string>
+    <string name="importer_help_plain_text">Jāiesniedz vienkārša teksta datne, kuras katra līnija satur vienu Google Authenticator URI.</string>
+    <string name="importer_help_proton_authenticator">Jānorāda Proton Authenticator izguves datne (.json), kas iegūta <b>Settings -&gt; Export</b>.</string>
+    <string name="importer_help_steam"><b>Steam v3.0 un jaunāks netiek atbalstīts</b>. Jāiesniedz <b>/data/data/com.valvesoftware.android.steam.community/files/Steamguard-*.json</b> kopija, kas atrodas iekšējās krātuves Steam mapē.</string>
+    <string name="importer_help_stratum">Jāiesniedz Stratum izgūšanas datne, kas ir iegūstama <b>Iestatījumi -&gt; Rezerves kopijas -&gt; Dublēt šifrētā datnē (ieteicams)</b>.</string>
+    <string name="importer_help_totp_authenticator">Jāiesniedz TOTP Authenticator izgūšanas datne.</string>
+    <string name="importer_help_winauth">Jāiesniedz WinAuth izgūšanas datne.</string>
+    <string name="import_assign_icons_dialog_title">Piešķirt ikonas</string>
+    <string name="import_assign_icons_dialog_text">Vai piešķirt ikonas ievietotajiem ierakstiem?</string>
+    <string name="importer_encrypted_exception_google_authenticator">Tika izlaists šifrēts ieraksts: %s</string>
     <string name="importer_help_direct">Ievietot ierakstus uzreiz no %s. Tam ir nepieciešams, lai lietotne ir uzstādīta šajā ierīcē un lai Aegis ir nodrošināta saknes piekļuve.</string>
     <string name="groups">Kopas</string>
+    <string name="pref_focus_search">Izcelt meklēšanas lauku pēc lietotnes sāknēšanas</string>
+    <string name="pref_focus_search_summary">Izcelt meklēšanas lauku uzreiz pēc lietotnes atvēršanas.</string>
+    <string name="pref_grouping_halves">Puses</string>
+    <string name="pref_grouping_none">Bez kopām</string>
+    <string name="pref_grouping_size_two">Kopas no 2</string>
+    <string name="pref_grouping_size_three">Kopas no 3</string>
+    <string name="pref_grouping_size_four">Kopas no 4</string>
+    <string name="pref_copy_behavior_never">Nekad</string>
+    <string name="pref_copy_behavior_single_tap">Viens piesitiens</string>
+    <string name="pref_copy_behavior_double_tap">Divkāršs piesitiens</string>
+    <string name="pref_account_name_position_hidden">Paslēpts</string>
+    <string name="pref_account_name_position_end">Aiz izdevēja</string>
+    <string name="pref_account_name_position_below">Zem izdevēja</string>
+    <plurals name="time_elapsed_seconds" tools:ignore="UnusedResources">
+        <item quantity="zero">pirms %d sekundēm</item>
+        <item quantity="one">pirms %d sekundes</item>
+        <item quantity="other">Pirms %d sekundēm</item>
+    </plurals>
+    <plurals name="time_elapsed_minutes" tools:ignore="UnusedResources">
+        <item quantity="zero">Pirms %d minūtēm</item>
+        <item quantity="one">Pirms %d minūtes</item>
+        <item quantity="other">Pirms %d minūtēm</item>
+    </plurals>
+    <plurals name="time_elapsed_hours" tools:ignore="UnusedResources">
+        <item quantity="zero">Pirms %d stundām</item>
+        <item quantity="one">Pirms %d stundas</item>
+        <item quantity="other">Pirms %d stundām</item>
+    </plurals>
+    <plurals name="time_elapsed_days" tools:ignore="UnusedResources">
+        <item quantity="zero">Pirms %d dienām</item>
+        <item quantity="one">Pirms %d dienas</item>
+        <item quantity="other">Pirms %d dienām</item>
+    </plurals>
+    <plurals name="time_elapsed_years" tools:ignore="UnusedResources">
+        <item quantity="zero">Pirms %d gadiem</item>
+        <item quantity="one">Pirms %d gada</item>
+        <item quantity="other">Pirms %d gadiem</item>
+    </plurals>
+    <plurals name="dropdown_checkboxes_default_count">
+        <item quantity="zero">Atlasīti %d vienumu</item>
+        <item quantity="one">Atlasīts %d vienums</item>
+        <item quantity="other">Atlasīti %d vienumi</item>
+    </plurals>
 </resources>

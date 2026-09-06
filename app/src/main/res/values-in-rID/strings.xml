@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="action_settings">Pengaturan</string>
     <string name="action_about">Tentang</string>
-    <string name="action_import">Impor</string>
     <string name="action_delete">Hapus</string>
-    <string name="action_transfer">Kirim</string>
-    <string name="action_edit_icon">Mengedit ikon</string>
-    <string name="action_reset_usage_count">Setel ulang jumlah penggunaan</string>
-    <string name="action_reset_usage_count_dialog">Apakah Anda yakin ingin mengatur jumlah penggunaan entri ini menjadi 0?</string>
-    <string name="action_default_icon">Pulihkan ikon baku</string>
+    <string name="action_transfer">Transfer</string>
+    <string name="action_edit_icon">Ubah ikon</string>
+    <string name="action_reset_usage_count">Reset jumlah penggunaan</string>
+    <string name="action_reset_usage_count_dialog">Apakah Anda yakin ingin mengatur jumlah penggunaan entri ini ke 0?</string>
+    <string name="action_default_icon">Pulihkan ikon bawaan</string>
     <string name="discard">Buang</string>
     <string name="save">Simpan</string>
+    <string name="all">Semua</string>
     <string name="issuer">Penerbit</string>
+    <string name="yandex_pin">PIN (4–16 digit)</string>
+    <string name="motp_pin">PIN (4 digit)</string>
     <string name="suggested">Disarankan</string>
     <string name="usage_count">Jumlah penggunaan</string>
-    <string name="settings">Preferensi</string>
+    <string name="warning">Peringatan</string>
     <string name="pref_cat_appearance_app">Aplikasi</string>
     <string name="pref_cat_appearance_entries">Entri</string>
     <string name="pref_cat_backups_android">Android</string>
@@ -27,66 +29,135 @@
     <string name="pref_section_security_summary">Menyesuaikan enkripsi, buka kunci dengan biometrik, penguncian otomatis, dan pengaturan keamanan lainnya.</string>
     <string name="pref_section_import_export_title">Impor &amp; Ekspor</string>
     <string name="pref_section_import_export_summary">Impor cadangan dari Aegis atau aplikasi autentikasi lainnya. Buat ekspor manual dari brankas Aegis.</string>
+    <string name="pref_section_audit_log_title">Log audit</string>
+    <string name="pref_section_audit_log_summary">Temukan daftar semua peristiwa penting yang dilaporkan yang terjadi di dalam aplikasi.</string>
     <string name="pref_section_backups_title">Cadangan</string>
-    <string name="pref_section_backups_summary">Atur pencadangan otomatis ke lokasi yang Anda pilih atau aktifkan partisipasi di sistem pencadangan Android.</string>
+    <string name="pref_section_backups_summary">Atur pencadangan otomatis ke lokasi yang Anda pilih atau aktifkan partisipasi di sistem pencadangan awan Android.</string>
     <string name="pref_section_icon_packs">Paket Ikon</string>
     <string name="pref_section_icon_packs_summary">Kelola dan impor paket ikon</string>
     <string name="pref_select_theme_title">Tema</string>
+    <string name="pref_dynamic_colors_title">Warna dinamis</string>
+    <string name="pref_dynamic_colors_summary">Terapkan lapisan berdasarkan warna tema Android Anda</string>
     <string name="pref_view_mode_title">Mode tampilan</string>
     <string name="pref_lang_title">Bahasa</string>
+    <string name="pref_show_icons_title">Tampilkan ikon</string>
+    <string name="pref_show_icons_summary">Tampilkan ikon di samping setiap entri</string>
     <string name="pref_code_group_size_title">Pengelompokan digit kode</string>
-    <string name="pref_code_group_size_summary">Tampilkan kode dalam pengelompokan 2 digit, bukan pengelompokan 3 digit</string>
-    <string name="pref_account_name_title">Tampilkan nama akun</string>
-    <string name="pref_account_name_summary">Aktifkan ini untuk menampilkan nama akun di samping penerbit</string>
-    <string name="pref_timeout_title">Waktu habis</string>
-    <string name="pref_timeout_summary">Kunci brankas secara otomatis setelah %1$s detik tidak aktif</string>
-    <string name="pref_slots_title">Slot kunci</string>
-    <string name="pref_slots_summary">Kelola daftar kunci yang dapat mendekripsi brankas</string>
-    <string name="pref_import_file_title">Impor berkas</string>
+    <string name="pref_code_group_size_summary">Pilih jumlah digit untuk mengelompokkan kode berdasarkan</string>
+    <string name="pref_account_name_position_title">Tampilkan nama akun</string>
+    <string name="pref_show_next_code_title">Tampilkan kode selanjutnya</string>
+    <string name="pref_show_next_code_summary">Hasilkan dan tampilkan kode berikutnya lebih awal</string>
+    <string name="pref_expiration_state_title">Tunjukkan kapan kode akan kedaluwarsa</string>
+    <string name="pref_expiration_state_summary">Ubah warna kode dan buat kode tersebut berkedip ketika akan kedaluwarsa</string>
+    <string name="pref_expiration_state_fallback">Ubah warna kode saat kode akan kedaluwarsa</string>
+    <string name="pref_shared_issuer_account_name_title">Hanya tampilkan nama akun jika diperlukan</string>
+    <string name="pref_shared_issuer_account_name_summary">Hanya tampilkan nama akun ketika mereka memiliki penerbit yang sama. Nama akun lain akan disembunyikan.</string>
+    <string name="pref_account_name_position_summary_override">Pengaturan ini digantikan oleh mode tampilan kotak. Nama akun akan ditampilkan di bawah penerbit.</string>
+    <string name="pref_import_file_title">Impor dari berkas</string>
     <string name="pref_import_file_summary">Impor token dari berkas</string>
-    <string name="pref_android_backups_title">Partisipasi di sistem pencadangan Android</string>
-    <string name="pref_android_backups_summary">Bolehkan sistem pencadangan Android untuk menyertakan brankas Aegis di pencadangan mereka. Ini hanya didukung untuk brankas terenkripsi.</string>
+    <string name="pref_android_backups_title">Pencadangan awan Android</string>
+    <string name="pref_android_backups_summary">Izinkan sistem pencadangan awan Android untuk menyertakan brankas Aegis dalam pencadangannya. Ini hanya didukung untuk brankas terenkripsi.</string>
+    <string name="pref_android_backups_hint"><i>Pencadangan perangkat-ke-perangkat (D2D) selalu diizinkan, terlepas dari pengaturan di atas.</i></string>
     <string name="pref_backups_title">Otomatis cadangkan brankas</string>
-    <string name="pref_backups_summary">Secara otomatis membuat cadangan vault di penyimpanan eksternal saat ada perubahan. Ini hanya didukung untuk brankas terenkripsi.</string>
-    <string name="pref_backups_location_title">Direktori untuk cadangan berkas</string>
+    <string name="pref_backups_summary">Secara otomatis membuat cadangan brankas pada penyimpanan eksternal ketika ada perubahan. Ini hanya didukung untuk brankas terenkripsi.</string>
+    <string name="pref_backups_reminder_title">Pengingat pencadangan</string>
+    <string name="pref_backups_reminder_summary">Tampilkan pengingat untuk mencadangkan cadangan jika Anda belum mencadangkan perubahan terakhir.</string>
+    <string name="pref_backups_reminder_dialog_title">Menonaktifkan pengingat pencadangan</string>
+    <string name="pref_backups_reminder_dialog_summary">Dengan menonaktifkan pengingat ini, Aegis tidak akan memberi tahu Anda apakah Anda memiliki perubahan yang belum dicadangkan atau tidak. Hal ini membuat Anda berisiko kehilangan akses ke token Anda. Apakah Anda yakin ingin menonaktifkan pengingat ini?</string>
+    <string name="pref_backups_versioning_strategy_title">Strategi pencadangan</string>
+    <string name="pref_backups_versioning_strategy_keep_x_versions">Simpan beberapa versi</string>
+    <string name="pref_backups_versioning_strategy_single_backup">Pencadangan tunggal</string>
+    <string name="pref_backups_versioning_strategy_single_backup_warning">Strategi pencadangan yang dipilih tidak dapat diandalkan dan tidak direkomendasikan. Kegagalan pencadangan tunggal dapat menyebabkan kehilangan satu-satunya cadangan Anda.</string>
+    <string name="pref_backups_versioning_strategy_dialog_title">Pilih strategi pencadangan</string>
+    <string name="pref_backups_location_title">Lokasi pencadangan</string>
     <string name="pref_backups_location_summary">Cadangan akan disimpan di</string>
-    <string name="pref_backups_trigger_title">Perintah pencadangan</string>
-    <string name="pref_backups_trigger_summary">Perintah pencadangan secara manual</string>
-    <string name="pref_backups_versions_title">Nomor versi untuk disimpan</string>
+    <string name="pref_backup_location_summary">Cadangan akan disimpan di</string>
+    <string name="pref_backups_trigger_title">Jalankan pencadangan</string>
+    <string name="pref_backups_trigger_summary">Jalankan pencadangan secara manual</string>
+    <string name="pref_backups_versions_title">Banyaknya versi yang harus disimpan</string>
+    <string name="pref_backups_versions_infinite">\u221E</string>
     <plurals name="pref_backups_versions_summary">
-        <item quantity="other">Simpan %1$d versi cadangan</item>
+        <item quantity="other">Simpan versi %1$d dari cadangan</item>
     </plurals>
+    <string name="pref_backups_versions_infinite_summary">Menyimpan cadangan dalam jumlah tak terbatas</string>
     <string name="pref_import_app_title">Impor dari aplikasi</string>
     <string name="pref_import_app_summary">Impor token dari aplikasi (membutuhkan akses root)</string>
     <string name="pref_export_title">Ekspor</string>
     <string name="pref_export_summary">Ekspor ke brankas</string>
     <string name="pref_password_reminder_title">Pengingat kata sandi</string>
-    <string name="pref_password_reminder_summary">Tampilkan pengingat sesekali untuk memasukkan kata sandi, agar Anda tidak lupa.</string>
+    <string name="pref_google_auth_export_title">Ekspor untuk Google Authenticator</string>
+    <string name="pref_google_auth_export_descriptor">Membuat kode QR ekspor yang kompatibel dengan Google Authenticator</string>
+    <string name="pref_google_auth_export_no_data">Tidak ada data untuk diekspor</string>
+    <plurals name="pref_google_auth_export_incompatible_entries">
+        <item quantity="other">Melewatkan %d entri yang tidak kompatibel</item>
+    </plurals>
+    <string name="pref_password_reminder_summary">Tampilkan pengingat %s untuk memasukkan kata sandi agar Anda tidak lupa.</string>
+    <string name="pref_password_reminder_summary_disabled">Dinonaktifkan</string>
     <string name="pref_secure_screen_title">Keamanan layar</string>
     <string name="pref_secure_screen_summary">Blokir tangkapan layar dan upaya lain untuk menangkap layar di dalam aplikasi</string>
-    <string name="pref_tap_to_reveal_title">Sentuh untuk melihat</string>
-    <string name="pref_tap_to_reveal_summary">Token akan disembunyikan secara default. Sentuh token untuk melihat kode.</string>
-    <string name="pref_tap_to_reveal_time_title">Batas waktu sentuh untuk melihat</string>
-    <string name="pref_auto_lock_title">Kunci Otomatis</string>
+    <string name="pref_tap_to_reveal_title">Ketuk untuk menampilkan</string>
+    <string name="pref_tap_to_reveal_summary">Token akan disembunyikan secara bawaan. Ketuk pada token untuk menampilkan kode.</string>
+    <string name="pref_tap_to_reveal_time_title">Batas waktu ketuk untuk menampilkan</string>
+    <string name="pref_auto_lock_title">Kunci otomatis</string>
     <string name="pref_auto_lock_summary">Kapan %s</string>
     <string name="pref_auto_lock_summary_disabled">Dinonaktifkan</string>
-    <string name="pref_auto_lock_prompt">Secara otomatis mengunci Aegis saat</string>
-    <string name="pref_auto_lock_type_back_button">Tombol kembali ditekan</string>
+    <string name="pref_auto_lock_prompt">Otomatis mengunci Aegis saat</string>
+    <string name="pref_auto_lock_type_back_button">Tombol kembali sudah ditekan</string>
     <string name="pref_auto_lock_type_minimize">Aplikasi diminimalkan</string>
     <string name="pref_auto_lock_type_device_lock">Perangkat terkunci</string>
+    <string name="pref_backup_password_category">Cadangan &amp; Ekspor</string>
+    <string name="pref_backup_password_title">Pisahkan kata sandi untuk cadangan &amp; ekspor</string>
+    <string name="pref_backup_password_summary">Jika diaktifkan, kata sandi yang digunakan untuk membuka aplikasi tidak bisa digunakan kembali untuk mendekripsikan cadangan dan ekspor.</string>
+    <string name="pref_backup_password_change_title">Ubah kata sandi untuk cadangan &amp; ekspor</string>
+    <string name="pref_backup_password_change_summary">Atur kata sandi baru yang akan digunakan untuk mengenkripsi brankas ketika pencadangan dan ekspor.</string>
     <string name="pref_encryption_title">Enkripsi</string>
     <string name="pref_encryption_summary">Enkripsi brankas dan buka dengan kata sandi atau biometrik</string>
     <string name="pref_biometrics_title">Buka kunci dengan biometrik</string>
     <string name="pref_biometrics_summary">Izinkan otentikasi biometrik untuk membuka brankas</string>
+    <string name="pref_search_behavior_summary">Telusuri melalui: %s</string>
+    <string name="pref_search_behavior_prompt">Cari di salah satu kolom berikut</string>
+    <string name="pref_search_behavior_type_name">Nama</string>
+    <string name="pref_search_behavior_type_issuer">Penerbit</string>
+    <string name="pref_search_behavior_type_note">Catatan</string>
+    <string name="pref_search_behavior_type_groups">Grup</string>
     <string name="pref_set_password_title">Ganti kata sandi</string>
     <string name="pref_set_password_summary">Atur kata sandi baru untuk digunkan membuka brankas Anda</string>
+    <string name="no_events_title">Tidak ada kejadian yang dilaporkan</string>
+    <string name="no_events_description">Tidak ada kejadian penting yang dilaporkan dalam aplikasi ini</string>
+    <string name="event_title_vault_unlocked">Brankas terbuka</string>
+    <string name="event_description_vault_unlocked">Brankas telah berhasil dibuka</string>
+    <string name="event_title_backup_created">Cadangan dibuat</string>
+    <string name="event_description_backup_created">Cadangan brankas telah berhasil dibuat</string>
+    <string name="event_title_android_backup_created">Cadangan dibuat oleh Android</string>
+    <string name="event_description_android_backup_created">Cadangan brankas telah berhasil dibuat oleh Android</string>
+    <string name="event_title_vault_exported">Brankas diekspor</string>
+    <string name="event_description_vault_exported">Salinan brankas telah diekspor</string>
+    <string name="event_title_entry_shared">Entri dibagikan</string>
+    <string name="event_description_entry_shared">Sebuah entri telah dibagikan</string>
+    <string name="event_title_vault_unlock_failed_password">Gagal membuka kunci brankas (kata sandi)</string>
+    <string name="event_description_vault_unlock_failed_password">Upaya membuka kunci brankas dengan kata sandi gagal</string>
+    <string name="event_title_vault_unlock_failed_biometrics">Gagal membuka kunci brankas (biometrik)</string>
+    <string name="event_description_vault_unlock_failed_biometrics">Upaya membuka kunci brankas dengan biometrik gagal</string>
+    <string name="event_unknown">Jenis peristiwa tidak diketahui</string>
+    <string name="audit_log_entry_deleted">(terhapus)</string>
+    <string name="today_at_time">Hari ini pada %1$s</string>
+    <string name="day_of_week_at_time">Hari %1$s pada %2$s</string>
     <string name="export_encrypted">Enkripsi brankas</string>
     <string name="export_help">Tindakan ini akan mengekspor brankas dari penyimpanan internal Aegis. Pilih format yang Anda inginkan untuk ekspor:</string>
     <string name="export_warning_unencrypted">Anda akan mengekspor salinan tidak terenkripsi dari brankas Aegis Anda. <b>Ini tidak disarankan</b>.</string>
-    <string name="export_warning_accept">Saya mengerti risikonya</string>
+    <string name="export_warning_password">Ekspor dienkripsi menggunakan kata sandi terpisah yang dikonfigurasikan dalam pengaturan Keamanan.</string>
+    <string name="understand_risk_accept">Saya mengerti risikonya</string>
     <string name="export_format_aegis">Aegis (.JSON)</string>
     <string name="export_format_google_auth_uri">File teks (*.txt)</string>
+    <string name="export_format_html">Halaman web (.HTML)</string>
     <string name="export_format_hint">Format ekspor</string>
+    <string name="export_all_groups">Ekspor semua grup</string>
+    <string name="export_choose_groups">Pilih grup mana yang akan diekspor</string>
+    <plurals name="export_groups_selected_count">
+        <item quantity="other">%d kelompok yang dipilih</item>
+    </plurals>
+    <string name="export_no_groups_selected">Tidak ada grup yang dipilih untuk diekspor</string>
+    <string name="export_html_title" comment="The title of an HTML export document">Ekspor Aegis Authenticator</string>
     <string name="choose_authentication_method">Keamanan</string>
     <string name="authentication_method_explanation">Aegis adalah aplikasi 2FA yang berfokus pada keamanan. Token disimpan dalam brankas, yang secara opsional dapat dienkripsi dengan kata sandi pilihan Anda. Jika penyerang mendapatkan file brankas terenkripsi Anda, mereka tidak akan dapat mengakses konten tanpa mengetahui kata sandinya.\n\nKami telah memilih opsi yang menurut kami paling sesuai untuk perangkat Anda.</string>
     <string name="authentication_method_none">Tidak ada</string>
@@ -96,11 +167,8 @@
     <string name="authentication_method_password_explanation">Peringatan: Jika Anda lupa kata sandi, Anda akan kehilangan akses ke token Anda secara permanen. Tidak ada cara untuk memulihkan nya tanpa kata sandi.</string>
     <string name="authentication_method_biometrics">Biometrik</string>
     <string name="authentication_method_biometrics_description">Selain kata sandi, biometrik yang terdaftar di perangkat ini, seperti sidik jari atau wajah Anda, dapat digunakan untuk membuka brankas.</string>
-    <string name="authentication_method_set_password">Kata Sandi</string>
-    <string name="authentication_enter_password">Masukkan kata sandi Anda</string>
     <string name="authentication">Buka brankas</string>
-    <!-- The newline (\n) on the following line is just for aesthetic purposes !-->
-    <string name="authentication_multiline">Buka\nbrankas</string>
+    <string name="authentication_multiline" comment="The newline in the middle is used for aesthetic purposes">Buka\nbrankas</string>
     <string name="auth_use_biometrics">Atau sentuh di sini untuk menggunakan <font fgcolor="#FF0D86C1">biometrik</font></string>
     <string name="set_password">Masukkan kata sandi</string>
     <string name="set_group">Masukkan nama grup</string>
@@ -108,16 +176,25 @@
     <string name="set_password_confirm">Konfirmasi kata sandi</string>
     <string name="invalid_password">Kata sandi salah</string>
     <string name="invalidated_biometrics">Perubahan di pengaturan keamanan perangkat Anda terdeteksi. Silakan pergi ke \"Aegis-&gt; Pengaturan -&gt; Keamanan -&gt; Kunci Biometrik\" untuk menonaktifkan dan mengaktifkan kembali kunci biometrik.</string>
-    <string name="password_reminder">Masukkan kata sandi Anda. Kami sesekali meminta Anda melakukan ini agar tidak melupakannya.</string>
+    <string name="password_reminder">Masukkan kata sandi Anda. Kami sesekali meminta Anda untuk melakukan hal ini agar Anda tidak lupa.</string>
+    <string name="password_reminder_dialog_title">Buka kunci biometrik secara default</string>
+    <string name="password_reminder_dialog_message">Kami sesekali meminta Anda untuk memasukkan kata sandi untuk memastikan Anda tidak lupa dan tidak terkunci dari brankas. Setelah memasukkan kata sandi Anda sekali, Aegis akan kembali ke pembukaan kunci biometrik secara default hingga tiba waktunya untuk pengingat kata sandi berikutnya.</string>
+    <string name="password_reminder_freq_never">Tak Pernah</string>
+    <string name="password_reminder_freq_weekly">Setiap Pekan</string>
+    <string name="password_reminder_freq_biweekly">Setiap Dua Pekan</string>
+    <string name="password_reminder_freq_monthly">Setiap Bulan</string>
+    <string name="password_reminder_freq_quarterly">Setiap Triwulan</string>
+    <string name="enter_password_2fas_message">Sepertinya cadangan 2FAS ini dienkripsi. Masukkan kata sandi di bawah.</string>
     <string name="enter_password_authy_message">Sepertinya token Authy Anda dienkripsi. Silakan tutup Aegis, buka Authy dan buka token dengan kata sandi Anda. Sebagai gantinya, Aegis juga dapat mencoba mendekripsi token Authy untuk Anda, jika Anda memasukkan kata sandi di bawah.</string>
+    <string name="enter_password_aegis_title">Mohon masukkan kata sandi pengimporan</string>
     <string name="period_hint">Jangka Waktu (detik)</string>
     <string name="algorithm_hint">Fungsi Hash</string>
     <string name="type">Tipe</string>
     <string name="share">Bagikan</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
+    <string name="undo">Urung</string>
     <string name="unlock">Buka</string>
-    <string name="biometrics">Biometrik</string>
     <string name="advanced">Lanjutan</string>
     <string name="counter">Penghitung</string>
     <string name="digits">Digit</string>
@@ -125,14 +202,17 @@
     <string name="scan">Pindai kode QR</string>
     <string name="scan_image">Pindai gambar</string>
     <string name="enter_manually">Masukkan secara manual</string>
-    <string name="add_biometric">Tambahkan biometrik</string>
-    <string name="add_biometric_slot">Tambahkan slot biometrik</string>
     <string name="set_up_biometric">Atur buka kunci biometrik</string>
-    <string name="add_password">Tambahkan kata sandi</string>
-    <string name="slots_warning">Brankas ini hanya mengamankan sebagian rahasia Anda. Jika Anda mengubah pengaturan otentikasi biometrik perangkat Anda, Anda perlu mengaktifkan kembali buka kunci biometrik di dalam Aegis.</string>
     <string name="copy">Salin</string>
     <string name="edit">Ubah</string>
-    <string name="delete">Hapus</string>
+    <string name="select_all">Pilih semua</string>
+    <string name="assign_icons">Tetapkan ikon</string>
+    <string name="assign_groups">Tetapkan ke grup</string>
+    <string name="assign_groups_dialog_summary">Pilih grup yang ingin Anda tetapkan untuk menetapkan entri yang dipilih.</string>
+    <string name="assign_groups_dialog_dropdown">Pilih grup</string>
+    <string name="favorite" comment="Verb">Favorit</string>
+    <string name="unfavorite" comment="Verb">Hapus dari favorit</string>
+    <string name="error_all_caps">ERROR</string>
     <string name="password">Kata Sandi</string>
     <string name="confirm_password">Konfirmasi Kata Sandi</string>
     <string name="show_password">Tampilkan Kata Sandi</string>
@@ -144,20 +224,27 @@
     <string name="snackbar_authentication_method">Pilih metode otentikasi</string>
     <string name="encrypting_vault">Mengenkripsi brankas</string>
     <string name="exporting_vault">Ekspor brankas</string>
+    <string name="optimizing_icon">Mengoptimasi ikon</string>
+    <string name="optimizing_icon_multiple">Mengoptimasi ikon %1$d/%2$d</string>
     <string name="reading_file">Baca berkas</string>
+    <string name="requesting_root_access">Meminta akses root</string>
+    <string name="analyzing_qr">Menganalisis kode QR</string>
+    <string name="analyzing_qr_multiple">Menganalisis kode QR %1$d/%2$d (%3$s)</string>
+    <plurals name="added_new_entries">
+        <item quantity="other">Menambahkan %d entri baru ke brankas</item>
+    </plurals>
     <string name="importing_icon_pack">Impor paket ikon</string>
     <string name="delete_entry">Hapus entri</string>
     <string name="delete_entry_description">Apakah Anda yakin ingin menghapus entri ini?</string>
-    <string name="delete_entry_explanation">Tindakan ini tidak mematikan 2FA untuk <b>%s</b>. Untuk menghidari kehilangan akses, pastikan bahwa Anda sudah mematikan 2FA atau Anda memiliki cara alternatif untuk menghasilkan kode untuk layanan ini.</string>
+    <string name="delete_entry_explanation">Tindakan ini tidak mematikan 2FA untuk\n<b>%s</b>\n\nUntuk menghidari kehilangan akses, pastikan bahwa Anda sudah mematikan 2FA atau Anda memiliki cara alternatif untuk menghasilkan kode untuk layanan ini.</string>
     <string name="delete_entries">Hapus catatan</string>
     <plurals name="delete_entries_description">
         <item quantity="other">Apakah Anda yakin ingin menghapus %d entri ini?</item>
     </plurals>
     <string name="discard_changes">Batalkan perubahan?</string>
     <string name="discard_changes_description">Perubahan Anda belum disimpan</string>
-    <string name="folder">Direktori</string>
-    <string name="tap_to_select">Sentuh untuk memilih</string>
     <string name="saving_profile_error">Terjadi kesalahan saat menyimpan profil</string>
+    <string name="saving_assign_icons_error">Kesalahan dalam menetapkan ikon</string>
     <string name="welcome">Selamat Datang</string>
     <string name="app_description">Aegis adalah aplikasi 2FA gratis, aman, dan kode sumber terbuka</string>
     <string name="setup_completed">Pengaturan selesai</string>
@@ -166,6 +253,7 @@
     <string name="copied">Disalin</string>
     <string name="errors_copied">Kesalahan menyalin ke Clipboard</string>
     <string name="version_copied">Versi disalin ke Clipboard</string>
+    <string name="error_required_field">Kolom ini wajib diisi</string>
     <string name="error_occurred">Terjadi kesalahan</string>
     <string name="decryption_error">Terjadi kesalahan saat membuka brankas</string>
     <string name="decryption_corrupt_error">Terjadi kesalahan saat membuka brankas. Mungkin file berkas brankas Anda rusak.</string>
@@ -180,6 +268,10 @@
     <string name="disable_encryption_error">Terjadi kesalahan saat menonaktifkan enkripsi</string>
     <string name="backup_successful">Pencadangan sukses dijadwalkan</string>
     <string name="backup_error">Terjadi kesalahan saat membuat cadangan</string>
+    <string name="backup_status_success">Backup terakhir berhasil: %s</string>
+    <string name="backup_status_failed">Backup terakhir gagal: %s</string>
+    <string name="backup_status_none">Belum ada backup yang dibuat</string>
+    <string name="backup_warning_password">Backup dienkripsi menggunakan kata sandi terpisah yang dikonfigurasi dalam pengaturan Keamanan</string>
     <string name="documentsui_error">DocumentsUI sepertinya menghilang dari perangkat Anda. Ini merupakan komponen sistem yang penting yang diperlukan untuk seleksi dan pembuatan dokumen. Jika Anda menggunakan alat untuk &quot;debloat&quot; perangkat Anda, Anda mungkin tidak sengaja menghapusnya dan Anda harus memasang alat tersebut kembali.</string>
     <string name="icon_pack_import_error">Terjadi kesalahan ketika mencoba mengimpor sebuah paket ikon</string>
     <string name="icon_pack_import_exists_error">Paket ikon yang Anda coba impor sudah ada. Apakah Anda ingin menimpanya?</string>
@@ -187,7 +279,6 @@
     <plurals name="icon_pack_info">
         <item quantity="other">%d ikon</item>
     </plurals>
-    <string name="icon_pack">Paket Ikon</string>
     <string name="icon_custom">Kustom</string>
     <string name="permission_denied">Izin ditolak</string>
     <string name="andotp_new_format">Format baru (v0.6.3 atau terbaru) </string>
@@ -196,15 +287,22 @@
     <string name="choose_totpauth_importer">Apakah cadangan otentikasi TOTP ini dienkripsi dengan sandi?</string>
     <string name="choose_application">Pilih aplikasi yang ingin Anda impor</string>
     <string name="choose_theme">Pilih tema yang Anda inginkan</string>
+    <string name="choose_account_name_position">Pilih posisi nama akun yang Anda inginkan</string>
     <string name="choose_view_mode">Pilih mode tampilan yang Anda inginkan</string>
+    <string name="choose_copy_behavior">Pilih perilaku penyalinan yang Anda inginkan</string>
     <string name="parsing_file_error">Terjadi kesalahan saat mengurai berkas</string>
     <string name="file_not_found">Kesalahan: Berkas tidak ditemukan</string>
     <string name="reading_file_error">Terjadi kesalahan saat membaca berkas</string>
     <string name="app_lookup_error">Kesalahan: Aplikasi tidak terpasang</string>
-    <string name="root_error">Kesalahan: tidak bisa mendapatkan akses root</string>
+    <string name="app_version_error">Versi %s yang terinstal tidak didukung. Versi terbaru telah mulai mengenkripsi beberapa file di direktori penyimpanan internal, sehingga Aegis tidak dapat mengakses informasi yang dibutuhkan untuk impor. Mencoba mengimpor kemungkinan besar akan menghasilkan kesalahan. Apakah Anda tetap ingin melanjutkan?</string>
+    <string name="root_error">Eror: Tidak bisa mendapatkan akses root</string>
     <plurals name="imported_entries_count">
         <item quantity="other">%d entri yang diimpor</item>
     </plurals>
+    <plurals name="entries_shown">
+        <item quantity="other">Menampilkan %d entri</item>
+    </plurals>
+    <string name="intro_import_error_title">Terjadi kesalahan saat mengimpor vault</string>
     <string name="import_error_title">Terjadi beberapakali kesalahan saat proses impor</string>
     <string name="exporting_vault_error">Terjadi kesalahan saat mengekspor brankas</string>
     <string name="exported_vault">Data brankas Anda telah diekspor</string>
@@ -213,32 +311,40 @@
     <string name="no_cameras_available">Kamera tidak tersedia</string>
     <string name="read_qr_error">Terjadi kesalahan saat membaca kode QR</string>
     <string name="read_qr_error_phonefactor">Aegis tidak sesuai dengan algoritma 2FA milik Microsoft. Tolong untuk memastikan telah memilih \"Atur aplikasi tanpa notifikasi\" ketika mengonfigurasi 2FA di Office 365.</string>
-    <string name="authentication_method_raw">Raw</string>
+    <string name="partial_google_auth_import">Ekspor Google Authenticator tidak lengkap terdeteksi</string>
+    <string name="partial_google_auth_import_warning">Beberapa kode QR tidak ditemukan dalam impor Anda. Kode berikut ini tidak ditemukan:\n\n<b>%s</b>\n\nAnda dapat melanjutkan mengimpor ekspor parsial ini, tetapi kami sarankan untuk mencoba kembali dengan semua kode QR agar Anda tidak mengambil risiko kehilangan akses ke token apa pun.</string>
+    <string name="missing_qr_code_descriptor">• - Kode QR %d</string>
+    <plurals name="import_partial_export_anyway">
+        <item quantity="other">Tetap mengimpor token %d</item>
+    </plurals>
+    <string name="import_google_auth_failure">Mengimpor ekspor Google Authenticator gagal</string>
+    <string name="unrelated_google_auth_batches_error">Ekspor berisi informasi untuk batch yang tidak terkait. Coba impor 1 batch dalam satu waktu.</string>
+    <string name="no_tokens_can_be_imported">Tidak ada token yang dapat diimpor sebagai hasilnya</string>
     <string name="unlocking_vault">Buka brankas</string>
-    <string name="unlocking_vault_repair">Membuka brankas (memperbaiki)</string>
-    <string name="password_slot_error">Setidaknya Anda harus memiliki satu slot kata sandi</string>
-    <string name="slot_this_device">(perangkat ini)</string>
-    <string name="remove_slot">Hapus slot</string>
-    <string name="remove_slot_description">Apakah Anda yakin ingin menghapus slot ini?</string>
+    <string name="rename_group">Ganti Nama Grup</string>
+    <string name="no_group_selection">Jika sebuah entri bukan merupakan bagian dari grup mana pun, entri tersebut dapat ditemukan di bawah “Tidak ada grup”.</string>
     <string name="remove_group">Hapus kelompok</string>
     <string name="remove_group_description">Apakah Anda yakin ingin menghapus kelompok ini? Catatan dalam kelompok ini akan secara otomatis beralih ke \'Tidak ada kelompok\'.</string>
+    <string name="remove_unused_groups">Menghapus grup yang tidak digunakan</string>
+    <string name="remove_unused_groups_description">Apakah Anda yakin ingin menghapus semua grup yang tidak ditetapkan ke entri?</string>
     <string name="remove_icon_pack">Hapus Paket Ikon</string>
     <string name="remove_icon_pack_description">Apakah Anda yakin ingin menghapus paket ikon ini? Entri yang menggunakan ikon dari paket ini tidak akan terpengaruh.</string>
-    <string name="adding_new_slot_error">Terjadi kesalahan saat menambahkan slot baru:</string>
-    <string name="progressbar_error">Tidak dapat mengatur ulang skala durasi animasi. Progress bar tidak akan terlihat.</string>
     <string name="details">Rincian</string>
+    <string name="show_error_details">Tampilkan detil eror</string>
     <string name="lock">Kunci</string>
     <string name="name">Nama</string>
     <string name="no_group">Tidak ada kelompok</string>
-    <string name="sort">Sortir</string>
+    <string name="sort" comment="Title of the Sort button in the top action bar of the main view">Sortir</string>
     <string name="sort_alphabetically">Penerbit (A ke Z)</string>
     <string name="sort_alphabetically_reverse">Penerbit (Z ke A)</string>
     <string name="sort_alphabetically_name">Akun (A ke Z)</string>
     <string name="sort_alphabetically_name_reverse">Akun (Z ke A)</string>
     <string name="sort_usage_count">Jumlah penggunaan</string>
+    <string name="sort_last_used">Terakhir digunakan</string>
     <string name="sort_custom">Kustom</string>
+    <string name="last_used">Terakhir digunakan</string>
+    <string name="last_used_never">tidak pernah</string>
     <string name="new_group">Kelompok baru…</string>
-    <string name="enter_group_name">Masukkan nama kelompok</string>
     <string name="group">Kelompok</string>
     <string name="group_name_hint">Nama kelompok</string>
     <string name="preference_manage_groups">Ubah kelompok</string>
@@ -246,11 +352,32 @@
     <string name="preference_reset_usage_count">Atur ulang jumlah penggunaan</string>
     <string name="preference_reset_usage_count_summary">Atur ulang jumlah penggunaan setiap entri di brankas Anda</string>
     <string name="preference_reset_usage_count_dialog">Apakah Anda yakin ingin mengatur ulang jumlah penggunaan semua entri di brankas Anda menjadi 0?</string>
+    <string name="note" comment="Users can add a note to an entry">Catatan</string>
     <string name="clear">Bersihkan</string>
+    <string name="dialog_duplicate_entry_title" comment="'Duplicate' is a noun here">Duplikat entri</string>
+    <string name="dialog_duplicate_entry_message">Entri ini memiliki nama dan penerbit yang sama dengan satu atau lebih entri yang sudah ada. Bagaimana Anda ingin melanjutkan?</string>
+    <string name="dialog_duplicate_entry_overwrite_title">Ganti entri yang sudah ada</string>
+    <string name="dialog_duplicate_entry_overwrite_subtitle">Ganti entri yang ada dengan entri baru. Tindakan ini tidak dapat dibatalkan</string>
+    <string name="dialog_duplicate_entry_suffix_title">Tambahkan sufiks</string>
+    <string name="dialog_duplicate_entry_suffix_subtitle">Tambahkan sufiks ke nama entri baru ini. Nama baru akan menjadi: %s</string>
+    <string name="dialog_duplicate_entry_cancel_title">Batalkan penyimpanan</string>
+    <string name="dialog_duplicate_entry_cancel_subtitle">Memungkinkan Anda untuk mengedit entri sebelum mencoba menyimpannya kembali</string>
+    <plurals name="dialog_duplicate_entry_overwrite_dialog_message">
+        <item quantity="other">Apakah Anda yakin ingin menghapus %d entri dengan nama berikut:\n\n%s - %s</item>
+    </plurals>
+    <string name="dialog_duplicate_entry_overwrite_dialog_title">Konfirmasi penghapusan</string>
+    <string name="pref_haptic_feedback_summary">Buat perangkat Anda bergetar saat kode sedang diperbarui</string>
+    <string name="pref_haptic_feedback_title">Umpan balik haptic</string>
     <string name="pref_highlight_entry_title">Sorot token saat disentuh</string>
     <string name="pref_highlight_entry_summary">Jadikan token untuk lebih mudah dibedakan satu sama lain dengan menyorotnya saat disentuh</string>
-    <string name="pref_copy_on_tap_title">Salin token saat disentuh</string>
-    <string name="pref_copy_on_tap_summary">Salin token ke clipboard dengan mengetuknya</string>
+    <string name="pref_groups_multiselect_title">Pilih berganda grup</string>
+    <string name="pref_groups_multiselect_summary">Mengizinkan memilih beberapa grup pada saat yang sama</string>
+    <string name="pref_minimize_on_copy_title">Meminimalkan penyalinan</string>
+    <string name="pref_minimize_on_copy_summary">Meminimalkan aplikasi setelah menyalin token</string>
+    <string name="pref_copy_behavior_title">Menyalin token ke papan klip</string>
+    <string name="pref_search_behavior_title">Aktivitas pencarian</string>
+    <string name="pref_pause_entry_title">Bekukan token ketika disentuh</string>
+    <string name="pref_pause_entry_summary">Hentikan penyegaran otomatis token dengan menyentuh mereka. Token tidak akan diperbarui selama mereka difokuskan. Membutuhkan \"Sorot token saat disentuh\" atau \"Sentuh untuk melihat.\"</string>
     <string name="pin_keyboard_description">Masukkan kata sandi Anda untuk mengaktifkan keyboard PIN. Perhatikan bahwa ini hanya berfungsi jika kata sandi Anda hanya terdiri dari angka</string>
     <string name="pin_keyboard_error">Terjadi kesalahan saat mengaktifkan keyboard PIN</string>
     <string name="pin_keyboard_error_description">Tidak dapat mengatur keyboard PIN. Kata sandi Anda hanya boleh terdiri dari angka.</string>
@@ -264,15 +391,21 @@
     <string name="normal_viewmode_title">Normal</string>
     <string name="compact_mode_title">Ringkas</string>
     <string name="small_mode_title">Kecil</string>
+    <string name="tiles_mode_title">Menu</string>
     <string name="unknown_issuer">Penerbit tidak diketahui</string>
     <string name="unknown_account_name">Nama akun tidak diketahui</string>
     <plurals name="import_error_dialog">
-        <item quantity="other">Aegis tidak dapat mengimpor %d token. Token ini akan dilewati. Tekan \'detail\' untuk melihat informasi lebih lanjut tentang kesalahan tersebut.</item>
+        <item quantity="other">Aegis tidak dapat mengimpor token %d. Token ini akan dilewati. Tekan \'detail\' untuk melihat informasi lebih lanjut tentang kesalahan.</item>
     </plurals>
-    <string name="unable_to_read_qrcode">Tidak dapat membaca dan memproses kode QR</string>
+    <string name="unable_to_process_deeplink">Tidak dapat memproses tautan dalam</string>
+    <string name="unable_to_read_qrcode_file">Tidak dapat membaca dan memproses kode QR dari berkas: %s.</string>
+    <string name="unable_to_process_shared_text">Tidak dapat memproses teks bersama sebagai OTP</string>
+    <string name="unable_to_read_qrcode_files">Tidak dapat membaca dan memproses sebagian kode QR. Hanya entri %1$d/%2$d yang akan diimpor.</string>
     <string name="unable_to_generate_qrcode">Tidak dapat membuat kode QR</string>
     <string name="select_picture">Pilih gambar</string>
     <string name="select_icon">Pilih ikon</string>
+    <string name="tile_open_vault" comment="label for a quick settings tile that opens the app when tapped">Buka brankas</string>
+    <string name="tile_open_scanner" comment="label for a quick settings tile that opens the QR code scanner when tapped">Buka pemindai</string>
     <string name="toggle_checkboxes">Alihkan kotak centang</string>
     <string name="search">Cari</string>
     <string name="channel_name_lock_status">Status kunci</string>
@@ -299,31 +432,55 @@
     <string name="time_sync_warning_disable">Berhenti memperingatkan saya. Saya tahu apa yang saya lakukan.</string>
     <string name="google_qr_export_unrelated">Ditemukan kode QR yang tidak terkait. Coba mulai ulang pemindai.</string>
     <plurals name="google_qr_export_scanned">
-        <item quantity="other">Pindai %d/%d code QR</item>
+        <item quantity="other">Kode QR yang dipindai %1$d/%2$d</item>
     </plurals>
-    <string name="google_qr_export_unexpected">Kode QR yang ditemukan #%d, namun hanya #%d yang dipindai</string>
+    <string name="google_qr_export_unexpected">Kode QR yang seharusnya #%1$d, tetapi yang dipindai justru #%2$d</string>
     <string name="backup_error_bar_message"><b>Pencadangan Brankas baru-baru ini gagal</b></string>
+    <string name="backup_error_dialog_details" comment="The first parameter is the type of backup (e.g. built-in or Android backup). The second parameter is an elapsed time in the style of 'x seconds/minutes/days ago'.">               Upaya pencadangan brankas terkini menggunakan %1$s gagal karena terjadi kesalahan. Pencadangan telah dilakukan dengan menggunakan %2$s. Periksa pengaturan pencadangan Anda untuk memastikan pencadangan berhasil diselesaikan.</string>
+    <string name="backup_permission_error_dialog_details" comment="The first parameter is the type of backup (e.g. built-in or Android backup). The second parameter is an elapsed time in the style of 'x seconds/minutes/days ago'.">        Upaya pencadangan brankas terkini menggunakan %1$s gagal karena Aegis tidak memiliki izin untuk menulis ke tujuan pencadangan. Pencadangan telah dilakukan dengan menggunakan %2$s. Kesalahan ini dapat terjadi jika Anda memindahkan/mengganti nama tujuan pencadangan atau jika Anda baru saja memulihkan Aegis dari pencadangan. Harap konfigurasikan ulang tujuan pencadangan.</string>
+    <string name="backup_system_builtin">Pencadangan otomatis bawaan Aegis</string>
+    <string name="backup_system_android">Sistem pencadangan awan Android</string>
+    <string name="backup_reminder_bar_message_with_latest" comment="The parameter is an elapsed time in the style of 'x seconds/minutes/days ago'">
+        Backup terakhir sudah kedaluwarsa (%s)
+    </string>
+    <string name="backup_reminder_bar_message">
+        Perubahan tidak di backup
+    </string>
+    <string name="backup_reminder_bar_dialog_title">Perubahan tidak di backup</string>
+    <string name="backup_reminder_bar_dialog_summary">
+        Perubahan terbaru pada brankas belum dicadangkan. Penting untuk melakukan pencadangan secara teratur untuk mencegah kehilangan akses ke akun Anda. Pertimbangkan untuk menyiapkan pencadangan otomatis di menu pengaturan.
+    </string>
+    <string name="backup_reminder_bar_dialog_accept">Menyiapkan cadangan</string>
+    <string name="backup_plaintext_export_warning"><b>Brankas baru-baru ini diekspor dalam teks biasa</b></string>
+    <string name="pref_show_plaintext_warning_hint">Jangan perlihatkan peringatan ini lagi</string>
+    <string name="backup_plaintext_warning_explanation">Peringatan ini ditampilkan karena Anda baru-baru ini mengekspor salinan tidak terenkripsi dari brankas. Untuk menjaga keamanan token Anda, kami merekomendasikan untuk menghapus berkas ini ketika sudah tidak dibutuhkan.</string>
     <string name="switch_camera">Beralih ke Kamera</string>
     <string name="empty_list">Tidak ada kode untuk ditampilkan. Mulai tambahkan catatan dengan menekan tanda plus di pojok kanan bawah</string>
     <string name="empty_list_title">Tidak ada catatan yang ditemukan</string>
     <string name="empty_group_list">Tidak ada kelompok untuk ditampilkan. Tambahkan kelompok di layar penyuntingan sebuah entri</string>
     <string name="empty_group_list_title">Kelompok tidak ditemukan</string>
+    <string name="no_icon_packs">Belum ada paket ikon yang diimpor. Sentuh tanda plus untuk mulai mengimpor. Tip: coba <a href="https://aegis-icons.github.io">aegis-icons</a>.</string>
     <string name="no_icon_packs_title">Tidak ada paket ikon</string>
     <string name="pick_icon">Pilih sebuah ikon</string>
     <string name="uncategorized">Tidak Dikategorikan</string>
     <string name="done">Selesai</string>
-    <plurals name="entries_count">
-        <item quantity="other">%d / %d entri</item>
+    <plurals name="qr_count">
+        <item quantity="other">%d / %d Kode QR</item>
     </plurals>
     <string name="next">Berikutnya</string>
     <string name="previous">Sebelumnya</string>
-    <string name="transfer_entry">Pindahkan entri</string>
+    <string name="copy_uri">Salin URI</string>
+    <string name="unable_to_copy_uri_to_clipboard">Tidak dapat menyalin URI ke clipboard</string>
+    <string name="uri_copied_to_clipboard">URI disalin ke papan klip</string>
     <string name="transfer_entry_description">Pindai kode QR ini dengan aplikasi autentikasi yang ingin Anda pindahkan ke sana entri ini</string>
+    <string name="transfer_entry_brightness">Ketuk kode QR untuk mengatur kecerahan layar penuh</string>
+    <string name="google_auth_compatible_transfer_description">Pindai kode QR ini dengan Aegis atau Google Authenticator.\n\nKarena keterbatasan aplikasi Google Authenticator, hanya token TOTP &amp; HOTP yang menggunakan SHA1 dan menghasilkan kode 6 digit yang disertakan</string>
     <string name="password_strength_very_weak">Sangat lemah</string>
     <string name="password_strength_weak">Lemah</string>
     <string name="password_strength_fair">Baik</string>
     <string name="password_strength_good">Baik</string>
     <string name="password_strength_strong">Kuat</string>
+    <string name="password_strength_unknown">Kata sandi terlalu panjang untuk analisis kekuatan</string>
     <string name="pref_pin_keyboard_title">Gunakan keyboard PIN di layar kunci</string>
     <string name="pref_pin_keyboard_summary">Aktifkan ini jika Anda ingin mengaktifkan keyboard PIN di layar kunci. Ini hanya berfungsi untuk kata sandi numerik</string>
     <string name="title_activity_preferences">Pengaturan</string>
@@ -332,32 +489,78 @@
     <string name="title_activity_about">Tentang</string>
     <string name="title_activity_edit_entry">Sunting entri</string>
     <string name="title_activity_scan_qr">Pindai kode QR</string>
-    <string name="title_activity_manage_slots">Atur slot kunci</string>
     <string name="title_activity_import_entries">Impor entri</string>
+    <string name="title_activity_assign_icons">Tetapkan ikon</string>
+    <string name="title_activity_licenses">Lisensi pihak ketiga</string>
     <string name="dialog_wipe_entries_title">Hapus catatan</string>
     <string name="dialog_wipe_entries_message">Brankas Anda sudah memiliki catatan. Apakah Anda ingin menghapus catatan ini tanpa mengimpor berkas ini?\n\n<b>Jika ini dilakukan, Anda akan kehilangan akses secara permanen ke catatan yang ada di brankas.</b></string>
     <string name="dialog_wipe_entries_checkbox">Hapus konten brankas</string>
     <string name="panic_trigger_ignore_toast">Aegis menerima perintah darurat tetapi pengaturan dinonaktifkan, abaikan</string>
     <string name="pref_panic_trigger_title">Hapus brankas pada perintah darurat</string>
     <string name="pref_panic_trigger_summary">Hapus brankas saat menerima indikasi perintah darurat</string>
+    <string name="import_vault">Mengimpor brankas Aegis</string>
+    <string name="import_vault_hint">Ingin mengimpor dari aplikasi 2FA yang berbeda? Selesaikan penyiapan terlebih dahulu, lalu buka menu pengaturan.</string>
+    <plurals name="import_duplicate_toast">
+        <item quantity="other">Tidak dicentang %d potensi duplikat. Silakan tinjau daftar entri.</item>
+    </plurals>
     <string name="importer_help_2fas">Sediakan sebuah berkas cadangan Autetikator 2FAS.</string>
     <string name="importer_help_aegis">Siapkan berkas ekspor/cadangan Aegis.</string>
     <string name="importer_help_authenticator_plus">Siapkan berkas ekspor Authenticator Plus yang didapat melalui<b>Pengaturan -&gt; Pemulihan &amp; Cadangan -&gt; Ekspor sebagai Teks dan HTML</b>.</string>
     <string name="importer_help_authy">Siapkan salinan
 <b>/data/data/com.authy.authy/shared_prefs/com.authy.storage.tokens.authenticator.xml</b>, yang terletak di direktori penyimpanan internal Authy.</string>
     <string name="importer_help_andotp">Siapkan berkas ekspor/cadangan andOTP.</string>
-    <string name="importer_help_freeotp">Siapkan salinan
-<b>/data/data/org.fedorahosted.freeotp/shared_prefs/tokens.xml</b>, yang terletak di direktori penyimpanan internal FreeOTP.</string>
+    <string name="importer_help_bitwarden">Masukkan berkas cadangan/ekspor Bitwarden. Berkas terenkripsi tidak didukung.</string>
+    <string name="importer_help_battle_net_authenticator">Sediakan salinan <b>/data/data/com.blizzard.messenger/shared_prefs/com.blizzard.messenger.authenticator_preferences.xml</b>, yang terletak di direktori penyimpanan internal Battle.net Authenticator.</string>
+    <string name="importer_help_duo">Siapkan salinan
+<b>/data/data/com.duosecurity.duomobile/files/duokit/accounts.json</b>, yang terletak di direktori penyimpanan internal DUO.</string>
+    <string name="importer_help_ente_auth">Menyediakan file ekspor Ente Auth. Saat ini hanya file yang tidak dienkripsi yang didukung.</string>
+    <string name="importer_help_freeotp">FreeOTP 2: Menyediakan berkas cadangan.\nFreeOTP 1.x: Menyediakan salinan  <b>/data/data/org.fedorahosted.freeotp/shared_prefs/tokens.xml</b>, yang terletak di direktori penyimpanan internal FreeOTP.</string>
     <string name="importer_help_freeotp_plus">Siapkan berkas ekspor FreeOTP+.</string>
-    <string name="importer_help_google_authenticator">Siapkan salinan
-<b>/data/data/com.google.android.apps.authenticator2/databases/databases</b>, yang terletak di direktori penyimpanan internal Google Authenticator.</string>
+    <string name="importer_warning_title_freeotp2">Kompatibilitas FreeOTP 2</string>
+    <string name="importer_warning_message_freeotp2">Ada sejumlah masalah dalam FreeOTP 2 yang dapat mengakibatkan cadangan rusak. Aegis akan mencoba menyelamatkan sebanyak mungkin entri, tetapi ada kemungkinan beberapa atau bahkan semuanya gagal diimpor.</string>
+    <string name="importer_help_google_authenticator"><b>Hanya berkas basis data dari Google Authenticator v5.10 dan sebelumnya yang didukung</b>.\n\nMasukkan salinan dari <b>/data/data/com.google.android.apps.authenticator2/databases/databases</b>, yang tersimpan di direktori penyimpanan internal Google Authenticator.</string>
     <string name="importer_help_microsoft_authenticator">Siapkan salinan
 <b>/data/data/com.azure.authenticator/databases/PhoneFactor</b>, yang terletak di direktori penyimpanan internal Microsoft Authenticator.</string>
     <string name="importer_help_plain_text">Siapkan berkas plain text Google Authenticator dengan URI di setiap baris.</string>
-    <string name="importer_help_steam">Siapkan salinan
-<b>/data/data/com.valvesoftware.android.steam.community/files/Steamguard-*.json</b>, yang terletak di direktori penyimpanan internal Steam.</string>
+    <string name="importer_help_proton_authenticator">Sediakan berkas ekspor Proton Authenticator (.json) yang diperoleh melalui <b>Pengaturan -&gt; Ekspor</b>.</string>
+    <string name="importer_help_steam"><b>Steam v3.0 dan yang lebih baru tidak didukung</b>. Sediakan salinan <b>/data/data/com.valvesoftware.android.steam.community/files/Steamguard-*.json</b>, yang terletak di direktori penyimpanan internal Steam.</string>
+    <string name="importer_help_stratum">Sediakan berkas ekspor Stratum yang diperoleh melalui <b>Pengaturan -&gt; Cadangkan -&gt; Cadangkan ke berkas terenkripsi (disarankan)</b>.</string>
     <string name="importer_help_totp_authenticator">Siapkan berkas ekspor Autentikasi TOTP.</string>
     <string name="importer_help_winauth">Siapkan berkas ekspor WinAuth.</string>
+    <string name="import_assign_icons_dialog_title">Tetapkan ikon</string>
+    <string name="import_assign_icons_dialog_text">Apakah Anda ingin menetapkan ikon ke entri yang diimpor?</string>
+    <string name="importer_encrypted_exception_google_authenticator">Entri terenkripsi dilewati: %s</string>
     <string name="importer_help_direct">Impor entri langsung dari %s. Ini membutuhkan aplikasi untuk diinstal pada perangkat ini dan untuk akses root diberikan ke Aegis.</string>
     <string name="groups">Kelompok-kelompok</string>
+    <string name="pref_focus_search">Fokuskan pencarian saat aplikasi dimulai</string>
+    <string name="pref_focus_search_summary">Fokuskan pencarian langsung setelah membuka aplikasi.</string>
+    <string name="pref_grouping_halves">Dibelah dua</string>
+    <string name="pref_grouping_none">Tidak dikelompokan</string>
+    <string name="pref_grouping_size_two">Dua kelompok</string>
+    <string name="pref_grouping_size_three">Tiga kelompok</string>
+    <string name="pref_grouping_size_four">Empat kelompok</string>
+    <string name="pref_copy_behavior_never">Tidak pernah</string>
+    <string name="pref_copy_behavior_single_tap">Ketuk sekali</string>
+    <string name="pref_copy_behavior_double_tap">Ketuk dua kali</string>
+    <string name="pref_account_name_position_hidden">Tersembunyi</string>
+    <string name="pref_account_name_position_end">Di sebelah emiten</string>
+    <string name="pref_account_name_position_below">Di bawah emiten</string>
+    <plurals name="time_elapsed_seconds" tools:ignore="UnusedResources">
+        <item quantity="other">%d detik yang lalu</item>
+    </plurals>
+    <plurals name="time_elapsed_minutes" tools:ignore="UnusedResources">
+        <item quantity="other">%d menit yang lalu</item>
+    </plurals>
+    <plurals name="time_elapsed_hours" tools:ignore="UnusedResources">
+        <item quantity="other">%d jam yang lalu</item>
+    </plurals>
+    <plurals name="time_elapsed_days" tools:ignore="UnusedResources">
+        <item quantity="other">%d hari yang lalu</item>
+    </plurals>
+    <plurals name="time_elapsed_years" tools:ignore="UnusedResources">
+        <item quantity="other">%d tahun yang lalu</item>
+    </plurals>
+    <plurals name="dropdown_checkboxes_default_count">
+        <item quantity="other">%d item terpilih</item>
+    </plurals>
 </resources>

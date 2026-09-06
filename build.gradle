@@ -6,12 +6,17 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.3'
-        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.17'
+        classpath 'com.android.tools.build:gradle:8.10.0'
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.56.2'
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.9.4'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+}
+
+plugins {
+    id 'com.mikepenz.aboutlibraries.plugin' version '11.2.3'
 }
 
 allprojects {
@@ -19,10 +24,9 @@ allprojects {
         mavenCentral()
         google()
         maven { url 'https://jitpack.io' }
-        jcenter()
     }
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }

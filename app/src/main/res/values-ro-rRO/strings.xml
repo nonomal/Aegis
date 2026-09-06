@@ -1,69 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="action_settings">Setări</string>
     <string name="action_about">Despre</string>
-    <string name="action_import">Import</string>
     <string name="action_delete">Șterge</string>
     <string name="action_transfer">Transfer</string>
-    <string name="action_edit_icon">Editare pictogramă</string>
-    <string name="action_reset_usage_count">Resetează numărul de utilizări</string>
+    <string name="action_edit_icon">Editează pictogramă</string>
+    <string name="action_reset_usage_count">Resetează numărul utilizărilor</string>
     <string name="action_reset_usage_count_dialog">Sunteţi sigur că doriţi să setaţi numărul de utilizare a acestei intrări la 0?</string>
     <string name="action_default_icon">Resetare pictogramă</string>
     <string name="discard">Anulează</string>
     <string name="save">Salvare</string>
+    <string name="all">Toate</string>
     <string name="issuer">Emitent</string>
+    <string name="yandex_pin">PIN (4–16 cifre)</string>
+    <string name="motp_pin">PIN (4 cifre)</string>
     <string name="suggested">Sugerat</string>
     <string name="usage_count">Numărul de utilizări</string>
-    <string name="settings">Preferințe</string>
+    <string name="warning">Atenţie</string>
     <string name="pref_cat_appearance_app">Aplicație</string>
     <string name="pref_cat_appearance_entries">Intrări</string>
     <string name="pref_cat_backups_android">Android</string>
     <string name="pref_cat_backups_auto">Backup automat</string>
     <string name="pref_section_behavior_title">Comportament</string>
-    <string name="pref_section_behavior_summary">Personalizați comportamentul când interacționați cu lista de intrări.</string>
+    <string name="pref_section_behavior_summary">Personalizați comportamentul când interacționați cu lista intrărilor.</string>
     <string name="pref_section_appearance_title">Prezentare</string>
-    <string name="pref_section_appearance_summary">Reglaţi setările temei, limbii şi altor setări care afectează aspectul aplicaţiei.</string>
+    <string name="pref_section_appearance_summary">Reglați setările temei, limbii și altor setări care afectează aspectul aplicației.</string>
     <string name="pref_section_security_title">Securitate</string>
     <string name="pref_section_security_summary">Configurați criptarea, deblocarea biometrică, blocarea automată și alte setări de securitate.</string>
     <string name="pref_section_import_export_title">Importă &amp; Exportă</string>
     <string name="pref_section_import_export_summary">Importă copii de rezervă ale Aegis sau ale altor aplicații de autentificare. Creează exporturi manuale în seiful dvs. Aegis.</string>
-    <string name="pref_section_backups_title">Copii de rezervă</string>
-    <string name="pref_section_backups_summary">Configurați copiile de rezervă automate într-o locație aleasă de dumneavoastră, sau activați participarea în sistemul de backup Android.</string>
+    <string name="pref_section_audit_log_title">Jurnal de audit</string>
+    <string name="pref_section_audit_log_summary">Găsiți o listă cu toate evenimentele importante raportate care s-au întâmplat în cadrul aplicației.</string>
+    <string name="pref_section_backups_title">Backup-uri</string>
+    <string name="pref_section_backups_summary">Configurați backup-urile automate într-o locație în care alegeți sau activați participarea la sistemul Android de backup în cloud.</string>
     <string name="pref_section_icon_packs">Set de pictograme</string>
     <string name="pref_section_icon_packs_summary">Gestionați și importați pachete de pictograme</string>
     <string name="pref_select_theme_title">Temă</string>
+    <string name="pref_dynamic_colors_title">Culori dinamice</string>
+    <string name="pref_dynamic_colors_summary">Aplică o culoare principală pe baza culorilor temei tale Android</string>
     <string name="pref_view_mode_title">Mod de vizualizare</string>
     <string name="pref_lang_title">Limbă</string>
+    <string name="pref_show_icons_title">Arată pictograme</string>
+    <string name="pref_show_icons_summary">Afişare pictograme lângă fiecare intrare</string>
     <string name="pref_code_group_size_title">Grupare cifre cod</string>
-    <string name="pref_code_group_size_summary">Arată codul în grupuri din 2 cifre în loc de grupuri din 3 cifre</string>
-    <string name="pref_account_name_title">Arată numele contului</string>
-    <string name="pref_account_name_summary">Activează pentru a afișa numele contului lângă emitent</string>
-    <string name="pref_timeout_title">Inactivitate</string>
-    <string name="pref_timeout_summary">Blochează automat seiful după %1$s secunde de inactivitate</string>
-    <string name="pref_slots_title">Sloturi cheie</string>
-    <string name="pref_slots_summary">Gestionați lista de chei care pot decripta seiful</string>
+    <string name="pref_code_group_size_summary">Selectează numărul de cifre pentru a grupa codurile</string>
+    <string name="pref_account_name_position_title">Arată numele contului</string>
+    <string name="pref_show_next_code_title">Arată următorul cod</string>
+    <string name="pref_show_next_code_summary">Generează și arată codul următor înainte</string>
+    <string name="pref_expiration_state_title">Indică momentul când codurile sunt pe cale să expire</string>
+    <string name="pref_expiration_state_summary">Schimbă culoarea codurilor și fă codurile să clipească în momentul în care expiră</string>
+    <string name="pref_expiration_state_fallback">Schimbă culoarea codurilor când sunt pe cale să expire</string>
+    <string name="pref_shared_issuer_account_name_title">Arată numele contului doar atunci când este necesar</string>
+    <string name="pref_shared_issuer_account_name_summary">Arată numai numele de cont ce au același emitent. Alte nume de cont vor fi ascunse.</string>
+    <string name="pref_account_name_position_summary_override">Această setare este suprascrisă de modul vizualizare dale. Numele contului va fi afișat mai jos de emitent.</string>
     <string name="pref_import_file_title">Importă din fișier</string>
     <string name="pref_import_file_summary">Importă token-uri dintr-un fișier</string>
-    <string name="pref_android_backups_title">Participă la copia de rezervă a sistemului Android</string>
-    <string name="pref_android_backups_summary">Permite sistemului de backup Android să includă seiful Aegis în copiile de rezervă. Acest lucru este acceptat doar pentru seifele criptate.</string>
+    <string name="pref_android_backups_title">Backup-uri Android în cloud</string>
+    <string name="pref_android_backups_summary">Permite sistemului de backup Android să includă seiful Addis în copiile de rezervă. Acest lucru este acceptat doar pentru seifurile criptate.</string>
+    <string name="pref_android_backups_hint"><i>Backup-urile de la un dispozitiv la altul (D2D) sunt întotdeauna permise, indiferent de setarea de mai sus</i></string>
     <string name="pref_backups_title">Salvează automat seiful</string>
     <string name="pref_backups_summary">Creează automat copii de rezervă ale seifului pe stocarea externă atunci când se fac modificări. Acest lucru este disponibil doar pentru seifurile criptate.</string>
-    <string name="pref_backups_location_title">Director pentru copiile de rezervă</string>
+    <string name="pref_backups_reminder_title">Alertă backup</string>
+    <string name="pref_backups_reminder_summary">Arată un mesaj pentru a salva seiful în cazul în care nu ai făcut backup la ultimele modificări.</string>
+    <string name="pref_backups_reminder_dialog_title">Dezactivează alerta de backup</string>
+    <string name="pref_backups_reminder_dialog_summary">Dezactivarea acestei alerte înseamnă că Addis nu îți va spune dacă ai sau nu schimbări care nu sunt încă salvate. Acest lucru te pune în pericol de a pierde accesul la Cohen-urile tale. Ești sigur că vrei să dezactivezi alerta?</string>
+    <string name="pref_backups_versioning_strategy_title">Strategie de backup</string>
+    <string name="pref_backups_versioning_strategy_keep_x_versions">Păstrează un număr de versiuni</string>
+    <string name="pref_backups_versioning_strategy_single_backup">O singură copie de rezervă</string>
+    <string name="pref_backups_versioning_strategy_single_backup_warning">Strategia de backup selectată nu este fiabilă și nu este recomandată. Un singur backup nereușit ar putea duce la pierderea singurei tale copii de rezervă.</string>
+    <string name="pref_backups_versioning_strategy_dialog_title">Selectează o strategie de backup</string>
+    <string name="pref_backups_location_title">Locație backup</string>
     <string name="pref_backups_location_summary">Copiile de rezervă vor fi stocate la</string>
+    <string name="pref_backup_location_summary">Copiile de rezervă vor fi stocate la</string>
     <string name="pref_backups_trigger_title">Declanșare copie de rezervă</string>
     <string name="pref_backups_trigger_summary">Declanșează manual o copie de rezervă</string>
     <string name="pref_backups_versions_title">Numărul de versiuni de păstrat</string>
+    <string name="pref_backups_versions_infinite">\u221E</string>
     <plurals name="pref_backups_versions_summary">
         <item quantity="one">Păstraţi %1$d versiune a copiei de rezervă</item>
         <item quantity="few">Păstraţi %1$d versiune a copiei de rezervă</item>
         <item quantity="other">Păstraţi %1$d de versiuni ale copiei de rezervă</item>
     </plurals>
+    <string name="pref_backups_versions_infinite_summary">Păstrează un număr infinit de versiuni ale copiei de rezervă</string>
     <string name="pref_import_app_title">Importă din aplicație</string>
     <string name="pref_import_app_summary">Importă tokeni dintr-o aplicație (necesită acces root)</string>
     <string name="pref_export_title">Exportă</string>
     <string name="pref_export_summary">Exportă seiful</string>
     <string name="pref_password_reminder_title">Reamintire parolă</string>
-    <string name="pref_password_reminder_summary">Arată un memento pentru a introduce parola o dată la un interval de timp pentru nu o uita.</string>
+    <string name="pref_google_auth_export_title">Exportă pentru Google Authenticator</string>
+    <string name="pref_google_auth_export_descriptor">Generează coduri QR de export compatibile cu Google Authenticator</string>
+    <string name="pref_google_auth_export_no_data">Nu există date de exportat</string>
+    <plurals name="pref_google_auth_export_incompatible_entries">
+        <item quantity="one">%d intrare incompatibilă a fost omisă</item>
+        <item quantity="few">%d intrari incompatibile au fost omise</item>
+        <item quantity="other">%d de intrari incompatibile au fost omise</item>
+    </plurals>
+    <string name="pref_password_reminder_summary">Arată un %s memento pentru a introduce parola, astfel încât să nu o uiți.</string>
+    <string name="pref_password_reminder_summary_disabled">Dezactivat</string>
     <string name="pref_secure_screen_title">Securitatea ecranului</string>
     <string name="pref_secure_screen_summary">Blochează capturile de ecran și alte încercări de a captura ecranul în cadrul aplicației</string>
     <string name="pref_tap_to_reveal_title">Atinge pentru a descoperi</string>
@@ -76,19 +109,61 @@
     <string name="pref_auto_lock_type_back_button">Butonul înapoi este apăsat</string>
     <string name="pref_auto_lock_type_minimize">Aplicația este minimizată</string>
     <string name="pref_auto_lock_type_device_lock">Dispozitivul este blocat</string>
+    <string name="pref_backup_password_category">Backup &amp; Export</string>
+    <string name="pref_backup_password_title">Parolă separată pentru backup &amp; export</string>
+    <string name="pref_backup_password_summary">Dacă este activată, parola folosită pentru a debloca aplicația nu mai poate fi utilizat ăpentru a decripta copiile de rezervă și exporturi.</string>
+    <string name="pref_backup_password_change_title">Schimbă parola pentru backup &amp; export</string>
+    <string name="pref_backup_password_change_summary">Setează o parolă nouă care va fi folosită pentru a cripta seiful în timpul procedurii de backup and export.</string>
     <string name="pref_encryption_title">Criptare</string>
     <string name="pref_encryption_summary">Criptează seiful și deblochează-l cu o parolă sau biometrice</string>
     <string name="pref_biometrics_title">Deblocare biometrică</string>
     <string name="pref_biometrics_summary">Permite autentificarea biometrică pentru a debloca seiful</string>
+    <string name="pref_search_behavior_summary">Căutare prin: %s</string>
+    <string name="pref_search_behavior_prompt">Căutare în oricare dintre următoarele câmpuri</string>
+    <string name="pref_search_behavior_type_name">Nume</string>
+    <string name="pref_search_behavior_type_issuer">Emitent</string>
+    <string name="pref_search_behavior_type_note">Notă</string>
+    <string name="pref_search_behavior_type_groups">Grupuri</string>
     <string name="pref_set_password_title">Schimbă parola</string>
     <string name="pref_set_password_summary">Setează o parolă nouă cu care va trebui să deblochezi seiful</string>
+    <string name="no_events_title">Nu s-au raportat evenimente</string>
+    <string name="no_events_description">Nu au fost raportate evenimente importante în cadrul aplicației</string>
+    <string name="event_title_vault_unlocked">Seif deblocat</string>
+    <string name="event_description_vault_unlocked">Seiful a fost deblocat cu succes</string>
+    <string name="event_title_backup_created">Copie de rezervă creată</string>
+    <string name="event_description_backup_created">O copie de rezervă a seifului a fost creată cu succes</string>
+    <string name="event_title_android_backup_created">Android a creat o copie de rezervă</string>
+    <string name="event_description_android_backup_created">O copie de rezervă a seifului a fost creată cu succes de Android</string>
+    <string name="event_title_vault_exported">Seif exportat</string>
+    <string name="event_description_vault_exported">O copie a seifului a fost exportată</string>
+    <string name="event_title_entry_shared">Element distribuit</string>
+    <string name="event_description_entry_shared">Un element a fost distribuit</string>
+    <string name="event_title_vault_unlock_failed_password">Deblocarea seifului a eșuat (parolă)</string>
+    <string name="event_description_vault_unlock_failed_password">Încercarea de a debloca seiful cu o parolă a eșuat</string>
+    <string name="event_title_vault_unlock_failed_biometrics">Deblocarea seifului a eșuat (biometrie)</string>
+    <string name="event_description_vault_unlock_failed_biometrics">Încercarea de a debloca seiful cu datele biometrice a eșuat</string>
+    <string name="event_unknown">Tipul evenimentului este necunoscut</string>
+    <string name="audit_log_entry_deleted">(șters)</string>
+    <string name="today_at_time">Astăzi, la %1$s</string>
+    <string name="day_of_week_at_time">%1$s la %2$s</string>
     <string name="export_encrypted">Criptează seiful</string>
     <string name="export_help">Această acțiune va exporta seiful din spațiul de stocare al aplicaţiei. Selectează formatul în care dorești exportul:</string>
     <string name="export_warning_unencrypted">Ești pe cale să exportezi o copie necriptată a seifului Aegis. <b>Acest lucru nu este recomandat</b>.</string>
-    <string name="export_warning_accept">Înţeleg riscurile</string>
+    <string name="export_warning_password">Exporturile sunt criptate folosind o parolă separată configurată în setările de securitate.</string>
+    <string name="understand_risk_accept">Înțeleg riscul</string>
     <string name="export_format_aegis">Aegis (.JSON)</string>
     <string name="export_format_google_auth_uri">Fișier text (.TXT)</string>
+    <string name="export_format_html">Pagină web (.HTML)</string>
     <string name="export_format_hint">Formatul în care se exportă</string>
+    <string name="export_all_groups">Exportă toate grupurile</string>
+    <string name="export_choose_groups">Selectează ce grupuri să exporți</string>
+    <plurals name="export_groups_selected_count">
+        <item quantity="one">%d grup selectat</item>
+        <item quantity="few">%d grupuri selectate</item>
+        <item quantity="other">%d de grupuri selectate</item>
+    </plurals>
+    <string name="export_no_groups_selected">Nici un grup selectat pentru export</string>
+    <string name="export_html_title" comment="The title of an HTML export document">Exportul aplicației Aegis Authenticator</string>
     <string name="choose_authentication_method">Securitate</string>
     <string name="authentication_method_explanation">Aegis este o aplicație 2FA concentrată pe securitate. Token-urile sunt stocate într-un seif, care poate criptat cu o parolă aleasă. Dacă un atacator obține fișierul criptat al seifului, nu va putea accesa conținutul fără a cunoaște parola.\n\nAm selectat opțiunea pe care o credem cea mai potrivită pentru dispozitivul tău.</string>
     <string name="authentication_method_none">Fără</string>
@@ -98,11 +173,8 @@
     <string name="authentication_method_password_explanation">Avertisment: Dacă îți uiți parola, vei pierde definitiv accesul la token-urile dvs. Nu există nicio modalitate de a le recupera fără parolă.</string>
     <string name="authentication_method_biometrics">Biometrice</string>
     <string name="authentication_method_biometrics_description">În plus față de o parolă, datele biometrice înregistrate pe acest dispozitiv, cum ar fi o amprentă sau fața ta, pot fi folosite pentru a debloca seiful.</string>
-    <string name="authentication_method_set_password">Parolă</string>
-    <string name="authentication_enter_password">Introdu parola</string>
     <string name="authentication">Deblocare seif</string>
-    <!-- The newline (\n) on the following line is just for aesthetic purposes !-->
-    <string name="authentication_multiline">Deblocare\nseif</string>
+    <string name="authentication_multiline" comment="The newline in the middle is used for aesthetic purposes">Deblocare\nseif</string>
     <string name="auth_use_biometrics">Sau apasă aici pentru a utiliza <font fgcolor="#FF0D86C1">datele biometrice</font></string>
     <string name="set_password">Te rugăm să introduci o parolă</string>
     <string name="set_group">Te rugăm să introduci un nume de grup</string>
@@ -111,15 +183,24 @@
     <string name="invalid_password">Parola este incorectă</string>
     <string name="invalidated_biometrics">A fost detectată o modificare a setărilor de securitate ale dispozitivului. Vă rugăm să mergeţi la \"Aegis -&gt; Setări -&gt; Securitate -&gt; Deblocare biometrică\" pentru a dezactiva şi reactiva deblocarea biometrică.</string>
     <string name="password_reminder">Te rugăm să introduci parola. Uneori îți cerem să faci asta pentru a nu o uita.</string>
+    <string name="password_reminder_dialog_title">Deblocare biometrică în mod implicit</string>
+    <string name="password_reminder_dialog_message">Vă recomandăm ocazional să introduci parola pentru a te asigura că nu ai uitat-o. După introducerea parolei o dată, Aegis va reveni la deblocarea biometrică până când este timpul pentru o altă reamintire a parolei.</string>
+    <string name="password_reminder_freq_never">Niciodată</string>
+    <string name="password_reminder_freq_weekly">Săptămânal</string>
+    <string name="password_reminder_freq_biweekly">La doua săptămâni</string>
+    <string name="password_reminder_freq_monthly">Lunar</string>
+    <string name="password_reminder_freq_quarterly">Trimestrial</string>
+    <string name="enter_password_2fas_message">Se pare că această copie de rezervă 2FAS este criptată. Introduceți parola mai jos.</string>
     <string name="enter_password_authy_message">Se pare că token-urile tale Authy sunt criptate. Te rugăm să închizi Aegis, să deschizi Authy și să deblochezi tokenurile cu parola ta. În schimb, Aegis poate încerca, de asemenea, să decripteze tokenurile Authy pentru tine, dacă introduci parola mai jos.</string>
+    <string name="enter_password_aegis_title">Vă rugăm să introduceți parola curentă</string>
     <string name="period_hint">Timp (secunde)</string>
     <string name="algorithm_hint">Funcția Hash</string>
     <string name="type">Tip</string>
     <string name="share">Distribuie</string>
     <string name="yes">Da</string>
     <string name="no">Nu</string>
+    <string name="undo">Anulare</string>
     <string name="unlock">Deblocare</string>
-    <string name="biometrics">Biometrice</string>
     <string name="advanced">Avansat</string>
     <string name="counter">Contor</string>
     <string name="digits">Cifre</string>
@@ -127,14 +208,17 @@
     <string name="scan">Scanare cod QR</string>
     <string name="scan_image">Scanare imagine</string>
     <string name="enter_manually">Introducere manuală</string>
-    <string name="add_biometric">Adaugare biometrice</string>
-    <string name="add_biometric_slot">Adăugare slot biometric</string>
     <string name="set_up_biometric">Configurează deblocarea biometrică</string>
-    <string name="add_password">Adăugare parolă</string>
-    <string name="slots_warning">Seiful este la fel de sigur ca cel mai slab secret. Dacă modifici setările biometrice de autentificare ale dispozitivului tău, va trebui să reactivezi deblocarea biometrică în interiorul Aegis.</string>
     <string name="copy">Copiere</string>
     <string name="edit">Editare</string>
-    <string name="delete">Ştergere</string>
+    <string name="select_all">Selectează tot</string>
+    <string name="assign_icons">Atribuie pictograme</string>
+    <string name="assign_groups">Abonează în grup</string>
+    <string name="assign_groups_dialog_summary">Selectează un grup căruia dorești să îi atribui intrările selectate.</string>
+    <string name="assign_groups_dialog_dropdown">Selectează grupul</string>
+    <string name="favorite" comment="Verb">Favorit</string>
+    <string name="unfavorite" comment="Verb">Elimină din favorite</string>
+    <string name="error_all_caps">EROARE</string>
     <string name="password">Parolă</string>
     <string name="confirm_password">Confirmă parola</string>
     <string name="show_password">Arată parola</string>
@@ -146,11 +230,21 @@
     <string name="snackbar_authentication_method">Te rugăm să selectezi o metodă de autentificare</string>
     <string name="encrypting_vault">Criptează seiful</string>
     <string name="exporting_vault">Exportă seiful</string>
+    <string name="optimizing_icon">Se optimizează pictograma</string>
+    <string name="optimizing_icon_multiple">Se optimizează pictogramele %1$d/%2$d</string>
     <string name="reading_file">Citire fişier</string>
+    <string name="requesting_root_access">Solicită acces root</string>
+    <string name="analyzing_qr">Se analizează codul QR</string>
+    <string name="analyzing_qr_multiple">Analizând QR code %1$d/%2$d (%3$s)</string>
+    <plurals name="added_new_entries">
+        <item quantity="one">Au fost adăugate %d de noi intrări în seif</item>
+        <item quantity="few">Au fost adăugate %d noi intrări în seif</item>
+        <item quantity="other">Au fost adăugate %d de noi intrări în seif</item>
+    </plurals>
     <string name="importing_icon_pack">Se importă pachetul de pictograme</string>
     <string name="delete_entry">Ștergere intrare</string>
     <string name="delete_entry_description">Ești sigur că dorești să ştergi această intrare?</string>
-    <string name="delete_entry_explanation">Această acțiune nu dezactivează 2FA pentru <b>%s</b>. Pentru a preveni pierderea accesului, asigurați-vă că ați dezactivat 2FA sau că aveți o modalitate alternativă de a genera coduri pentru acest serviciu.</string>
+    <string name="delete_entry_explanation">Această acțiune nu dezactivează 2FA pentru\n <b>%s</b>\n\n. Pentru a preveni pierderea accesului, asigurați-vă că ați dezactivat 2FA sau că aveți o modalitate alternativă de a genera coduri pentru acest serviciu.</string>
     <string name="delete_entries">Ştergere intrări</string>
     <plurals name="delete_entries_description">
         <item quantity="one">Sigur vrei să ștergi %d element?</item>
@@ -159,9 +253,8 @@
     </plurals>
     <string name="discard_changes">Renunți la modificări?</string>
     <string name="discard_changes_description">Modificările nu au fost salvate</string>
-    <string name="folder">Dosar</string>
-    <string name="tap_to_select">Apasă pentru a selecta</string>
     <string name="saving_profile_error">Eroare la salvarea profilului</string>
+    <string name="saving_assign_icons_error">Eroare la atribuirea pictogramelor</string>
     <string name="welcome">Bun venit</string>
     <string name="app_description">Aegis este o aplicație 2FA gratuită, sigură și cu sursă deschisă</string>
     <string name="setup_completed">Configurare finalizată</string>
@@ -170,6 +263,7 @@
     <string name="copied">Copiat</string>
     <string name="errors_copied">Erori copiate în clipboard</string>
     <string name="version_copied">Versiune copiată în clipboard</string>
+    <string name="error_required_field">Acest câmp este obligatoriu</string>
     <string name="error_occurred">A apărut o eroare</string>
     <string name="decryption_error">A apărut o eroare în timpul deblocării seifului</string>
     <string name="decryption_corrupt_error">A apărut o eroare în timp ce se încerca deblocarea seiful. Seiful poate fi corupt.</string>
@@ -184,6 +278,10 @@
     <string name="disable_encryption_error">A apărut o eroare la dezactivarea criptării</string>
     <string name="backup_successful">Copia de rezervă a fost creată cu succes</string>
     <string name="backup_error">A apărut o eroare în timpul creării unei copii de rezervă</string>
+    <string name="backup_status_success">Cea mai recentă copie de rezervă a reușit: %s</string>
+    <string name="backup_status_failed">Cea mai recentă copie de rezervă a eșuat: %s</string>
+    <string name="backup_status_none">Nu au fost generate copii de rezervă</string>
+    <string name="backup_warning_password">Copiile de rezervă sunt criptate folosind o parolă separată configurată în setările de securitate</string>
     <string name="documentsui_error">DocumentsUI pare să lipsească de pe dispozitivul tău. Aceasta este o componentă de sistem importantă, necesară pentru selectarea și crearea documentelor. Dacă ai folosit o unealtă pentru a &quot;debloata&quot; dispozitivul tău, este posibil să fi șters-o din greșeală și să trebuiască să o reinstalezi.</string>
     <string name="icon_pack_import_error">S-a produs o eroare în timpul importării unui pachet de pictograme</string>
     <string name="icon_pack_import_exists_error">Pachetul de pictograme pe care încercați să îl importați există deja. Doriți să îl suprascrieți?</string>
@@ -193,7 +291,6 @@
         <item quantity="few">Pictograme %d</item>
         <item quantity="other">%d pictograme</item>
     </plurals>
-    <string name="icon_pack">Pachetul de pictograme</string>
     <string name="icon_custom">Personalizat</string>
     <string name="permission_denied">Permisiune refuzată</string>
     <string name="andotp_new_format">Format nou (v0.6.3 sau mai nou) </string>
@@ -202,17 +299,26 @@
     <string name="choose_totpauth_importer">Este această copie de rezervă a autentificatorului TOTP criptată cu o parolă?</string>
     <string name="choose_application">Selectează aplicația din care dorești să imporți</string>
     <string name="choose_theme">Selectează tema dorită</string>
+    <string name="choose_account_name_position">Selectați poziția dorită a numelui de cont</string>
     <string name="choose_view_mode">Selectează modul de vizualizare dorit</string>
+    <string name="choose_copy_behavior">Selectați comportamentul dorit la copiere</string>
     <string name="parsing_file_error">A apărut o eroare în timpul analizării fișierului</string>
     <string name="file_not_found">Eroare: Fișierul nu a fost găsit</string>
     <string name="reading_file_error">A apărut o eroare în timpul citirii fișierului</string>
     <string name="app_lookup_error">Eroare: Aplicația nu este instalată</string>
+    <string name="app_version_error">Versiunea %s care este instalată nu este suportată. Versiunile recente au început criptarea unora dintre fișierele din directorul de stocare internă, Aegis devenind incapabil de a accesa informațiile de care are nevoie pentru import. Este posibil ca încercarea de a importa să ducă la o eroare. Doriţi să continuaţi oricum?</string>
     <string name="root_error">Eroare: nu se poate obține acces root</string>
     <plurals name="imported_entries_count">
         <item quantity="one">Importată %d intrare</item>
         <item quantity="few">Importate %d intrare</item>
         <item quantity="other">Importate %d intrări</item>
     </plurals>
+    <plurals name="entries_shown">
+        <item quantity="one">Se afișează %d intrare</item>
+        <item quantity="few">Se afișează %d intrări</item>
+        <item quantity="other">Se afișează %d de intrări</item>
+    </plurals>
+    <string name="intro_import_error_title">A apărut o eroare în timpul importării seifului</string>
     <string name="import_error_title">Una sau mai multe erori au apărut în timpul importului</string>
     <string name="exporting_vault_error">A apărut o eroare în timpul exportării seifului</string>
     <string name="exported_vault">Seiful a fost exportat</string>
@@ -221,32 +327,37 @@
     <string name="no_cameras_available">Nu sunt camere disponibile</string>
     <string name="read_qr_error">A apărut o eroare în timp ce se încerca citirea codului QR</string>
     <string name="read_qr_error_phonefactor">Aegis nu este compatibil cu algoritmul 2FA brevetat al Microsoft. Te rugăm să selectezi \"Configurare aplicație fără notificări\" la configurarea 2FA în Office 365.</string>
-    <string name="authentication_method_raw">Brut</string>
+    <string name="partial_google_auth_import">S-a detectat exportul incomplet a datelor din autentificatorul Google</string>
+    <string name="partial_google_auth_import_warning">Unele coduri QR lipsesc din fișerul importat. Următoarele coduri nu au fost găsite:\n\n<b>%s</b>\n\nPuteţi continua importul acestui fișier parţial, dar vă recomandăm să încercaţi din nou cu toate codurile QR pentru a nu risca pierderea niciunui token.</string>
+    <string name="missing_qr_code_descriptor">• codul QR %d</string>
+    <string name="import_google_auth_failure">Importarea din Google Authenticator a eșuat</string>
+    <string name="unrelated_google_auth_batches_error">Exportul conține informații pentru un calup neasociat. Încercați să importați câte un calup pe rând.</string>
+    <string name="no_tokens_can_be_imported">Nu se pot importa token-uri drept rezultat</string>
     <string name="unlocking_vault">Deblocarea seifului</string>
-    <string name="unlocking_vault_repair">Deblocarea seifului (reparare)</string>
-    <string name="password_slot_error">Trebuie să ai cel puțin un slot pentru parolă</string>
-    <string name="slot_this_device">(aceste dispozitive)</string>
-    <string name="remove_slot">Elimină slotul</string>
-    <string name="remove_slot_description">Ești sigur că dorești să ștergi acest slot?</string>
+    <string name="rename_group">Redenumește grupul</string>
+    <string name="no_group_selection">În cazul în care o intrare nu face parte din niciun grup, aceasta poate fi găsită în categoria „Niciun grup”.</string>
     <string name="remove_group">Elimină grupul</string>
     <string name="remove_group_description">Ești sigur că dorești să ștergi acest grup? Intrările din acest grup vor comuta automat la \'Niciun grup\'.</string>
+    <string name="remove_unused_groups">Ștergeți grupurile neutilizate</string>
+    <string name="remove_unused_groups_description">Sunteţi sigur că doriţi să ştergeţi toate grupurile care nu sunt atribuite unei intrări?</string>
     <string name="remove_icon_pack">Ștergeți pachetul de pictograme</string>
     <string name="remove_icon_pack_description">Sunteţi sigur că doriţi să ştergeţi acest pachet de pictograme? Intrările care folosesc pictograme din acest pachet nu vor fi afectate.</string>
-    <string name="adding_new_slot_error">A aparut o eroare în timp ce se încerca adăugarea unui nou slot:</string>
-    <string name="progressbar_error">Imposibil de a reseta scala duratei animatorului. Barele de progres vor fi invizibile.</string>
     <string name="details">Detalii</string>
+    <string name="show_error_details">Arată detaliile erorii</string>
     <string name="lock">Blocare</string>
     <string name="name">Nume</string>
     <string name="no_group">Niciun grup</string>
-    <string name="sort">Sortează</string>
+    <string name="sort" comment="Title of the Sort button in the top action bar of the main view">Sortează</string>
     <string name="sort_alphabetically">Emitent (A - Z)</string>
     <string name="sort_alphabetically_reverse">Emitent (Z - A)</string>
     <string name="sort_alphabetically_name">Cont (A - Z)</string>
     <string name="sort_alphabetically_name_reverse">Cont (Z - A)</string>
     <string name="sort_usage_count">Numărul de utilizări</string>
+    <string name="sort_last_used">Utilizat ultima dată</string>
     <string name="sort_custom">Personalizat</string>
+    <string name="last_used">Utilizat ultima dată</string>
+    <string name="last_used_never">niciodată</string>
     <string name="new_group">Grup nou…</string>
-    <string name="enter_group_name">Introdu numele grupului</string>
     <string name="group">Grup</string>
     <string name="group_name_hint">Numele grupului</string>
     <string name="preference_manage_groups">Editează grupuri</string>
@@ -254,12 +365,25 @@
     <string name="preference_reset_usage_count">Resetează numărul de utilizări</string>
     <string name="preference_reset_usage_count_summary">Resetează numărul de utilizări al fiecărei intrări din seiful tău</string>
     <string name="preference_reset_usage_count_dialog">Sunteţi sigur că doriţi să setaţi numărul de utilizări pentru fiecare intrare din seif la 0?</string>
-    <string name="note">Notă</string>
+    <string name="note" comment="Users can add a note to an entry">Notă</string>
     <string name="clear">Șterge</string>
+    <string name="dialog_duplicate_entry_title" comment="'Duplicate' is a noun here">Intrare duplicat</string>
+    <string name="dialog_duplicate_entry_message">Această intrare are același nume și emitent ca una sau mai multe intrări existente. Cum ați dori să continuați?</string>
+    <string name="dialog_duplicate_entry_overwrite_title">Rescrie intrarea/intrările existente</string>
+    <string name="dialog_duplicate_entry_overwrite_subtitle">Înlocuiţi intrarea sau intrările existente cu cea nouă. Această acţiune nu poate fi anulată</string>
+    <string name="dialog_duplicate_entry_suffix_title">Adaugă sufix</string>
+    <string name="dialog_duplicate_entry_suffix_subtitle">Adaugă un sufix la numele acestei noi intrări. Noul nume va fi: %s</string>
+    <string name="dialog_duplicate_entry_cancel_title">Anulează salvarea</string>
+    <string name="dialog_duplicate_entry_cancel_subtitle">Vă permite să editaţi intrarea înainte de a încerca să o salvaţi din nou</string>
+    <string name="dialog_duplicate_entry_overwrite_dialog_title">Confirmă ștergerea</string>
     <string name="pref_highlight_entry_title">Evidențiază simbolurile când apăsați</string>
     <string name="pref_highlight_entry_summary">Fă token-urile mai ușor să se distingă între ele prin evidențierea lor temporară atunci când sunt apăsate</string>
-    <string name="pref_copy_on_tap_title">Copiază token-urile când apeși</string>
-    <string name="pref_copy_on_tap_summary">Copiază token-urile în clipboard apăsându-le</string>
+    <string name="pref_groups_multiselect_title">Grupuri multiple</string>
+    <string name="pref_groups_multiselect_summary">Permite selecția mai multor grupuri în același timp</string>
+    <string name="pref_minimize_on_copy_title">Minimizează după copiere</string>
+    <string name="pref_minimize_on_copy_summary">Minimizează aplicația după copierea unui token</string>
+    <string name="pref_copy_behavior_title">Copiați tokenul în clipboard</string>
+    <string name="pref_search_behavior_title">Mod de căutare</string>
     <string name="pref_pause_entry_title">Îngheață jetoanele când sunt apăsate</string>
     <string name="pref_pause_entry_summary">Oprește reîmprospătarea automată a jetoanelor prin apăsarea lor. Token-urile nu se vor actualiza atâta timp cât sunt evidențiate. Necesită \"Evidențierea tokenurilor atunci când sunt apasate\" sau \"Atinge pentru a arăta\".</string>
     <string name="pin_keyboard_description">Introdu parola pentru a activa tastatura PIN. Reține că aceasta funcționează doar dacă parola constă doar din numere</string>
@@ -275,17 +399,23 @@
     <string name="normal_viewmode_title">Normal</string>
     <string name="compact_mode_title">Compact</string>
     <string name="small_mode_title">Mic</string>
+    <string name="tiles_mode_title">Tiles</string>
     <string name="unknown_issuer">Emitent necunoscut</string>
     <string name="unknown_account_name">Nume de cont necunoscut</string>
     <plurals name="import_error_dialog">
-        <item quantity="one">Aegis nu a putut importa %d token. Aceste token-uri vor fi sărite. Apasă pe \'detalii\' pentru a vedea mai multe informații despre erori.</item>
-        <item quantity="few">Aegis nu a putut importa %d token. Aceste token-uri vor fi sărite. Apăsați \'detalii\' pentru a vedea mai multe informații despre erori.</item>
-        <item quantity="other">Aegis nu a putut importa %d token-rui. Aceste token-uri vor fi sărite. Apăsați \'detalii\' pentru a vedea mai multe informații despre erori.</item>
+        <item quantity="one">Aegis nu a putut importa tokenul %d. Acest token va fi omis. Apasă pe \"detalii\" pentru a vedea mai multe informații despre erori.</item>
+        <item quantity="few">Aegis nu a putut importa tokenurile %d. Aceste tokenuri vor fi omise. Apasă pe \'detalii\' pentru a vedea mai multe informații despre erori.</item>
+        <item quantity="other">Aegis nu a putut importa tokenurile %d. Aceste tokenuri vor fi omise. Apasă pe \'detalii\' pentru a vedea mai multe informații despre erori.</item>
     </plurals>
-    <string name="unable_to_read_qrcode">Nu se poate citi și prelucra codul QR</string>
+    <string name="unable_to_process_deeplink">Nu se poate procesa link-ul</string>
+    <string name="unable_to_read_qrcode_file">Nu se poate citi și procesa codul QR din fișierul: %s.</string>
+    <string name="unable_to_process_shared_text">Imposibil de procesat textul partajat ca un cod OTP</string>
+    <string name="unable_to_read_qrcode_files">Nu a putut fi citită și procesă unele dintre QR code-urile. Numai întrările %1$d/%2$d vor fi importate.</string>
     <string name="unable_to_generate_qrcode">Nu se poate genera codul QR</string>
     <string name="select_picture">Selectare imagine</string>
     <string name="select_icon">Selectare pictogramă</string>
+    <string name="tile_open_vault" comment="label for a quick settings tile that opens the app when tapped">Deschide seif</string>
+    <string name="tile_open_scanner" comment="label for a quick settings tile that opens the QR code scanner when tapped">Deschide scanerul</string>
     <string name="toggle_checkboxes">Comută casetele de selectare</string>
     <string name="search">Căutare</string>
     <string name="channel_name_lock_status">Stare blocare</string>
@@ -311,13 +441,28 @@
     <string name="time_sync_warning_message">Aegis-ul se bazează pe un sistem de timp pentru a fi sincronizat pentru a genera codurile corecte. O abatere de doar câteva secunde ar putea duce la coduri incorecte. Se pare că dispozitivul tău nu este configurat pentru a sincroniza automat timpul. Dorești să faci acest lucru acum?</string>
     <string name="time_sync_warning_disable">Nu mă mai avertiza. Ştiu ce fac.</string>
     <string name="google_qr_export_unrelated">Cod QR negăsit găsit. Încearcă să repornești scanerul.</string>
-    <plurals name="google_qr_export_scanned">
-        <item quantity="one">Cod %d/%d QR scanat</item>
-        <item quantity="few">Coduri %d/%d QR scanate</item>
-        <item quantity="other">Coduri %d/%d QR scanate</item>
-    </plurals>
-    <string name="google_qr_export_unexpected">Se aștepta codul QR #%d, dar scanat #%d în schimb</string>
+    <string name="google_qr_export_unexpected">Așteptat QR code #%1$d, dar scanat #%2$d totuși</string>
     <string name="backup_error_bar_message"><b>Copia de rezervă a seifului a eșuat recent</b></string>
+    <string name="backup_error_dialog_details" comment="The first parameter is the type of backup (e.g. built-in or Android backup). The second parameter is an elapsed time in the style of 'x seconds/minutes/days ago'.">
+O tentativă recentă de backup de vault utilizând %1$s a eșuată deoarece un erori a întâmplat. Backup-ul a încercat %2$s. Va rog verificați setările backup-ului tale pentru a asigura că backup-urile pot completează cu succes.    </string>
+    <string name="backup_permission_error_dialog_details" comment="The first parameter is the type of backup (e.g. built-in or Android backup). The second parameter is an elapsed time in the style of 'x seconds/minutes/days ago'.">
+O tentativă recentă de backup de vault utilizând %1$s a eșuată deoarece Aegis nu are permisiunea a scrie la destinația backup-ului. Backup-ul a încercat %2$s. Acest erori poate întâmplă dacă aveți recent restaurat Aegis dintr-un backup. Vă rog reconfigurați destinația backup-ului.    </string>
+    <string name="backup_system_builtin">Copiile de siguranță încorporate în aplicație</string>
+    <string name="backup_system_android">Sistemul de backup în cloud Android</string>
+    <string name="backup_reminder_bar_message_with_latest" comment="The parameter is an elapsed time in the style of 'x seconds/minutes/days ago'">
+        Ultima copie de rezervă este învechită (%s)
+    </string>
+    <string name="backup_reminder_bar_message">
+        Modificările nu sunt salvate
+    </string>
+    <string name="backup_reminder_bar_dialog_title">Modificările nu sunt salvate</string>
+    <string name="backup_reminder_bar_dialog_summary">
+        Modificările recente în seif nu au fost încă salvate. Este important să faci copii de rezervă regulate pentru a preveni pierderea accesului la conturile tale. Te rugăm să luați în considerare configurarea copiilor de rezervă automate în meniul de setări.
+    </string>
+    <string name="backup_reminder_bar_dialog_accept">Configurare backup-uri</string>
+    <string name="backup_plaintext_export_warning"><b>Seiful a fost exportat recent în text simplu</b></string>
+    <string name="pref_show_plaintext_warning_hint">Nu mai arăta acest avertisment</string>
+    <string name="backup_plaintext_warning_explanation">Această avertizare este afișată deoarece ați exportat recent o copie necriptată a seifului. Pentru a menține securitatea token-urilor, vă recomandăm să ștergeți acest fișier o dată ce nu mai este necesar.</string>
     <string name="switch_camera">Comută camera foto</string>
     <string name="empty_list">Nu există coduri care să fie afișate. Începe să adaugi intrări apăsând pe semnul plus în colțul din dreapta jos</string>
     <string name="empty_list_title">Nicio intrare găsită</string>
@@ -328,20 +473,24 @@
     <string name="pick_icon">Alege o pictogramă</string>
     <string name="uncategorized">Necategorizat</string>
     <string name="done">Realizat</string>
-    <plurals name="entries_count">
-        <item quantity="one">%d / %d intrare</item>
-        <item quantity="few">%d / %d intrări</item>
-        <item quantity="other">%d / %d intrări</item>
+    <plurals name="qr_count">
+        <item quantity="one">%d / %d cod QR</item>
+        <item quantity="few">%d / %d coduri QR</item>
+        <item quantity="other">%d / %d de coduri QR</item>
     </plurals>
     <string name="next">Următorul</string>
     <string name="previous">Anteriorul</string>
-    <string name="transfer_entry">Transfer intrare</string>
+    <string name="copy_uri">Copiere URL</string>
+    <string name="unable_to_copy_uri_to_clipboard">Nu se poate copia în clipboard</string>
+    <string name="uri_copied_to_clipboard">URI copiat în clipboard</string>
     <string name="transfer_entry_description">Scanează acest cod QR cu aplicația de autentificare pe care dorești să o transferi</string>
+    <string name="google_auth_compatible_transfer_description">Scanați aceste coduri QR cu Aegis sau Google Authenticator.\n\nDatorită limitărilor aplicației Google Authenticator, numai token-urile TOTP &amp; HOTP care folosesc SHA1 și produc coduri de 6 cifre sunt incluse</string>
     <string name="password_strength_very_weak">Foarte slabă</string>
     <string name="password_strength_weak">Slabă</string>
     <string name="password_strength_fair">Acceptabilă</string>
     <string name="password_strength_good">Bună</string>
     <string name="password_strength_strong">Puternică</string>
+    <string name="password_strength_unknown">Parola este prea lungă pentru ai analiza eficacitatea</string>
     <string name="pref_pin_keyboard_title">Utilizează tastatura PIN pe ecranul de blocare</string>
     <string name="pref_pin_keyboard_summary">Activează dacă dorești să activezi tastatura PIN pe ecranul de blocare. Acest lucru funcționează numai pentru parolele numerice</string>
     <string name="title_activity_preferences">Setări</string>
@@ -350,27 +499,87 @@
     <string name="title_activity_about">Despre</string>
     <string name="title_activity_edit_entry">Editați intrarea</string>
     <string name="title_activity_scan_qr">Scanează cod QR</string>
-    <string name="title_activity_manage_slots">Gestionare sloturi cheie</string>
     <string name="title_activity_import_entries">Importă intrări</string>
+    <string name="title_activity_assign_icons">Atribuie pictograme</string>
+    <string name="title_activity_licenses">Licențe terțe</string>
     <string name="dialog_wipe_entries_title">Șterge intrările</string>
     <string name="dialog_wipe_entries_message">Seiful tău conține deja intrări. Dorești să ştergi aceste intrări înainte de a importa acest fişier?\n\n<b>Făcând acest lucru, vei pierde permanent accesul la intrările existente din seif.</b></string>
     <string name="dialog_wipe_entries_checkbox">Şterge conţinutul seifului</string>
     <string name="panic_trigger_ignore_toast">Aegis a primit un declanșator de panică, dar setarea este dezactivată, se ignoră</string>
     <string name="pref_panic_trigger_title">Șterge seiful la declanșatorul de panică</string>
     <string name="pref_panic_trigger_summary">Șterge seiful atunci când un declanșator de panică este primit de la Ripple</string>
+    <string name="import_vault">Importă seiful Aegis</string>
+    <string name="import_vault_hint">Doriți să importați dintr-o altă aplicație 2FA? Finalizați configurarea mai întâi și apoi mergeți la meniul de setări.</string>
+    <plurals name="import_duplicate_toast">
+        <item quantity="one">Am detectat %d potențial duplicat ce a rămas nebifat. Te rugăm să revizuiești lista intrărilor.</item>
+        <item quantity="few">Am detectat %d potențiale duplicate ce au rămas nebifate. Te rugăm să revizuiești lista intrărilor.</item>
+        <item quantity="other">Am detectat %d de potențiale duplicate ce au rămas nebifate. Te rugăm să revizuiești lista intrărilor.</item>
+    </plurals>
     <string name="importer_help_2fas">Furnizează un fișier de backup 2FAS autentificator.</string>
     <string name="importer_help_aegis">Furnizează un fișier export/copie de rezervă Aegis.</string>
     <string name="importer_help_authenticator_plus">Furnizează un fişier de export de Autentificator Plus obţinut prin <b>Setări -&gt; Copie de rezervă &amp; Restore -&gt; Export ca Text şi HTML</b>.</string>
     <string name="importer_help_authy">Furnizează o copie a <b>/data/data/com.authy.authy/shared_prefs/com.authy.storage.tokens.authenticator.xml</b>, localizată în directorul de stocare internă al Authy.</string>
     <string name="importer_help_andotp">Furnizați un fişier de export/copie de rezervă andOTP.</string>
-    <string name="importer_help_freeotp">Furnizează o copie de <b>/data/data/org.fedorahosted.freeotp/shared_prefs/tokens.xml</b>, localizată în directorul de stocare internă a FreeOTP.</string>
+    <string name="importer_help_bitwarden">Furnizează un fișier de backup din aplicația Bitwarden. Fișierele criptate nu sunt suportate.</string>
+    <string name="importer_help_battle_net_authenticator">Furnizează o copie a <b>/data/data/com.blizzard.messenger/shared_prefs/com.blizzard.messenger.authenticator_preferences.xml</b>, localizată în folderul din memoria internă al Battle.net Authenticator.</string>
+    <string name="importer_help_duo">Furnizează o copie a <b>/data/data/com.duosecurity.duomobile/files/duokit/accounts.json</b>, localizată în dosarul din memoria internă al DUO.</string>
+    <string name="importer_help_ente_auth">Aprovizionați un fișier de export Ente Auth. Actualmente numai fișierului criptate sunt suportate.</string>
+    <string name="importer_help_freeotp">FreeOTP 2: Furnizează o copie de rezervă.\nFreeOTP 1.x: Furnizează o copie a <b>/data/org.fedorahosted.freeotp/shared_prefs/tokens.xml</b>, localizată în directorul FreeOTP din stocarea internă.</string>
     <string name="importer_help_freeotp_plus">Furnizează un fișier de export FreeOTP+.</string>
-    <string name="importer_help_google_authenticator">Furnizează o copie a <b>/data/data/com.google.android.apps.authenticator2/databases/databases</b>, localizată în directorul de stocare internă al Google Authenticator.</string>
+    <string name="importer_warning_title_freeotp2">Compatibilitate FreeOTP 2</string>
+    <string name="importer_warning_message_freeotp2">În FreeOTP 2 există o serie de probleme care pot duce la copii de rezervă corupte. Aegis va încerca să salveze cât mai multe intrări, dar este posibil ca unele sau chiar toate să nu poată fi importe.</string>
+    <string name="importer_help_google_authenticator"><b>Doar fișierele de la Google Authenticator v5.10 și înainte sunt acceptate</b>.\n\nFurnizează o copie a <b>/data/data/com. oogle.android.apps.authenticator2/databases/databases</b>, situat în directorul de stocare internă al Google Authenticator.</string>
     <string name="importer_help_microsoft_authenticator">Furnizează o copie a <b>/data/data/com.azure.authenticator/databases/PhoneFactor</b>, localizată în directorul de stocare internă al Microsoft Authenticator.</string>
     <string name="importer_help_plain_text">Furnizează un fișier text simplu cu un URL de autentificare Google pe fiecare linie.</string>
-    <string name="importer_help_steam">Furnizează o copie a <b>/data/data/com.valvesoftware.android.steam.community/files/Steamguard-*.json</b>, localizată în directorul Steam de stocare internă.</string>
+    <string name="importer_help_steam"><b>Versiunile Steam v3.0 sau mai mari nu sunt suportate</b>. Furnizează o copie a <b>data/data/com.valvesoftware.android.steam.community/files/Steamguard-*.json</b>, localizat în dosarul intern Steam.</string>
     <string name="importer_help_totp_authenticator">Furnizează un fișier de export Autentificator TOTP.</string>
     <string name="importer_help_winauth">Furnizează un fișier de export WinAuth.</string>
+    <string name="import_assign_icons_dialog_title">Atribuie pictograme</string>
+    <string name="import_assign_icons_dialog_text">Dorești să atribui pictograme intrărilor importate?</string>
+    <string name="importer_encrypted_exception_google_authenticator">Informațiile criptate au fost omise: %s</string>
     <string name="importer_help_direct">Importă intrările direct din %s. Aceasta necesită ca aplicația să fie instalată pe acest dispozitiv și ca accesul root să fie acordat Aegis.</string>
     <string name="groups">Grupuri</string>
+    <string name="pref_focus_search">Focalizare pe căsuţa de căutare la pornirea aplicației</string>
+    <string name="pref_focus_search_summary">Focalizați căutarea imediat după deschiderea aplicației.</string>
+    <string name="pref_grouping_halves">Jumătăți</string>
+    <string name="pref_grouping_none">Fara grupare</string>
+    <string name="pref_grouping_size_two">Grupuri a câte 2</string>
+    <string name="pref_grouping_size_three">Grupuri a câte 3</string>
+    <string name="pref_grouping_size_four">Grupuri a câte 4</string>
+    <string name="pref_copy_behavior_never">Niciodată</string>
+    <string name="pref_copy_behavior_single_tap">O singură atingere</string>
+    <string name="pref_copy_behavior_double_tap">Atingere dublă</string>
+    <string name="pref_account_name_position_hidden">Ascuns</string>
+    <string name="pref_account_name_position_end">Alături de emitent</string>
+    <string name="pref_account_name_position_below">Sub emitent</string>
+    <plurals name="time_elapsed_seconds" tools:ignore="UnusedResources">
+        <item quantity="one">%d secundă în urmă</item>
+        <item quantity="few">%d secunde în urmă</item>
+        <item quantity="other">%d de secunde în urmă</item>
+    </plurals>
+    <plurals name="time_elapsed_minutes" tools:ignore="UnusedResources">
+        <item quantity="one">%d minut în urmă</item>
+        <item quantity="few">%d minute în urmă</item>
+        <item quantity="other">%d de minute în urmă</item>
+    </plurals>
+    <plurals name="time_elapsed_hours" tools:ignore="UnusedResources">
+        <item quantity="one">%d oră în urmă</item>
+        <item quantity="few">Acum %d ore</item>
+        <item quantity="other">Acum %d de ore</item>
+    </plurals>
+    <plurals name="time_elapsed_days" tools:ignore="UnusedResources">
+        <item quantity="one">%d zi în urmă</item>
+        <item quantity="few">%d zile în urmă</item>
+        <item quantity="other">%d de zile în urmă</item>
+    </plurals>
+    <plurals name="time_elapsed_years" tools:ignore="UnusedResources">
+        <item quantity="one">acum %d an</item>
+        <item quantity="few">acum %d ani</item>
+        <item quantity="other">acum %d de ani</item>
+    </plurals>
+    <plurals name="dropdown_checkboxes_default_count">
+        <item quantity="one">%d element selectat</item>
+        <item quantity="few">%d elemente selectate</item>
+        <item quantity="other">%d de elemente selectate</item>
+    </plurals>
 </resources>

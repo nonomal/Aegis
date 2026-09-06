@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="authentication_methods">
-        <item>@string/authentication_method_none</item>
-        <item>@string/authentication_method_password</item>
-        <item>@string/authentication_method_biometrics</item>
-    </string-array>
-
     <string-array name="otp_types_array">
         <item>TOTP</item>
         <item>HOTP</item>
         <item>Steam</item>
+        <item>Yandex</item>
+        <item>MOTP</item>
     </string-array>
 
     <string-array name="otp_algo_array">
@@ -30,37 +26,48 @@
         <item>@string/normal_viewmode_title</item>
         <item>@string/compact_mode_title</item>
         <item>@string/small_mode_title</item>
+        <item>@string/tiles_mode_title</item>
     </string-array>
 
     <string-array name="pref_lang_entries">
         <item>System default</item>
         <item>Arabic</item>
+        <item>Asturian</item>
         <item>Basque</item>
         <item>Bulgarian</item>
+        <item>Catalan</item>
         <item>Chinese (Simplified Han, China)</item>
         <item>Chinese (Traditional Han, Taiwan)</item>
         <item>Czech</item>
         <item>Danish</item>
         <item>Dutch</item>
+        <item>Dutch (Frysian)</item>
         <item>English</item>
+        <item>Estonian</item>
         <item>Finnish</item>
         <item>French</item>
+        <item>Galician</item>
         <item>German</item>
         <item>Greek</item>
+        <item>Hebrew</item>
         <item>Hindi</item>
         <item>Hungarian</item>
         <item>Italian</item>
         <item>Indonesian</item>
         <item>Japanese</item>
         <item>Kannada</item>
+        <item>Korean</item>
         <item>Latvian</item>
         <item>Lithuanian</item>
+        <item>Norwegian (Bokmål)</item>
+        <item>Malayalam</item>
         <item>Persian</item>
         <item>Polish</item>
         <item>Portuguese</item>
         <item>Portuguese (Brazilian)</item>
         <item>Romanian</item>
         <item>Russian</item>
+        <item>Serbian</item>
         <item>Slovak</item>
         <item>Spanish</item>
         <item>Swedish</item>
@@ -71,32 +78,42 @@
     <string-array name="pref_lang_values" translatable="false">
         <item>system</item>
         <item>ar</item>
+        <item>ast</item>
         <item>eu</item>
         <item>bg</item>
+        <item>ca</item>
         <item>zh_CN</item>
         <item>zh_TW</item>
         <item>cs</item>
         <item>da</item>
         <item>nl</item>
+        <item>fy_NL</item>
         <item>en</item>
+        <item>et</item>
         <item>fi</item>
         <item>fr</item>
+        <item>gl</item>
         <item>de</item>
         <item>el</item>
+        <item>iw</item>
         <item>hi</item>
         <item>hu</item>
         <item>it</item>
         <item>in</item>
         <item>ja</item>
         <item>kn</item>
+        <item>ko</item>
         <item>lv</item>
         <item>lt</item>
+        <item>nb</item>
+        <item>ml</item>
         <item>fa</item>
         <item>pl</item>
-        <item>pt</item>
+        <item>pt_PT</item>
         <item>pt_BR</item>
         <item>ro</item>
         <item>ru</item>
+        <item>sr</item>
         <item>sk</item>
         <item>es</item>
         <item>sv</item>
@@ -118,8 +135,44 @@
         <item>@string/pref_auto_lock_type_device_lock</item>
     </string-array>
 
+    <string-array name="pref_search_behavior_types">
+        <item>@string/pref_search_behavior_type_issuer</item>
+        <item>@string/pref_search_behavior_type_name</item>
+        <item>@string/pref_search_behavior_type_note</item>
+        <item>@string/pref_search_behavior_type_groups</item>
+    </string-array>
+
     <string-array name="export_formats">
         <item>@string/export_format_aegis</item>
+        <item>@string/export_format_html</item>
         <item>@string/export_format_google_auth_uri</item>
+    </string-array>
+
+    <string-array name="pref_code_groupings">
+        <item>@string/pref_grouping_halves</item>
+        <item>@string/pref_grouping_none</item>
+        <item>@string/pref_grouping_size_two</item>
+        <item>@string/pref_grouping_size_three</item>
+        <item>@string/pref_grouping_size_four</item>
+    </string-array>
+
+    <string-array name="pref_code_groupings_values">
+        <item>HALVES</item>
+        <item>NO_GROUPING</item>
+        <item>GROUPING_TWOS</item>
+        <item>GROUPING_THREES</item>
+        <item>GROUPING_FOURS</item>
+    </string-array>
+
+    <string-array name="account_name_position_titles">
+        <item>@string/pref_account_name_position_hidden</item>
+        <item>@string/pref_account_name_position_end</item>
+        <item>@string/pref_account_name_position_below</item>
+    </string-array>
+
+    <string-array name="copy_behavior_titles">
+        <item>@string/pref_copy_behavior_never</item>
+        <item>@string/pref_copy_behavior_single_tap</item>
+        <item>@string/pref_copy_behavior_double_tap</item>
     </string-array>
 </resources>

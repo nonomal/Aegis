@@ -13,20 +13,16 @@ import android.widget.Toast;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.StringRes;
-import androidx.core.view.LayoutInflaterCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.beemdevelopment.aegis.BuildConfig;
 import com.beemdevelopment.aegis.R;
-import com.beemdevelopment.aegis.Theme;
-import com.beemdevelopment.aegis.helpers.ThemeHelper;
-import com.beemdevelopment.aegis.licenses.GlideLicense;
-import com.beemdevelopment.aegis.licenses.ProtobufLicense;
 import com.beemdevelopment.aegis.ui.dialogs.ChangelogDialog;
 import com.beemdevelopment.aegis.ui.dialogs.LicenseDialog;
-import com.mikepenz.iconics.context.IconicsLayoutInflater2;
-
-import de.psdev.licensesdialog.LicenseResolver;
-import de.psdev.licensesdialog.LicensesDialog;
+import com.beemdevelopment.aegis.helpers.ViewHelper;
+import com.google.android.material.color.MaterialColors;
 
 public class AboutActivity extends AegisActivity {
 
@@ -40,11 +36,14 @@ public class AboutActivity extends AegisActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        LayoutInflaterCompat.setFactory2(getLayoutInflater(), new IconicsLayoutInflater2(getDelegate()));
-
         super.onCreate(savedInstanceState);
+        if (abortIfOrphan(savedInstanceState)) {
+            return;
+        }
+
         setContentView(R.layout.activity_about);
         setSupportActionBar(findViewById(R.id.toolbar));
+        ViewHelper.setupAppBarInsets(findViewById(R.id.app_bar_layout));
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -54,12 +53,15 @@ public class AboutActivity extends AegisActivity {
         View btnLicense = findViewById(R.id.btn_license);
         btnLicense.setOnClickListener(v -> {
             LicenseDialog.create()
-                    .setTheme(getConfiguredTheme())
+                    .setTheme(_themeHelper.getConfiguredTheme())
                     .show(getSupportFragmentManager(), null);
         });
 
         View btnThirdPartyLicenses = findViewById(R.id.btn_third_party_licenses);
-        btnThirdPartyLicenses.setOnClickListener(v -> showThirdPartyLicenseDialog());
+        btnThirdPartyLicenses.setOnClickListener(v -> {
+            Intent intent = new Intent(this, LicensesActivity.class);
+            startActivity(intent);
+        });
 
         TextView appVersion = findViewById(R.id.app_version);
         appVersion.setText(getCurrentAppVersion());
@@ -90,8 +92,19 @@ public class AboutActivity extends AegisActivity {
         View btnChangelog = findViewById(R.id.btn_changelog);
         btnChangelog.setOnClickListener(v -> {
             ChangelogDialog.create()
-                    .setTheme(getConfiguredTheme())
+                    .setTheme(_themeHelper.getConfiguredTheme())
                     .show(getSupportFragmentManager(), null);
+        });
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.about_scroll_view), (targetView, windowInsets) -> {
+            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+            targetView.setPadding(
+                    0,
+                    0,
+                    0,
+                    insets.bottom
+            );
+            return WindowInsetsCompat.CONSUMED;
         });
     }
 
@@ -124,40 +137,19 @@ public class AboutActivity extends AegisActivity {
         mailIntent.putExtra(Intent.EXTRA_EMAIL, mailaddress);
         mailIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name_full);
 
-        startActivity(Intent.createChooser(mailIntent, this.getString(R.string.email)));
-    }
-
-    private void showThirdPartyLicenseDialog() {
-        String stylesheet = getString(R.string.custom_notices_format_style);
-        int backgroundColorResource = getConfiguredTheme() == Theme.AMOLED ? R.attr.cardBackgroundFocused : R.attr.cardBackground;
-        String backgroundColor = getThemeColorAsHex(backgroundColorResource);
-        String textColor = getThemeColorAsHex(R.attr.primaryText);
-        String licenseColor = getThemeColorAsHex(R.attr.cardBackgroundFocused);
-        String linkColor = getThemeColorAsHex(R.attr.colorAccent);
-
-        stylesheet = String.format(stylesheet, backgroundColor, textColor, licenseColor, linkColor);
-
-        LicenseResolver.registerLicense(new GlideLicense());
-        LicenseResolver.registerLicense(new ProtobufLicense());
-
-        new LicensesDialog.Builder(this)
-                .setNotices(R.raw.notices)
-                .setTitle(R.string.third_party_licenses)
-                .setNoticesCssStyle(stylesheet)
-                .setIncludeOwnLicense(true)
-                .build()
-                .show();
+        startActivity(Intent.createChooser(mailIntent, getString(R.string.email)));
     }
 
     private String getThemeColorAsHex(@AttrRes int attributeId) {
-        return String.format("%06X", (0xFFFFFF & ThemeHelper.getThemeColor(attributeId, getTheme())));
+        int color = MaterialColors.getColor(this, attributeId, getClass().getCanonicalName());
+        return String.format("%06X", 0xFFFFFF & color);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                onBackPressed();
+                finish();
                 break;
             default:
                 return super.onOptionsItemSelected(item);

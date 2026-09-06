@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="0dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:checkable="true"
+    app:checkedIcon="@null"
+    app:cardElevation="0dp"
+    style="@style/Widget.Aegis.EntryCardView">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/rlCardEntry"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/favorite_indicator"
+            android:layout_width="15dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="-11dp"
+            android:backgroundTint="?attr/colorFavorite"
+            android:background="@drawable/favorite_indicator" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:id="@+id/relativeLayout"
+            android:paddingTop="12dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp">
+
+            <RelativeLayout
+                android:id="@+id/layoutImage"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivTextDrawable"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_alignParentStart="true"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Aegis.ImageView.Circle" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivSelected"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_alignParentStart="true"
+                        android:src="@drawable/item_selected"
+                        android:visibility="gone"
+                        android:background="?attr/colorPrimaryAlternative"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Aegis.ImageView.Circle" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="24dp"
+                android:id="@+id/description"
+                android:layout_toEndOf="@id/layoutImage">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/profile_issuer"
+                    android:text="@string/issuer"
+                    android:textStyle="bold"
+                    android:includeFontPadding="false"
+                    android:textSize="11sp"
+                    android:ellipsize="end"
+                    android:maxLines="1"/>
+                <TextView
+                    android:id="@+id/profile_copied"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profile_issuer"
+                    android:maxLines="1"
+                    android:includeFontPadding="false"
+                    android:visibility="invisible"
+                    android:text="@string/copied"
+                    android:textSize="9sp" />
+                <TextView
+                    android:id="@+id/profile_account_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profile_issuer"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:textSize="9sp"
+                    tools:text=" - AccountName" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginBottom="0dp"
+                android:paddingBottom="0dp"
+                android:id="@+id/profile_codes_layout"
+                android:layout_below="@id/description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:fontFamily="sans-serif-light"
+                    tools:text="012 345"
+                    android:id="@+id/profile_code"
+                    android:layoutDirection="ltr"
+                    android:layout_below="@id/description"
+                    android:includeFontPadding="false"
+                    android:fallbackLineSpacing="false"
+                    android:textSize="26sp"
+                    android:textColor="?attr/colorCode"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="normal|bold"/>
+
+                <TextView
+                    android:id="@+id/next_profile_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="-0.01"
+                    android:layout_marginTop="0dp"
+                    android:paddingTop="0dp"
+                    android:paddingStart="2dp"
+                    android:textColor="?attr/colorOnSurfaceDim"
+                    android:textSize="16sp"
+                    android:textStyle="normal|bold"
+                    android:includeFontPadding="false"
+                    android:fallbackLineSpacing="false"
+                    tools:text="412 643"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/buttonRefresh"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="0dp"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_outline_refresh_24"
+                android:background="?android:attr/selectableItemBackground" />
+
+            <ImageView
+                android:id="@+id/drag_handle"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="-12dp"
+                android:visibility="invisible"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_outline_menu_24" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:padding="0dp"
+        android:layout_margin="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.beemdevelopment.aegis.ui.views.TotpProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progressDrawable="@drawable/progress_horizontal"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:id="@+id/progressBar"
+            android:max="5000"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

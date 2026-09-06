@@ -42,6 +42,10 @@ public class IconPackManager {
         return packs.get(0);
     }
 
+    public boolean hasIconPack() {
+        return _iconPacks.size() > 0;
+    }
+
     public List<IconPack> getIconPacks() {
         return new ArrayList<>(_iconPacks);
     }
@@ -91,6 +95,9 @@ public class IconPackManager {
             // extract each of the defined icons to the icon pack directory
             for (IconPack.Icon icon : pack.getIcons()) {
                 File destFile = new File(packDir, icon.getRelativeFilename());
+                if (!destFile.getCanonicalPath().startsWith(packDir.getCanonicalPath() + File.separator)) {
+                    throw new IOException("Attempted to write outside of the icon pack directory");
+                }
                 FileHeader iconHeader = zipFile.getFileHeader(icon.getRelativeFilename());
                 if (iconHeader == null) {
                     throw new IOException(String.format("Unable to find %s relative to the root of the ZIP file", icon.getRelativeFilename()));

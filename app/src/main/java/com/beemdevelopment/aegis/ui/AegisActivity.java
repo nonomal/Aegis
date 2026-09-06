@@ -1,66 +1,86 @@
 package com.beemdevelopment.aegis.ui;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.CallSuper;
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.view.ActionMode;
+import androidx.core.view.ViewPropertyAnimatorCompat;
 
-import com.beemdevelopment.aegis.AegisApplication;
 import com.beemdevelopment.aegis.Preferences;
 import com.beemdevelopment.aegis.R;
-import com.beemdevelopment.aegis.Theme;
 import com.beemdevelopment.aegis.ThemeMap;
-import com.beemdevelopment.aegis.ui.dialogs.Dialogs;
-import com.beemdevelopment.aegis.vault.VaultManagerException;
+import com.beemdevelopment.aegis.database.AuditLogRepository;
+import com.beemdevelopment.aegis.helpers.ThemeHelper;
+import com.beemdevelopment.aegis.icons.IconPackManager;
+import com.beemdevelopment.aegis.vault.VaultManager;
+import com.beemdevelopment.aegis.vault.VaultRepositoryException;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.color.MaterialColors;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Locale;
-import java.util.Map;
 
-public abstract class AegisActivity extends AppCompatActivity implements AegisApplication.LockListener {
-    private AegisApplication _app;
+import javax.inject.Inject;
+
+import dagger.hilt.InstallIn;
+import dagger.hilt.android.AndroidEntryPoint;
+import dagger.hilt.android.EarlyEntryPoint;
+import dagger.hilt.android.EarlyEntryPoints;
+import dagger.hilt.components.SingletonComponent;
+
+@AndroidEntryPoint
+public abstract class AegisActivity extends AppCompatActivity implements VaultManager.LockListener {
+    protected Preferences _prefs;
+    protected ThemeHelper _themeHelper;
+
+    @Inject
+    protected VaultManager _vaultManager;
+
+    @Inject
+    protected AuditLogRepository _auditLogRepository;
+
+    @Inject
+    protected IconPackManager _iconPackManager;
+
+    private ActionModeStatusGuardHack _statusGuardHack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        _app = (AegisApplication) getApplication();
-
         // set the theme and locale before creating the activity
-        Preferences prefs = getPreferences();
+        _prefs = EarlyEntryPoints.get(getApplicationContext(), PrefEntryPoint.class).getPreferences();
+        _themeHelper = new ThemeHelper(this, _prefs);
         onSetTheme();
-        setLocale(prefs.getLocale());
+        setLocale(_prefs.getLocale());
         super.onCreate(savedInstanceState);
 
-        // if the app was killed, relaunch MainActivity and close everything else
-        if (savedInstanceState != null && isOrphan()) {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-            return;
-        }
+        _statusGuardHack = new ActionModeStatusGuardHack();
 
         // set FLAG_SECURE on the window of every AegisActivity
-        if (getPreferences().isSecureScreenEnabled()) {
+        if (_prefs.isSecureScreenEnabled()) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         }
 
         // register a callback to listen for lock events
-        _app.registerLockListener(this);
+        _vaultManager.registerLockListener(this);
     }
 
     @Override
     @CallSuper
     protected void onDestroy() {
-        _app.unregisterLockListener(this);
+        _vaultManager.unregisterLockListener(this);
         super.onDestroy();
     }
 
@@ -68,59 +88,33 @@ public abstract class AegisActivity extends AppCompatActivity implements AegisAp
     @Override
     protected void onResume() {
         super.onResume();
-        _app.setBlockAutoLock(false);
+        _vaultManager.setBlockAutoLock(false);
     }
 
+    @SuppressLint("SoonBlockedPrivateApi")
+    @SuppressWarnings("JavaReflectionMemberAccess")
     @Override
     public void onLocked(boolean userInitiated) {
         setResult(RESULT_CANCELED, null);
+
         try {
+            // Call a private overload of the finish() method to prevent the app
+            // from disappearing from the recent apps menu
             Method method = Activity.class.getDeclaredMethod("finish", int.class);
             method.setAccessible(true);
             method.invoke(this, 2); // FINISH_TASK_WITH_ACTIVITY = 2
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
+            // On recent Android versions, the overload  of the finish() method
+            // used above is no longer accessible
             finishAndRemoveTask();
         }
-    }
-
-    protected AegisApplication getApp() {
-        return _app;
-    }
-
-    protected Preferences getPreferences() {
-        return _app.getPreferences();
     }
 
     /**
      * Called when the activity is expected to set its theme.
      */
     protected void onSetTheme() {
-        setTheme(ThemeMap.DEFAULT);
-    }
-
-    /**
-     * Sets the theme of the activity. The actual style that is set is picked from the
-     * given map, based on the theme configured by the user.
-     */
-    protected void setTheme(Map<Theme, Integer> themeMap) {
-        int theme = themeMap.get(getConfiguredTheme());
-        setTheme(theme);
-    }
-
-    protected Theme getConfiguredTheme() {
-        Theme theme = getPreferences().getCurrentTheme();
-
-        if (theme == Theme.SYSTEM || theme == Theme.SYSTEM_AMOLED) {
-            int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-            if (currentNightMode == Configuration.UI_MODE_NIGHT_YES) {
-                theme = theme == Theme.SYSTEM_AMOLED ? Theme.AMOLED : Theme.DARK;
-            } else {
-                theme = Theme.LIGHT;
-            }
-        }
-
-        return theme;
+        _themeHelper.setTheme(ThemeMap.DEFAULT);
     }
 
     protected void setLocale(Locale locale) {
@@ -129,87 +123,133 @@ public abstract class AegisActivity extends AppCompatActivity implements AegisAp
         Configuration config = new Configuration();
         config.locale = locale;
 
-        this.getResources().updateConfiguration(config, this.getResources().getDisplayMetrics());
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
     }
 
-    protected boolean saveVault(boolean backup) {
+    protected boolean saveVault() {
         try {
-            getApp().getVaultManager().save(backup);
+            _vaultManager.save();
             return true;
-        } catch (VaultManagerException e) {
+        } catch (VaultRepositoryException e) {
+            Toast.makeText(this, getString(R.string.saving_error), Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
+
+    protected boolean saveAndBackupVault() {
+        try {
+            _vaultManager.saveAndBackup();
+            return true;
+        } catch (VaultRepositoryException e) {
             Toast.makeText(this, getString(R.string.saving_error), Toast.LENGTH_LONG).show();
             return false;
         }
     }
 
     /**
-     * Reports whether this Activity instance has become an orphan. This can happen if
-     * the vault was locked by an external trigger while the Activity was still open.
+     * Closes this activity if it has become an orphan (isOrphan() == true) and launches MainActivity.
+     * @param savedInstanceState the bundle passed to onCreate.
+     * @return whether to abort onCreate.
      */
-    protected boolean isOrphan() {
-        return !(this instanceof MainActivity) && !(this instanceof AuthActivity) && !(this instanceof IntroActivity) && _app.isVaultLocked();
+    protected boolean abortIfOrphan(Bundle savedInstanceState) {
+        if (savedInstanceState == null || !isOrphan()) {
+            return false;
+        }
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+        return true;
     }
 
-    public static class Helper {
-        private Helper() {
+    @Override
+    public void onSupportActionModeStarted(@NonNull ActionMode mode) {
+        super.onSupportActionModeStarted(mode);
+        _statusGuardHack.apply(View.VISIBLE);
+    }
 
-        }
+    @Override
+    public void onSupportActionModeFinished(@NonNull ActionMode mode) {
+        super.onSupportActionModeFinished(mode);
+        _statusGuardHack.apply(View.GONE);
+    }
 
-        /**
-         * Starts an external activity, temporarily blocks automatic lock of Aegis and
-         * shows an error dialog if the target activity is not found.
-         */
-        public static void startExtActivityForResult(Activity activity, Intent intent, int requestCode) {
-            AegisApplication app = (AegisApplication) activity.getApplication();
-            app.setBlockAutoLock(true);
+    /**
+     * When starting/finishing an action mode, forcefully cancel the fade in/out animation and
+     * set the status bar color. This requires the abc_decor_view_status_guard colors to be set
+     * to transparent.
+     *
+     * This should fix any inconsistencies between the color of the action bar and the status bar
+     * when an action mode is active.
+     */
+    private class ActionModeStatusGuardHack {
+        private Field _fadeAnimField;
+        private Field _actionModeViewField;
+        private Drawable _appBarBackground;
 
+        private ActionModeStatusGuardHack() {
             try {
-                activity.startActivityForResult(intent, requestCode, null);
-            } catch (ActivityNotFoundException e) {
-                e.printStackTrace();
-
-                if (isDocsAction(intent.getAction())) {
-                    Dialogs.showErrorDialog(activity, R.string.documentsui_error, e);
-                } else {
-                    throw e;
-                }
+                _fadeAnimField = getDelegate().getClass().getDeclaredField("mFadeAnim");
+                _fadeAnimField.setAccessible(true);
+                _actionModeViewField = getDelegate().getClass().getDeclaredField("mActionModeView");
+                _actionModeViewField.setAccessible(true);
+            } catch (NoSuchFieldException ignored) {
             }
         }
 
-        /**
-         * Starts an external activity, temporarily blocks automatic lock of Aegis and
-         * shows an error dialog if the target activity is not found.
-         */
-        public static void startExtActivity(Fragment fragment, Intent intent) {
-            startExtActivityForResult(fragment, intent, -1);
-        }
+        private void apply(int visibility) {
+            if (_fadeAnimField == null || _actionModeViewField == null) {
+                return;
+            }
 
-        /**
-         * Starts an external activity, temporarily blocks automatic lock of Aegis and
-         * shows an error dialog if the target activity is not found.
-         */
-        public static void startExtActivityForResult(Fragment fragment, Intent intent, int requestCode) {
-            AegisApplication app = (AegisApplication) fragment.getActivity().getApplication();
-            app.setBlockAutoLock(true);
-
+            ViewPropertyAnimatorCompat fadeAnim;
+            ViewGroup actionModeView;
             try {
-                fragment.startActivityForResult(intent, requestCode, null);
-            } catch (ActivityNotFoundException e) {
-                e.printStackTrace();
+                fadeAnim = (ViewPropertyAnimatorCompat) _fadeAnimField.get(getDelegate());
+                actionModeView = (ViewGroup) _actionModeViewField.get(getDelegate());
+            } catch (IllegalAccessException e) {
+                return;
+            }
 
-                if (isDocsAction(intent.getAction())) {
-                    Dialogs.showErrorDialog(fragment.getContext(), R.string.documentsui_error, e);
-                } else {
-                    throw e;
-                }
+            AppBarLayout appBarLayout = findViewById(R.id.app_bar_layout);
+            if (appBarLayout != null && _appBarBackground == null) {
+                _appBarBackground = appBarLayout.getBackground();
+            }
+
+            if (fadeAnim == null || actionModeView == null || appBarLayout == null || _appBarBackground == null) {
+                return;
+            }
+
+            fadeAnim.cancel();
+
+            if (visibility == View.VISIBLE) {
+                actionModeView.setVisibility(visibility);
+                actionModeView.setAlpha(1f);
+                int color = MaterialColors.getColor(appBarLayout, com.google.android.material.R.attr.colorSurfaceContainer);
+                appBarLayout.setBackgroundColor(color);
+            } else {
+                actionModeView.setVisibility(visibility);
+                actionModeView.setAlpha(0f);
+                appBarLayout.setBackground(_appBarBackground);
             }
         }
+    }
 
-        private static boolean isDocsAction(@Nullable String action) {
-            return action != null && (action.equals(Intent.ACTION_GET_CONTENT)
-                    || action.equals(Intent.ACTION_CREATE_DOCUMENT)
-                    || action.equals(Intent.ACTION_OPEN_DOCUMENT)
-                    || action.equals(Intent.ACTION_OPEN_DOCUMENT_TREE));
-        }
+    /**
+     * Reports whether this Activity instance has become an orphan. This can happen if
+     * the vault was killed/locked by an external trigger while the Activity was still open.
+     */
+    private boolean isOrphan() {
+        return !(this instanceof MainActivity)
+                && !(this instanceof AuthActivity)
+                && !(this instanceof IntroActivity)
+                && !_vaultManager.isVaultLoaded();
+    }
+
+    @EarlyEntryPoint
+    @InstallIn(SingletonComponent.class)
+    public interface PrefEntryPoint {
+        Preferences getPreferences();
     }
 }

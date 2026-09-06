@@ -1,5 +1,6 @@
 package com.beemdevelopment.aegis;
 
+import com.beemdevelopment.aegis.helpers.comparators.LastUsedComparator;
 import com.beemdevelopment.aegis.helpers.comparators.UsageCountComparator;
 import com.beemdevelopment.aegis.vault.VaultEntry;
 import com.beemdevelopment.aegis.helpers.comparators.AccountNameComparator;
@@ -14,7 +15,8 @@ public enum SortCategory {
     ACCOUNT_REVERSED,
     ISSUER,
     ISSUER_REVERSED,
-    USAGE_COUNT;
+    USAGE_COUNT,
+    LAST_USED;
 
     private static SortCategory[] _values;
 
@@ -31,20 +33,22 @@ public enum SortCategory {
 
         switch (this) {
             case ACCOUNT:
-                comparator = new AccountNameComparator();
+                comparator = new AccountNameComparator().thenComparing(new IssuerNameComparator());
                 break;
             case ACCOUNT_REVERSED:
-                comparator = Collections.reverseOrder(new AccountNameComparator());
+                comparator = Collections.reverseOrder(new AccountNameComparator().thenComparing(new IssuerNameComparator()));
                 break;
             case ISSUER:
-                comparator = new IssuerNameComparator();
+                comparator = new IssuerNameComparator().thenComparing(new AccountNameComparator());
                 break;
             case ISSUER_REVERSED:
-                comparator = Collections.reverseOrder(new IssuerNameComparator());
+                comparator = Collections.reverseOrder(new IssuerNameComparator().thenComparing(new AccountNameComparator()));
                 break;
             case USAGE_COUNT:
                 comparator = Collections.reverseOrder(new UsageCountComparator());
                 break;
+            case LAST_USED:
+                comparator = Collections.reverseOrder(new LastUsedComparator());
         }
 
         return comparator;
@@ -64,6 +68,8 @@ public enum SortCategory {
                 return R.id.menu_sort_alphabetically_reverse;
             case USAGE_COUNT:
                 return R.id.menu_sort_usage_count;
+            case LAST_USED:
+                return R.id.menu_sort_last_used;
             default:
                 return R.id.menu_sort_custom;
         }

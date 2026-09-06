@@ -1,11 +1,11 @@
 package com.beemdevelopment.aegis.ui.intro;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,8 +13,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.beemdevelopment.aegis.R;
-import com.beemdevelopment.aegis.Theme;
+import com.beemdevelopment.aegis.helpers.AnimationsHelper;
 import com.beemdevelopment.aegis.ui.AegisActivity;
+import com.google.android.material.button.MaterialButton;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -27,14 +28,15 @@ public abstract class IntroBaseActivity extends AegisActivity implements IntroAc
     private List<Class<? extends SlideFragment>> _slides;
     private WeakReference<SlideFragment> _currentSlide;
 
-    private ImageButton _btnPrevious;
-    private ImageButton _btnNext;
+    private MaterialButton _btnPrevious;
+    private MaterialButton _btnNext;
     private SlideIndicator _slideIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
+        getOnBackPressedDispatcher().addCallback(this, new BackPressHandler());
 
         _slides = new ArrayList<>();
         _state = new Bundle();
@@ -116,7 +118,7 @@ public abstract class IntroBaseActivity extends AegisActivity implements IntroAc
      * @param newSlide the next slide that will be shown.
      * @return whether to block the transition.
      */
-    protected boolean onBeforeSlideChanged(Class<? extends SlideFragment> oldSlide, Class<? extends SlideFragment> newSlide) {
+    protected boolean onBeforeSlideChanged(@Nullable Class<? extends SlideFragment> oldSlide, @NonNull Class<? extends SlideFragment> newSlide) {
         return false;
     }
 
@@ -125,7 +127,7 @@ public abstract class IntroBaseActivity extends AegisActivity implements IntroAc
      * @param oldSlide the slide that was previously shown.
      * @param newSlide the slide that is now shown.
      */
-    protected void onAfterSlideChanged(Class<? extends SlideFragment> oldSlide, Class<? extends SlideFragment> newSlide) {
+    protected void onAfterSlideChanged(@Nullable Class<? extends SlideFragment> oldSlide, @NonNull Class<? extends SlideFragment> newSlide) {
 
     }
 
@@ -134,7 +136,10 @@ public abstract class IntroBaseActivity extends AegisActivity implements IntroAc
         Class<? extends SlideFragment> newSlide = _slides.get(pos);
 
         if (!onBeforeSlideChanged(oldSlide, newSlide)) {
-            _pager.setCurrentItem(pos);
+            // We can't easily control the speed of the smooth scroll animation, but we
+            // can at least disable it if animations are disabled
+            boolean smoothScroll = !AnimationsHelper.Scale.TRANSITION.isZero(this);
+            _pager.setCurrentItem(pos, smoothScroll);
         }
         onAfterSlideChanged(oldSlide, newSlide);
 
@@ -153,7 +158,7 @@ public abstract class IntroBaseActivity extends AegisActivity implements IntroAc
                         ? View.VISIBLE
                         : View.INVISIBLE);
         if (pos == _slides.size() - 1) {
-            _btnNext.setImageResource(R.drawable.circular_button_done);
+            _btnNext.setIconResource(R.drawable.ic_outline_check_24);
         }
         _slideIndicator.setSlideCount(_slides.size());
         _slideIndicator.setCurrentSlide(pos);
@@ -162,11 +167,6 @@ public abstract class IntroBaseActivity extends AegisActivity implements IntroAc
     @NonNull
     public Bundle getState() {
         return _state;
-    }
-
-    @Override
-    public void onBackPressed() {
-        goToPreviousSlide();
     }
 
     protected abstract void onDonePressed();
@@ -178,6 +178,24 @@ public abstract class IntroBaseActivity extends AegisActivity implements IntroAc
 
         _slides.add(type);
         _slideIndicator.setSlideCount(_slides.size());
+
+        // send 'slide changed' events for the first slide
+        if (_slides.size() == 1) {
+            Class<? extends SlideFragment> slide = _slides.get(0);
+            onBeforeSlideChanged(null, slide);
+            onAfterSlideChanged(null, slide);
+        }
+    }
+
+    private class BackPressHandler extends OnBackPressedCallback {
+        public BackPressHandler() {
+            super(true);
+        }
+
+        @Override
+        public void handleOnBackPressed() {
+            goToPreviousSlide();
+        }
     }
 
     private class ScreenSlidePagerAdapter extends FragmentStateAdapter {

@@ -20,9 +20,11 @@ public class SteamInfo extends TotpInfo {
     }
 
     @Override
-    public String getOtp() {
+    public String getOtp(long time) throws OtpInfoException {
+        checkSecret();
+
         try {
-            OTP otp = TOTP.generateOTP(getSecret(), getAlgorithm(true), getDigits(), getPeriod());
+            OTP otp = TOTP.generateOTP(getSecret(), getAlgorithm(true), getDigits(), getPeriod(), time);
             return otp.toSteamString();
         } catch (InvalidKeyException | NoSuchAlgorithmException e) {
             throw new RuntimeException(e);

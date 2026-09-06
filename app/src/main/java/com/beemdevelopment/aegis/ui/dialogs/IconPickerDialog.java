@@ -18,14 +18,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.beemdevelopment.aegis.R;
 import com.beemdevelopment.aegis.icons.IconPack;
-import com.beemdevelopment.aegis.ui.glide.IconLoader;
+import com.beemdevelopment.aegis.ui.glide.GlideHelper;
 import com.beemdevelopment.aegis.ui.views.IconAdapter;
 import com.beemdevelopment.aegis.ui.views.IconRecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.ListPreloader;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.util.ViewPreloadSizeProvider;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -40,7 +39,7 @@ public class IconPickerDialog {
 
     }
 
-    public static BottomSheetDialog create(Activity activity, List<IconPack> iconPacks, String issuer, IconAdapter.Listener listener) {
+    public static BottomSheetDialog create(Activity activity, List<IconPack> iconPacks, String issuer, boolean showAddCustom, IconAdapter.Listener listener) {
         View view = LayoutInflater.from(activity).inflate(R.layout.dialog_icon_picker, null);
         TextView textIconPack = view.findViewById(R.id.text_icon_pack);
 
@@ -76,12 +75,9 @@ public class IconPickerDialog {
             @Nullable
             @Override
             public RequestBuilder<Drawable> getPreloadRequestBuilder(@NonNull IconPack.Icon icon) {
-                return Glide.with(dialog.getContext())
-                        .asDrawable()
-                        .load(icon.getFile())
-                        .set(IconLoader.ICON_TYPE, icon.getIconType())
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(false);
+                RequestBuilder<Drawable> rb = Glide.with(dialog.getContext())
+                        .load(icon.getFile());
+                return GlideHelper.setCommonOptions(rb, icon.getIconType());
             }
         }
 
@@ -128,7 +124,7 @@ public class IconPickerDialog {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(preloader);
-        adapter.loadIcons(iconPacks.get(0));
+        adapter.loadIcons(iconPacks.get(0), showAddCustom);
         textIconPack.setText(iconPacks.get(0).getName());
 
         view.findViewById(R.id.btn_icon_pack).setOnClickListener(v -> {
@@ -139,7 +135,7 @@ public class IconPickerDialog {
             PopupMenu popupMenu = new PopupMenu(activity, v);
             popupMenu.setOnMenuItemClickListener(item -> {
                 IconPack pack = iconPacks.get(iconPackNames.indexOf(item.getTitle().toString()));
-                adapter.loadIcons(pack);
+                adapter.loadIcons(pack, showAddCustom);
 
                 String query = iconSearch.getText().toString();
                 if (!query.isEmpty()) {

@@ -3,6 +3,7 @@ package com.beemdevelopment.aegis.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -17,11 +18,11 @@ import androidx.camera.view.PreviewView;
 import androidx.core.content.ContextCompat;
 
 import com.beemdevelopment.aegis.R;
-import com.beemdevelopment.aegis.ThemeMap;
 import com.beemdevelopment.aegis.helpers.QrCodeAnalyzer;
 import com.beemdevelopment.aegis.otp.GoogleAuthInfo;
 import com.beemdevelopment.aegis.otp.GoogleAuthInfoException;
 import com.beemdevelopment.aegis.ui.dialogs.Dialogs;
+import com.beemdevelopment.aegis.helpers.ViewHelper;
 import com.beemdevelopment.aegis.vault.VaultEntry;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.zxing.Result;
@@ -51,8 +52,12 @@ public class ScannerActivity extends AegisActivity implements QrCodeAnalyzer.Lis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (abortIfOrphan(savedInstanceState)) {
+            return;
+        }
         setContentView(R.layout.activity_scanner);
         setSupportActionBar(findViewById(R.id.toolbar));
+        ViewHelper.setupAppBarInsets(findViewById(R.id.app_bar_layout));
 
         _entries = new ArrayList<>();
         _lenses = new ArrayList<>();
@@ -85,13 +90,10 @@ public class ScannerActivity extends AegisActivity implements QrCodeAnalyzer.Lis
 
     @Override
     protected void onDestroy() {
-        _executor.shutdownNow();
+        if (_executor != null) {
+            _executor.shutdownNow();
+        }
         super.onDestroy();
-    }
-
-    @Override
-    protected void onSetTheme() {
-        setTheme(ThemeMap.FULLSCREEN);
     }
 
     @Override
@@ -103,6 +105,10 @@ public class ScannerActivity extends AegisActivity implements QrCodeAnalyzer.Lis
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (_cameraProvider == null) {
+            return false;
+        }
+
         if (item.getItemId() == R.id.action_camera) {
             unbindPreview(_cameraProvider);
             _currentLens = _currentLens == CameraSelector.LENS_FACING_BACK ? CameraSelector.LENS_FACING_FRONT : CameraSelector.LENS_FACING_BACK;
@@ -132,10 +138,10 @@ public class ScannerActivity extends AegisActivity implements QrCodeAnalyzer.Lis
             if (dual) {
                 switch (_currentLens) {
                     case CameraSelector.LENS_FACING_BACK:
-                        item.setIcon(R.drawable.ic_camera_front_24dp);
+                        item.setIcon(R.drawable.ic_outline_camera_front_24);
                         break;
                     case CameraSelector.LENS_FACING_FRONT:
-                        item.setIcon(R.drawable.ic_camera_rear_24dp);
+                        item.setIcon(R.drawable.ic_outline_camera_rear_24);
                         break;
                 }
             }
@@ -167,23 +173,30 @@ public class ScannerActivity extends AegisActivity implements QrCodeAnalyzer.Lis
 
     @Override
     public void onQrCodeDetected(Result result) {
-        if (_analysis != null) {
-            try {
-                Uri uri = Uri.parse(result.getText().trim());
-                if (uri.getScheme() != null && uri.getScheme().equals(GoogleAuthInfo.SCHEME_EXPORT)) {
-                    handleExportUri(uri);
-                } else {
-                    handleUri(uri);
-                }
-            } catch (GoogleAuthInfoException e) {
-                e.printStackTrace();
-
-                unbindPreview(_cameraProvider);
-                Dialogs.showErrorDialog(this,
-                        e.isPhoneFactor() ? R.string.read_qr_error_phonefactor : R.string.read_qr_error,
-                        e, ((dialog, which) -> bindPreview(_cameraProvider)));
+        new Handler(getMainLooper()).post(() -> {
+            if (isFinishing()) {
+                return;
             }
-        }
+
+            if (_analysis != null) {
+                try {
+                    Uri uri = Uri.parse(result.getText().trim());
+                    if (uri.getScheme() != null && uri.getScheme().equals(GoogleAuthInfo.SCHEME_EXPORT)) {
+                        handleExportUri(uri);
+                    } else {
+                        handleUri(uri);
+                    }
+                } catch (GoogleAuthInfoException e) {
+                    e.printStackTrace();
+
+                    unbindPreview(_cameraProvider);
+
+                    Dialogs.showErrorDialog(this,
+                            e.isPhoneFactor() ? R.string.read_qr_error_phonefactor : R.string.read_qr_error,
+                            e, ((dialog, which) -> bindPreview(_cameraProvider)));
+                }
+            }
+        });
     }
 
     private void handleUri(Uri uri) throws GoogleAuthInfoException {

@@ -11,12 +11,16 @@
             android:title="@string/pref_select_theme_title"
             app:iconSpaceReserved="false"/>
 
-        <ListPreference
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="pref_dynamic_colors"
+            android:title="@string/pref_dynamic_colors_title"
+            android:summary="@string/pref_dynamic_colors_summary"
+            app:iconSpaceReserved="false"/>
+
+        <Preference
             android:key="pref_lang"
             android:title="@string/pref_lang_title"
-            android:summary="%s"
-            android:entries="@array/pref_lang_entries"
-            android:entryValues="@array/pref_lang_values"
             android:defaultValue="system"
             app:iconSpaceReserved="false"/>
     </PreferenceCategory>
@@ -31,17 +35,43 @@
             app:iconSpaceReserved="false"/>
 
         <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="pref_show_icons"
+            android:title="@string/pref_show_icons_title"
+            android:summary="@string/pref_show_icons_summary"
+            app:iconSpaceReserved="false"/>
+
+        <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
-            android:key="pref_code_group_size"
-            android:title="@string/pref_code_group_size_title"
-            android:summary="@string/pref_code_group_size_summary"
+            android:key="pref_show_next_code"
+            android:title="@string/pref_show_next_code_title"
+            android:summary="@string/pref_show_next_code_summary"
             app:iconSpaceReserved="false"/>
 
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="true"
-            android:key="pref_account_name"
-            android:title="@string/pref_account_name_title"
-            android:summary="@string/pref_account_name_summary"
+            android:key="pref_expiration_state"
+            android:title="@string/pref_expiration_state_title"
+            android:summary="@string/pref_expiration_state_summary"
+            app:iconSpaceReserved="false"/>
+
+        <Preference
+            android:key="pref_code_group_size_string"
+            android:title="@string/pref_code_group_size_title"
+            android:summary="@string/pref_code_group_size_summary"
+            android:defaultValue="GROUPING_THREES"
+            app:iconSpaceReserved="false"/>
+
+        <Preference
+            android:key="pref_account_name_position"
+            android:title="@string/pref_account_name_position_title"
+            app:iconSpaceReserved="false"/>
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="pref_shared_issuer_account_name"
+            android:title="@string/pref_shared_issuer_account_name_title"
+            android:summary="@string/pref_shared_issuer_account_name_summary"
             app:iconSpaceReserved="false"/>
 
         <Preference

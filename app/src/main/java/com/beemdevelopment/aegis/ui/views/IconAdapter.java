@@ -18,7 +18,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class IconAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final Context _context;
@@ -40,7 +39,7 @@ public class IconAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     /**
      * Loads all icons from the given icon pack into this adapter. Any icons added before this call will be overwritten.
      */
-    public void loadIcons(IconPack pack) {
+    public void loadIcons(IconPack pack, boolean showAddCustom) {
         _pack = pack;
         _query = null;
         _icons = new ArrayList<>(_pack.getIcons());
@@ -60,7 +59,11 @@ public class IconAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 .count();
 
         List<IconPack.Icon> suggested = pack.getSuggestedIcons(_issuer);
-        suggested.add(0, new DummyIcon(_context.getString(R.string.icon_custom)));
+
+        if (showAddCustom) {
+            suggested.add(0, new DummyIcon(_context.getString(R.string.icon_custom)));
+        }
+
         if (suggested.size() > 0) {
             CategoryHeader category = new CategoryHeader(_context.getString(R.string.suggested));
             category.setIsCollapsed(false);
@@ -90,13 +93,9 @@ public class IconAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         _query = query;
 
         if (_query == null) {
-            loadIcons(_pack);
+            loadIcons(_pack, false);
         } else {
-            _icons = _pack.getIcons().stream()
-                    .filter(i -> i.isSuggestedFor(query))
-                    .collect(Collectors.toList());
-
-            Collections.sort(_icons, Comparator.comparing(IconPack.Icon::getName));
+            _icons = _pack.getSuggestedIcons(query);
             notifyDataSetChanged();
         }
     }
@@ -232,16 +231,8 @@ public class IconAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public static class DummyIcon extends IconPack.Icon {
-        private final String _name;
-
         protected DummyIcon(String name) {
-            super(null, null, null);
-            _name = name;
-        }
-
-        @Override
-        public String getName() {
-            return _name;
+            super(name, null, null, null);
         }
 
         @Override

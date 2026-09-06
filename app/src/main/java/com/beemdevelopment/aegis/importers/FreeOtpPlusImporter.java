@@ -34,7 +34,7 @@ public class FreeOtpPlusImporter extends DatabaseImporter {
         State state;
 
         if (isInternal) {
-            state = new FreeOtpImporter(getContext()).read(stream);
+            state = new FreeOtpImporter(requireContext()).read(stream);
         } else {
             try {
                 String json = new String(IOUtils.readAll(stream), StandardCharsets.UTF_8);
@@ -46,7 +46,7 @@ public class FreeOtpPlusImporter extends DatabaseImporter {
                     entries.add(array.getJSONObject(i));
                 }
 
-                state = new FreeOtpImporter.State(entries);
+                state = new FreeOtpImporter.DecryptedStateV1(entries);
             } catch (IOException | JSONException e) {
                 throw new DatabaseImporterException(e);
             }
